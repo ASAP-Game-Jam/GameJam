@@ -1,0 +1,1 @@
+enum TowerType { Generator, Cannon, Totem, LazerGun, Rocket };

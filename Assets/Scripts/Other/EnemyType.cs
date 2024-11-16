@@ -1,0 +1,1 @@
+enum EnemyType {Stick, FingerGun, Tank};
