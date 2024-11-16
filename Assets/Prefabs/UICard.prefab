@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3612213342218016694}
   - component: {fileID: 5143609897471937023}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: UICard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
