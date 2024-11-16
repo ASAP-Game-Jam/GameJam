@@ -1,6 +1,10 @@
-public class LevelProgress {
-    public int LevelScore;
-    //будет содержать данные о прогрессе игрока на уровне
-    // Тут будет все что вам нужно отслеживать
-    //в частности количество батарей
+public class LevelProgress
+{
+    private uint _levelScore;
+    public uint LevelScore
+    {
+        get => _levelScore;
+        set => _levelScore = (value < 0 ? 0 : value);
+    }
+    
 }
