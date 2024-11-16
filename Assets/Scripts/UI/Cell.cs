@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Cell: MonoBehaviour, ICell {
     public event EventHandler OnCellClick;
+    private bool isTaken;
 
     private void Start () 
     {
@@ -16,4 +17,5 @@ public class Cell: MonoBehaviour, ICell {
         OnCellClick?.Invoke(this, EventArgs.Empty);
         Debug.Log("Clicked");
     }
+
 }
