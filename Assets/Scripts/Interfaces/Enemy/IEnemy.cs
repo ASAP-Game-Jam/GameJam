@@ -6,5 +6,6 @@ namespace Assets.Scripts.Interfaces.Enemy
     {
         event EventHandler OnGetDamage;
         event EventHandler OnDestroy;
+        void TakeDamage(uint damage);
     }
 }
