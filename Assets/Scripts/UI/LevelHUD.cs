@@ -20,6 +20,9 @@ public partial class LevelHUD: MonoBehaviour {
     [SerializeField] private Image healthImage;
 
     [SerializeField] private Button menu;
+
+    [SerializeField] private GameObject[] healthDivs;
+
     // Создадим очередь команд
     public readonly UICommandQueue CommandQueue = new UICommandQueue();
     
