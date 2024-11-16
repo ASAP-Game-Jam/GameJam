@@ -6,6 +6,7 @@ namespace Assets.Scripts.Interfaces
     {
         event EventHandler OnAttack;
         event EventHandler OnReloaded;
+        IBullet Bullet { get;set; }
         void SetLevelManager(ILevelManager levelManager);
     }
 }
