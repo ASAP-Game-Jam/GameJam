@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,21 +22,24 @@ public partial class LevelHUD: MonoBehaviour {
     [SerializeField] private Button menu;
     // Создадим очередь команд
     public readonly UICommandQueue CommandQueue = new UICommandQueue();
-
+    
     private void Start () {
         // При создании интерфейса запустим задачу которая
         // позволяет ассинхронно обрабатывать команды
         StartCoroutine(AsyncUpdate());
     }
 
-    //// Функция для создания команды EnergyCommand и добавления её в очередь
-    //public void CreateEnergyCommand (uint energy) {
-    //    // Создаём новую команду EnergyCommand
-    //    EnergyCommand command = new EnergyCommand(energy);
+    // Функция для добавления команды энергии
+    public void AddEnergyCommand (uint energy) {
+        var energyCommand = new EnergyCommand(energy);
+        CommandQueue.TryEnqueueCommand(energyCommand);
+    }
 
-    //    // Добавляем команду в очередь
-    //    CommandQueue.TryEnqueueCommand(command);
-    //}
+    // Функция для добавления команды прогресса
+    public void AddProgressCommand (uint progress) {
+        var progressCommand = new ProgressCommand(progress);
+        CommandQueue.TryEnqueueCommand(progressCommand);
+    }
 
     // Метод обработки команд из очереди
     private IEnumerator AsyncUpdate () {
