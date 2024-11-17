@@ -20,7 +20,6 @@ public class Cell : MonoBehaviour, ICell
     private void OnClick()
     {
         OnCellClick?.Invoke(this, new EventCellArgs(this, isTaken));
-        Debug.Log("Clicked");
     }
 
     public void CellTaken()

@@ -22,6 +22,5 @@ public class UIButton : MonoBehaviour, IUICard
     private void OnClick()
     {
         OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType));
-        Debug.Log("Clicked");
     }
 }

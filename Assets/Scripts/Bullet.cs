@@ -18,14 +18,15 @@ namespace Assets.Scripts
             transform.Translate(new Vector3(Speed * (Direction == Direction.Left ? -1 : 1) * Time.deltaTime, 0, 0));
             if (timer <= 0)
             {
-                this.gameObject.SetActive(false);
+                Destroy(this.gameObject);
             }
         }
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D (Collider2D other)
         {
-            IEnemy enemy = other.GetComponent<IEnemy>();
+            IEnemy enemy = other.GetComponent<EnemyController>();
             if(enemy != null) {
                 enemy.TakeDamage(Damage);
+                Destroy(this.gameObject);
             }
         }
     }

@@ -45,6 +45,7 @@ namespace Assets.Scripts.Tower
                 GameObject pref = Instantiate(bulletPrefab, this.transform);
                 if (pref != null)
                 {
+                    pref.transform.position = this.transform.position;
                     IBullet bullet = pref?.GetComponent<IBullet>();
                     if (bullet != null)
                     {
