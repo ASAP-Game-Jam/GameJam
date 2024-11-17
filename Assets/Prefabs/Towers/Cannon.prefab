@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5460842096368193194}
   - component: {fileID: 7481440581792147690}
   - component: {fileID: 1178670748721239474}
+  - component: {fileID: 4313972370397065644}
+  - component: {fileID: 7704560487126286202}
   m_Layer: 9
   m_Name: Cannon
   m_TagString: Untagged
@@ -143,3 +145,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4313972370397065644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546346866649334783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dab8174d926cd44b35481dfc40f9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  Index: 0
+  damage: 2
+  speedBullet: 3
+  bulletPrefab: {fileID: 7586556376788979063, guid: 1abe957eb9d554a498ad995cf99754f0, type: 3}
+--- !u!114 &7704560487126286202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546346866649334783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29575155fa0e2444c97c12782c257897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
