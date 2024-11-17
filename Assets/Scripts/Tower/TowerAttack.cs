@@ -13,6 +13,7 @@ namespace Assets.Scripts.Tower
         private ILevelManager levelManager;
         public uint Index;
         [SerializeField] private uint damage;
+        [SerializeField] private float speedBullet = 3f;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private IBullet bullet;
         public IBullet Bullet { get => bullet; set => bullet = value; }
@@ -41,15 +42,16 @@ namespace Assets.Scripts.Tower
         {
             if (attackTime <= 0 && bulletPrefab != null && bullet != null)
             {
-                GameObject pref = Instantiate(bulletPrefab);
+                GameObject pref = Instantiate(bulletPrefab, this.transform);
                 if (pref != null)
                 {
-                    pref.transform.position = this.transform.position;
                     IBullet bullet = pref?.GetComponent<IBullet>();
                     if (bullet != null)
                     {
+                        bullet.Speed = this.speedBullet;
                         bullet.Direction = Direction.Right;
                         bullet.Damage = this.damage;
+                        OnAttack?.Invoke(this, EventArgs.Empty);
                     }
                     attackTime = cooldown;
                 }

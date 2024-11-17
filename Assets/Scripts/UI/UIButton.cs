@@ -1,20 +1,27 @@
+using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIButton: MonoBehaviour, ICell {
+public class UIButton : MonoBehaviour, IUICard
+{
     [SerializeField] private TowerType towerType;
 
-    public event EventHandler OnCellClick;
+    public event EventHandler OnCardMarked;
+    public event EventHandler OnCardCancel;
 
-    private void Start () {
+    private void Start()
+    {
         this.GetComponent<Button>().onClick.AddListener(OnClick);
     }
-    private void OnClick () {
-        OnCellClick?.Invoke(this, EventArgs.Empty);
+    private void OnCancel()
+    {
+        OnCardCancel?.Invoke(this, EventArgs.Empty);
+    }
+    private void OnClick()
+    {
+        OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType));
         Debug.Log("Clicked");
     }
 }

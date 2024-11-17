@@ -4,6 +4,8 @@ namespace Assets.Scripts.Interfaces
 {
     public interface IUICard
     {
-        event EventHandler OnCardClick;
+        event EventHandler OnCardMarked;
+        event EventHandler OnCardCancel;
+        
     }
 }

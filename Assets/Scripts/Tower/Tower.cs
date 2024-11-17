@@ -8,7 +8,6 @@ namespace Assets.Scripts.Tower
     {
         public event EventHandler OnGetDamage;
         public event EventHandler OnDestroy;
-
         [SerializeField] private uint hp = 10;
         public uint HP
         {
