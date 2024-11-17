@@ -14,20 +14,20 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void Update () {
         if (spawnTime > 0)
-        { 
-            spawnTime -= Time.deltaTime; 
-        }else
+        {
+            spawnTime -= Time.deltaTime;
+        } else
         {
             spawnTime = cooldown;
             GameObject enemyInstane = Instantiate(EnemyPrefabs[random.Next(0, EnemyPrefabs.Count)], transform.GetChild(enemies[random.Next(0, enemies.Count)].Spawner).transform);
             enemyInstane.GetComponent<EnemyController>().FinelDestination = transform.GetChild(enemies[random.Next(0, enemies.Count)].Spawner).GetComponent<SpawnPoint>().Destination;
         }
 
-        //foreach(Enemy enemy in enemies)
+        //foreach (Enemy enemy in enemies)
         //{
         //    if (enemy.isSpawned == false && enemy.spawnTime < Time.time)
         //    {
-        //        Instantiate(EnemyPrefabs[(int)enemy.enemytype], transform.GetChild(enemy.Spawner).transform);
+        //        Instantiate(EnemyPrefabs[(int) enemy.enemytype], transform.GetChild(enemy.Spawner).transform);
         //        enemy.isSpawned = true;
         //    }
         //}
