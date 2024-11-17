@@ -17,7 +17,10 @@ namespace Assets.Scripts.Tower
                 hp = (value < 0 ? 0 : value);
                 OnGetDamage?.Invoke(this, EventArgs.Empty);
                 if (hp == 0)
+                {
                     OnDestroy?.Invoke(this, EventArgs.Empty);
+                    Destroy(this.gameObject);
+                }
             }
         }
 
