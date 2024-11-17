@@ -173,5 +173,5 @@ MonoBehaviour:
   cooldown: 3
   Index: 6
   damage: 0
-  speedBullet: 3
+  speedBullet: 300
   bulletPrefab: {fileID: 4060172537256217885, guid: e3d72b203e295b14eb027c47c6ad6467, type: 3}
