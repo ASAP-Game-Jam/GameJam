@@ -23,11 +23,11 @@ namespace Assets.Scripts
         }
         private void OnTriggerEnter2D (Collider2D other)
         {
-            IEnemy enemy = other.GetComponent<EnemyController>();
+            /*IEnemy enemy = other.GetComponent<EnemyController>();
             if(enemy != null) {
                 enemy.TakeDamage(Damage);
                 Destroy(this.gameObject);
-            }
+            }*/
         }
     }
 }
