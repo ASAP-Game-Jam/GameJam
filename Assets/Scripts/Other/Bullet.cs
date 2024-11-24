@@ -1,33 +1,41 @@
 ﻿using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Enemy;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class Bullet : MonoBehaviour, IBullet
     {
-        public Direction Direction { get; set; }
-        public uint Damage { get; set; }
-        public float Speed{ get;set; }
+        [SerializeField] private Direction direction = Direction.Right;
+        [SerializeField] private uint damage = 3;
+        [SerializeField] private float speed = 7f;
 
-        public float timer = 5f;
+        [SerializeField] float timeLife = 5f;
+
+        public event EventHandler OnHit;
+
+        public Direction Direction { get => direction; set => direction = value; }
+        public uint Damage { get => damage; set => damage = (value > 0 ? value : 1); }
+        public float Speed { get => speed; set => speed = (value > 0 ? value : 0.1f); }
+
         private void Update()
         {
-            timer -= Time.deltaTime;
-            transform.Translate(new Vector3(Speed * (Direction == Direction.Left ? -1 : 1) * Time.deltaTime, 0, 0));
-            if (timer <= 0)
+            timeLife -= Time.deltaTime;
+            transform.Translate(new Vector3(speed * (direction == Direction.Left ? -1 : 1) * Time.deltaTime, 0, 0));
+            if (timeLife <= 0)
             {
                 Destroy(this.gameObject);
             }
         }
-        private void OnTriggerEnter2D (Collider2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            /*IEnemy enemy = other.GetComponent<EnemyController>();
-            if(enemy != null) {
-                enemy.TakeDamage(Damage);
+            if (other.GetComponent<IEnemy>() is IEnemy enemy)
+            {
+                enemy.TakeDamage(damage);
+                OnHit?.Invoke(this, EventArgs.Empty);
                 Destroy(this.gameObject);
-            }*/
+            }
         }
     }
 }

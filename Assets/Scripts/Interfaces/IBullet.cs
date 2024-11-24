@@ -1,7 +1,10 @@
-﻿namespace Assets.Scripts.Interfaces
+﻿using System;
+
+namespace Assets.Scripts.Interfaces
 {
     public interface IBullet
     {
+        event EventHandler OnHit;
         Direction Direction { get; set; }
         uint Damage { get; set; }
         float Speed { get; set; }
