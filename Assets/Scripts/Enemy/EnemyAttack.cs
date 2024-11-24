@@ -17,7 +17,14 @@ public class EnemyAttack : MonoBehaviour, IEnemyAttack
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        timeAttack = delayAttack;
+        if (collision.GetComponent<ITower>() is ITower tower)
+        {
+            timeAttack = delayAttack;
+            this.tower = tower;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.GetComponent<ITower>() is ITower tower)
             this.tower = tower;
     }

@@ -32,7 +32,18 @@ public class EnemyController : MonoBehaviour, IEnemyController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StopMove();
+        if (collision.tag == "Tower")
+            StopMove();
+        else
+            StartMove();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Tower")
+            StopMove();
+        else
+            StartMove();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
