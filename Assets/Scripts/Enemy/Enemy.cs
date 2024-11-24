@@ -9,13 +9,13 @@ namespace Assets.Scripts.Spawner
         public event EventHandler OnGetDamage;
         public event EventHandler OnDestroy;
 
-        [SerializeField] private uint hp;
+        [SerializeField] private uint hp = 5;
         public uint HP
         {
             get => hp;
             set
             {
-                hp = (value < 0 ? 0 : value); OnGetDamage(this, EventArgs.Empty); if (hp == 0) OnDestroy(this, EventArgs.Empty);
+                hp = (value < hp ? value : hp); OnGetDamage?.Invoke(this, EventArgs.Empty); if (hp == 0) OnDestroy?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Spawner
 
         public void TakeDamage(uint damage)
         {
-            HP -= damage;
+            HP -= damage>hp?hp:damage;
         }
 
 
