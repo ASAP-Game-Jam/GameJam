@@ -42,8 +42,6 @@ public class EnemyController : MonoBehaviour, IEnemyController
     {
         if (collision.tag == "Tower")
             StopMove();
-        else
-            StartMove();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
