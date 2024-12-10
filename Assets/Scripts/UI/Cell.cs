@@ -34,8 +34,16 @@ public class Cell : MonoBehaviour, ICell
 
     public void AddTower(ITower tower)
     {
-        CellTaken();
-        this.tower = tower;
-        tower.OnDestroy += (object sender, EventArgs e) => CellUnTaken();
+        if (IsEmpty())
+        {
+            CellTaken();
+            this.tower = tower;
+            tower.OnDestroy += (object sender, EventArgs e) => CellUnTaken();
+        }
+    }
+
+    public bool IsEmpty()
+    {
+        return !this.isTaken;
     }
 }
