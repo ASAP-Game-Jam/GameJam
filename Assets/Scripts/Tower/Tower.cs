@@ -14,7 +14,7 @@ namespace Assets.Scripts.Tower
             get => hp;
             set
             {
-                hp = (value < 0 ? 0 : value);
+                hp = (value > 10000 ? 0 : value);
                 OnGetDamage?.Invoke(this, EventArgs.Empty);
                 if (hp == 0)
                 {
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Tower
 
         public void TakeDamage(uint damage)
         {
-            HP -= damage;
+            HP = (HP >=damage?HP-damage:0);
         }
     }
 }
