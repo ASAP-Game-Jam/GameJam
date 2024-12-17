@@ -6,7 +6,6 @@ using Assets.Scripts.Other;
 using Assets.Scripts.Tower;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour, ILevelManager
@@ -17,8 +16,12 @@ public class LevelManager : MonoBehaviour, ILevelManager
     private Queue<IEnemy>[] countEnemiesForLine;
     private ISpawnerManager spawnerManager;
     [SerializeField] private GameObject[] towerPrefabs;
+    [SerializeField] const uint startEnergy = 100;
 
     private ICellandITower cellTower;
+
+    public uint Score => progress.LevelScore;
+
     private void Awake()
     {
         cellTower = new CellTowerConnect();
@@ -37,6 +40,12 @@ public class LevelManager : MonoBehaviour, ILevelManager
         {
             i.OnCellClick += CellSelected;
         }
+        levelHUD = FindObjectOfType<LevelHUD>();
+        progress.LevelScore = startEnergy;
+    }
+    private void Start()
+    {
+        levelHUD.AddProgressCommand(Score);
     }
     private void SpawnNewEnemy(object sender, EventArgs args)
     {
@@ -78,7 +87,7 @@ public class LevelManager : MonoBehaviour, ILevelManager
         {
             if (cellTower.Cell is Cell cell)
             {
-                var obj = Instantiate(towerPrefabs[(int)cellTower.Type],cell.gameObject.transform);
+                var obj = Instantiate(towerPrefabs[(int)cellTower.Type], cell.gameObject.transform);
                 cell.AddTower(obj.GetComponent<ITower>());
                 Debug.Log("SpawnTower");
             }
