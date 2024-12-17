@@ -359,6 +359,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button1
       objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cost
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9108613994261662924, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -384,6 +388,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2753081883184188329, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
   m_PrefabInstance: {fileID: 287791396}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &360195589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360195590}
+  - component: {fileID: 360195591}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &360195590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360195589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 817.0164, y: 860.0487, z: 3.524518}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &360195591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360195589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79390ac1459ddd49820fd1aaa4bf82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelHUD: {fileID: 0}
+  towerPrefabs: []
 --- !u!1 &380057994
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +694,10 @@ PrefabInstance:
       value: Button2
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
       value: 1
       objectReference: {fileID: 0}
@@ -697,7 +751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 205.01001, y: -15}
+  m_AnchoredPosition: {x: 205, y: -15}
   m_SizeDelta: {x: 283.97998, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &486617791
@@ -865,11 +919,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
       propertyPath: objectList.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
       propertyPath: prefabList.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
+      propertyPath: objectList.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
+      propertyPath: objectList.Array.data[2].type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
       propertyPath: prefabList.Array.data[1].type
@@ -881,6 +943,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
       propertyPath: objectList.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+    - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
+      propertyPath: objectList.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+    - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
+      propertyPath: objectList.Array.data[2].prefab
       value: 
       objectReference: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
     - target: {fileID: 3043832873381079449, guid: a1f5b0f5c68221a40b077729c4191f7f, type: 3}
@@ -1393,6 +1463,10 @@ PrefabInstance:
       value: Button3
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
       value: 2
       objectReference: {fileID: 0}
@@ -1769,7 +1843,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551208189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1940,7 +2014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2671,6 +2745,10 @@ PrefabInstance:
       value: Button4
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cost
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
       value: 3
       objectReference: {fileID: 0}
@@ -2803,6 +2881,10 @@ PrefabInstance:
     - target: {fileID: 4019861234570000324, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_Name
       value: Button5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cost
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
@@ -3269,3 +3351,4 @@ SceneRoots:
   - {fileID: 1953188125}
   - {fileID: 1220430924}
   - {fileID: 677886297}
+  - {fileID: 360195590}
