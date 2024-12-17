@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour, ISpawnerManager
+public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
 {
     public List<Transform> spawnPoints = new List<Transform>();
 
