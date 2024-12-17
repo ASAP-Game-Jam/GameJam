@@ -11,7 +11,7 @@ public class Cell : MonoBehaviour, ICell
 
     private ITower tower;
 
-    private bool isTaken;
+    [SerializeField] private bool isTaken;
 
     private void Start()
     {
