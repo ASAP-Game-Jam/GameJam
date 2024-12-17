@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Класс управляющий интерфейсом на уровне
-public partial class LevelHUD: MonoBehaviour {
+public partial class LevelHUD : MonoBehaviour
+{
     // Ссылка на текстовый виджет в котором отображается счет игрока
     [SerializeField] private TMP_Text scoreText;
 
@@ -25,27 +26,24 @@ public partial class LevelHUD: MonoBehaviour {
 
     // Создадим очередь команд
     public readonly UICommandQueue CommandQueue = new UICommandQueue();
-    
-    private void Start () {
+
+    private void Start()
+    {
         // При создании интерфейса запустим задачу которая
         // позволяет ассинхронно обрабатывать команды
         StartCoroutine(AsyncUpdate());
     }
 
-    // Функция для добавления команды энергии
-    public void AddEnergyCommand (uint energy) {
-        var energyCommand = new EnergyCommand(energy);
-        CommandQueue.TryEnqueueCommand(energyCommand);
-    }
-
     // Функция для добавления команды прогресса
-    public void AddProgressCommand (uint progress) {
+    public void AddProgressCommand(uint progress)
+    {
         var progressCommand = new ProgressCommand(progress);
         CommandQueue.TryEnqueueCommand(progressCommand);
     }
 
     // Метод обработки команд из очереди
-    private IEnumerator AsyncUpdate () {
+    private IEnumerator AsyncUpdate()
+    {
         while (true)
         {
             // Получим новую команду из очереди
@@ -55,10 +53,10 @@ public partial class LevelHUD: MonoBehaviour {
                 {
                     // В зависимости от типа команды выберем нужны обработчик
                     // Сюда можно добавлять любые обработчики команд, и они все будут сгруппированы в одном месте.
-                    case UpdateScoreCommand updateScoreCommand:
+                    case ProgressCommand progressCommand:
                         {
                             // Обновим текст
-                            scoreText.text = $"Score: {updateScoreCommand.NewScore}";
+                            scoreText.text = $"{progressCommand.Progress}";
                             break;
                         }
                 }
@@ -70,7 +68,8 @@ public partial class LevelHUD: MonoBehaviour {
         }
     }
 
-    private void OnDestroy () {
+    private void OnDestroy()
+    {
         // При уничтожении интерфейса остановим задачу
         StopAllCoroutines();
     }

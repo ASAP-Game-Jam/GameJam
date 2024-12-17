@@ -1,12 +1,16 @@
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIButton : MonoBehaviour, IUICard
 {
     [SerializeField] private TowerType towerType;
+    [SerializeField] private uint cost;
+    [SerializeField] private ILevelManager levelManager;
+    public uint Cost => cost;
 
     public event EventHandler OnCardMarked;
     public event EventHandler OnCardCancel;
@@ -21,6 +25,11 @@ public class UIButton : MonoBehaviour, IUICard
     }
     private void OnClick()
     {
-        OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType));
+        if (levelManager.Score >= cost)
+        {
+            OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType));
+            throw new InvalidImplementationException();
+        }
     }
+    public void SetLevelManager(ILevelManager levelManager) => this.levelManager = levelManager;
 }
