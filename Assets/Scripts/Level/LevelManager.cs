@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour, ILevelManager
             tower.OnDestroy += TowerIsDestroy;
         foreach (var i in FindObjectsOfType<UIButton>())
         {
+            i.SetLevelManager(this);
             i.OnCardMarked += TowerSelected;
             i.OnCardCancel += TowerUnSelected;
         }

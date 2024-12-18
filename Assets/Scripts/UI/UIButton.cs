@@ -27,8 +27,8 @@ public class UIButton : MonoBehaviour, IUICard
     {
         if (levelManager.Score >= cost)
         {
-            OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType));
-            throw new InvalidImplementationException();
+            OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType,cost));
+            //throw new InvalidImplementationException();
         }
     }
     public void SetLevelManager(ILevelManager levelManager) => this.levelManager = levelManager;

@@ -15,7 +15,6 @@ public class Cell : MonoBehaviour, ICell
 
     private void Start()
     {
-        this.GetComponent<Button>().onClick.AddListener(OnClick);
     }
     private void OnClick()
     {
