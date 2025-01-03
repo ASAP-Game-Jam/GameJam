@@ -56,6 +56,7 @@ namespace Assets.Scripts.Tower
                 if (Input.GetMouseButtonDown(0))
                 {
                     Instantiate(currentPlant,hit.collider.transform.position, Quaternion.identity);
+                    OnSpawn?.Invoke(this, EventArgs.Empty);
                     currentPlant = null;
                     currentPlantSprite = null;
                 }
