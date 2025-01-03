@@ -10,6 +10,7 @@ namespace Assets.Scripts.Tower
         public event EventHandler OnReloaded;
 
         [SerializeField] private float cooldown = 3f;
+        [SerializeField] private float first_attack_cooldown = 1f;
         private float attackTime;
 
         private ILevelManager levelManager;
@@ -18,6 +19,11 @@ namespace Assets.Scripts.Tower
         [SerializeField] private GameObject firePoint;
         [SerializeField] private IBullet bullet;
         public IBullet Bullet { get => bullet; set => bullet = value; }
+
+        private void Awake()
+        {
+            attackTime = first_attack_cooldown < 0 ? 1 : first_attack_cooldown;
+        }
 
         private void FixedUpdate()
         {
