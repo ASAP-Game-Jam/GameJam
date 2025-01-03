@@ -32,7 +32,7 @@ namespace Assets.Scripts.Tower
             if(args is EventMarkedArgs mark)
             {
                 currentPlant = fabric.GetPrefab(mark.TowerType);
-                currentPlantSprite = currentPlant.GetComponent<Sprite>();
+                currentPlantSprite = currentPlant.GetComponent<SpriteRenderer>().sprite;
             }
         }
 
