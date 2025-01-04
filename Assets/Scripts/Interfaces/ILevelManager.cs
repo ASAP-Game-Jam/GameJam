@@ -2,7 +2,6 @@
 {
     public interface ILevelManager
     {
-        uint Score { get; }
-        bool IsEnemyOnLine(uint index);
+        uint Score { get; set; }
     }
 }
