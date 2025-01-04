@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5575420677275043083}
-  - component: {fileID: 4519083186720860279}
   - component: {fileID: 3083156353979359535}
   - component: {fileID: 7954716083902360393}
   - component: {fileID: -2731623707433183703}
@@ -32,8 +31,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2838174, y: 1.2742957, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1433268390640224778}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -41,22 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 643.9858, y: 316.69766}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4519083186720860279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424059203088825179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3dab8174d926cd44b35481dfc40f9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 3
-  Index: 0
-  bulletPrefab: {fileID: 9134297695911617197, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
-  firePoint: {fileID: 2751239042207161466}
 --- !u!114 &3083156353979359535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +115,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0333334, y: 1.0262696}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 2.9186738, y: 1.8811765}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -183,7 +165,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba37dae8f05e49d4baff1ec5f370b9cc, type: 3}
+  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -194,34 +176,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2751239042207161466
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1433268390640224778}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1433268390640224778
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2751239042207161466}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.464, y: 0.005, z: -0.07373348}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5575420677275043083}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
