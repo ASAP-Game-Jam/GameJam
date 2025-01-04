@@ -1,7 +1,6 @@
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,6 @@ public class UIButton : MonoBehaviour, IUICard
 {
     [SerializeField] private TowerType towerType;
     [SerializeField] private uint cost;
-    [SerializeField] private ILevelManager levelManager;
     public uint Cost => cost;
 
     public event EventHandler OnCardMarked;
@@ -25,11 +23,6 @@ public class UIButton : MonoBehaviour, IUICard
     }
     private void OnClick()
     {
-        if (levelManager.Score >= cost)
-        {
-            OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType,cost));
-            //throw new InvalidImplementationException();
-        }
+        OnCardMarked?.Invoke(this, new EventMarkedArgs(towerType, cost));
     }
-    public void SetLevelManager(ILevelManager levelManager) => this.levelManager = levelManager;
 }

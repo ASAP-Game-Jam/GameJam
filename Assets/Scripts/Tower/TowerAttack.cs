@@ -46,8 +46,7 @@ namespace Assets.Scripts.Tower
         {
             if (attackTime <= 0 && bulletPrefab != null)
             {
-                if (levelManager == null || levelManager.IsEnemyOnLine(Index))
-                    CreateBullet();
+                CreateBullet();
             }
         }
 

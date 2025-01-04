@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Enemy;
-using Assets.Scripts.Interfaces.Tower;
+﻿using Assets.Scripts.Interfaces.Tower;
 using System.Collections.Generic;
 using UnityEngine;
 
