@@ -62,18 +62,23 @@ namespace Assets.Scripts.Tower
 
             if (hit.collider && currentPlant)
             {
-                hit.collider.GetComponent<SpriteRenderer>().sprite = currentPlantSprite;
-                hit.collider.GetComponent<SpriteRenderer>().enabled = true;
-
-                if (Input.GetMouseButtonDown(0))
+                ICell cell = hit.collider.GetComponent<ICell>();
+                if (cell.IsEmpty())
                 {
-                    GameObject obj = Instantiate(currentPlant, hit.collider.transform.position, Quaternion.identity);
-                    if (levelManager != null) levelManager.Score -= currentCost;
-                    currentCost = 0;
-                    AddEventForTower(obj);
-                    OnSpawn?.Invoke(this, EventArgs.Empty);
-                    currentPlant = null;
-                    currentPlantSprite = null;
+                    hit.collider.GetComponent<SpriteRenderer>().sprite = currentPlantSprite;
+                    hit.collider.GetComponent<SpriteRenderer>().enabled = true;
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        GameObject obj = Instantiate(currentPlant, hit.collider.transform.position, Quaternion.identity);
+                        cell.AddTower(obj.GetComponent<ITower>());
+                        if (levelManager != null) levelManager.Score -= currentCost;
+                        currentCost = 0;
+                        AddEventForTower(obj);
+                        OnSpawn?.Invoke(this, EventArgs.Empty);
+                        currentPlant = null;
+                        currentPlantSprite = null;
+                    }
                 }
             }
         }
