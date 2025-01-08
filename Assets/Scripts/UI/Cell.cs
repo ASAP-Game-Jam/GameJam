@@ -33,7 +33,7 @@ public class Cell : MonoBehaviour, ICell
 
     public void AddTower(ITower tower)
     {
-        if (IsEmpty())
+        if (tower != null && IsEmpty())
         {
             CellTaken();
             this.tower = tower;
