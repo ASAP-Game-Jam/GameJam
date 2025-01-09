@@ -6,7 +6,7 @@ namespace Assets.Scripts.Tower
 {
     public class Tower : MonoBehaviour, ITower
     {
-        public event EventHandler OnGetDamage;
+        public event EventHandler OnTakeDamage;
         public event EventHandler OnDestroy;
         [SerializeField] private uint hp = 10;
         public uint HP
@@ -15,7 +15,7 @@ namespace Assets.Scripts.Tower
             set
             {
                 hp = (value > 10000 ? 0 : value);
-                OnGetDamage?.Invoke(this, EventArgs.Empty);
+                OnTakeDamage?.Invoke(this, EventArgs.Empty);
                 if (hp == 0)
                 {
                     OnDestroy?.Invoke(this, EventArgs.Empty);
