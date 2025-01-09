@@ -1,6 +1,10 @@
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Interfaces.Enemy;
 using Assets.Scripts.Interfaces.Tower;
+using Assets.Scripts.Other;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour, IEnemyAttack
@@ -13,45 +17,45 @@ public class EnemyAttack : MonoBehaviour, IEnemyAttack
     [SerializeField] private float delayAttack = 0.5f;
     private float timeAttack = 0f;
 
-    private ITower tower;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<ITower>() is ITower tower)
+        IDestroyObject destroyObject = collision.GetComponent<IDestroyObject>();
+        if (destroyObject is ITower || destroyObject is IBase towerBase && towerBase.BaseType == BaseType.TowerBase)
         {
             timeAttack = delayAttack;
-            this.tower = tower;
+            StartCoroutine(AttackRoutine(destroyObject));
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.GetComponent<ITower>() is ITower tower)
-            this.tower = tower;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        tower = null;
+        StopAllCoroutines();
     }
 
-    private void FixedUpdate()
+    private IEnumerator AttackRoutine(IDestroyObject destroyObject)
     {
-        if (timeAttack > 0)
-            timeAttack -= Time.fixedDeltaTime;
-        else
+        while (true)
         {
-            OnReload?.Invoke(this, EventArgs.Empty);
-            Attack(this.tower);
+            if (timeAttack > 0)
+            {
+                timeAttack -= Time.deltaTime;
+            }
+            else
+            {
+                OnReload?.Invoke(this, EventArgs.Empty);
+                Attack(destroyObject);
+                timeAttack = cooldown;
+            }
+            yield return null;
         }
     }
 
-    public void Attack(ITower tower)
+    public void Attack(IDestroyObject destroyObject)
     {
-        if (timeAttack <= 0 && tower != null)
+        if (destroyObject != null)
         {
-            tower.TakeDamage(damage);
+            destroyObject.TakeDamage(damage);
             OnAttack?.Invoke(this, EventArgs.Empty);
-            timeAttack = cooldown;
         }
     }
 }
