@@ -17,9 +17,10 @@ namespace Assets.Scripts.Base
         public void TakeDamage(uint damage)
         {
             damage = damage < _hp ? damage : _hp;
+            _hp -= damage;
             EventBaseArgs args = new EventBaseArgs(damage, _hp, BaseType);
-            OnTakeDamage(this, args);
-            if (_hp == 0) OnDestroy(this, args);
+            OnTakeDamage?.Invoke(this, args);
+            if (_hp == 0) OnDestroy?.Invoke(this, args);
         }
     }
 }
