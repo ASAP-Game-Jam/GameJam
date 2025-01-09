@@ -4,6 +4,7 @@ using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Base;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour, ILevelManager
 {
@@ -45,5 +46,30 @@ public class LevelManager : MonoBehaviour, ILevelManager
                 levelHUD.AddEndOfTheGameCommand(args.BaseType);
             }
         }
+    }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SaveGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LoadGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ExitGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

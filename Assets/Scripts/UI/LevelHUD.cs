@@ -1,3 +1,4 @@
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Other;
 using System.Collections;
 using TMPro;
@@ -25,6 +26,12 @@ public partial class LevelHUD : MonoBehaviour
 
     [SerializeField] private GameObject[] healthDivs;
 
+    [SerializeField] private GameObject endGamePanel;
+    [SerializeField] private Button restartGameButton;
+    [SerializeField] private TMP_Text endText;
+
+    private ILevelManager levelManager;
+
     // Создадим очередь команд
     public readonly UICommandQueue CommandQueue = new UICommandQueue();
 
@@ -32,6 +39,10 @@ public partial class LevelHUD : MonoBehaviour
     {
         // При создании интерфейса запустим задачу которая
         // позволяет ассинхронно обрабатывать команды
+        endGamePanel.SetActive(false);
+        restartGameButton?.onClick.AddListener(AddRestartGameCommand);
+        menu?.onClick.AddListener(AddMainMenuCommand);
+        levelManager = FindObjectOfType<LevelManager>();
         StartCoroutine(AsyncUpdate());
     }
 
@@ -45,6 +56,16 @@ public partial class LevelHUD : MonoBehaviour
     public void AddEndOfTheGameCommand(BaseType winnerBase)
     {
         CommandQueue.TryEnqueueCommand(new EndOfTheGameCommand(winnerBase));
+    }
+
+    public void AddRestartGameCommand()
+    {
+        CommandQueue.TryEnqueueCommand(new RestartCommand());
+    }
+
+    public void AddMainMenuCommand()
+    {
+        CommandQueue.TryEnqueueCommand(new MainMenuCommand());
     }
 
     // Метод обработки команд из очереди
@@ -67,9 +88,19 @@ public partial class LevelHUD : MonoBehaviour
                         }
                     case EndOfTheGameCommand endGame:
                         {
-                            
+                            if(endText != null)
+                            {
+                                endText.text = $"You are {endGame.BaseType switch { BaseType.EnemyBase => "Win", BaseType.TowerBase => "Defeat", _=>"ERROR" }}";
+                            }
+                            endGamePanel.SetActive(true);
                             break;
                         }
+                    case MainMenuCommand:
+                        levelManager.OpenMainMenu();
+                        break;
+                    case RestartCommand:
+                        levelManager.ReloadGame();
+                        break;
                 }
             }
 

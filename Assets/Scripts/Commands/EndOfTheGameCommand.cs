@@ -1,4 +1,5 @@
 ﻿// Класс интерфейса на уровне
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Other;
 
 public partial class LevelHUD
