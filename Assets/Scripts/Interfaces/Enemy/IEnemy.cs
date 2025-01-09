@@ -2,10 +2,7 @@
 
 namespace Assets.Scripts.Interfaces.Enemy
 {
-    public interface IEnemy
+    public interface IEnemy : IDestroyObject
     {
-        event EventHandler OnGetDamage;
-        event EventHandler OnDestroy;
-        void TakeDamage(uint damage);
     }
 }

@@ -2,10 +2,7 @@
 
 namespace Assets.Scripts.Interfaces.Tower
 {
-    public interface ITower
+    public interface ITower : IDestroyObject
     {
-        event EventHandler OnGetDamage;
-        event EventHandler OnDestroy;
-        void TakeDamage(uint damage);
     }
 }
