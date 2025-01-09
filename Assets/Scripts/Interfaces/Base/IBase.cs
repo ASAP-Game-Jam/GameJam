@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Other;
-using System;
 
 namespace Assets.Scripts.Interfaces.Base
 {
