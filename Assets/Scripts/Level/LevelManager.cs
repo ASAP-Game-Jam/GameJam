@@ -1,4 +1,7 @@
+using Assets.Scripts.Base;
+using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.Interfaces.Base;
 using System;
 using UnityEngine;
 
@@ -14,7 +17,7 @@ public class LevelManager : MonoBehaviour, ILevelManager
         set
         {
             progress.LevelScore = Math.Abs(
-                Math.Max(progress.LevelScore,value) - Math.Min(progress.LevelScore, value)) > 100 
+                Math.Max(progress.LevelScore, value) - Math.Min(progress.LevelScore, value)) > 100
                 ? 0 : value;
             levelHUD?.AddProgressCommand(progress.LevelScore);
         }
@@ -23,10 +26,24 @@ public class LevelManager : MonoBehaviour, ILevelManager
     private void Awake()
     {
         progress = new LevelProgress();
+        foreach (IBase i in FindObjectsOfType<Base>())
+        {
+            i.OnDestroy += this.EndLevel;
+        }
     }
     private void Start()
     {
         levelHUD = FindObjectOfType<LevelHUD>();
         Score = startEnergy;
+    }
+    private void EndLevel(object sender, EventArgs eventArgs)
+    {
+        if (eventArgs is EventBaseArgs args)
+        {
+            if (args.HP == 0)
+            {
+                levelHUD.AddEndOfTheGameCommand(args.BaseType);
+            }
+        }
     }
 }

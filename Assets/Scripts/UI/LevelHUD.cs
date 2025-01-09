@@ -1,7 +1,8 @@
+using Assets.Scripts.Other;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //  ласс управл€ющий интерфейсом на уровне
@@ -41,6 +42,11 @@ public partial class LevelHUD : MonoBehaviour
         CommandQueue.TryEnqueueCommand(progressCommand);
     }
 
+    public void AddEndOfTheGameCommand(BaseType winnerBase)
+    {
+        CommandQueue.TryEnqueueCommand(new EndOfTheGameCommand(winnerBase));
+    }
+
     // ћетод обработки команд из очереди
     private IEnumerator AsyncUpdate()
     {
@@ -57,6 +63,11 @@ public partial class LevelHUD : MonoBehaviour
                         {
                             // ќбновим текст
                             scoreText.text = $"{progressCommand.Progress}";
+                            break;
+                        }
+                    case EndOfTheGameCommand endGame:
+                        {
+                            
                             break;
                         }
                 }
