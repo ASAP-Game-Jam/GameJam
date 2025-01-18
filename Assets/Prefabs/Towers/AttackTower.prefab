@@ -179,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   first_attack_cooldown: 1
-  Index: 0
+  endLevelX: 6
+  distanceAttack: 20
   bulletPrefab: {fileID: 9134297695911617197, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
   firePoint: {fileID: 2043217238603982948}
