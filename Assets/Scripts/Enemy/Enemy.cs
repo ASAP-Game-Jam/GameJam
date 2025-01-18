@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Spawner
+namespace Assets.Scripts.Enemy
 {
     public class Enemy : MonoBehaviour, IEnemy
     {
