@@ -1,61 +1,77 @@
+using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
-using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Interfaces.Enemy;
-using Assets.Scripts.Interfaces.Tower;
 using Assets.Scripts.Other;
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour, IEnemyAttack
 {
     public event EventHandler OnAttack;
     public event EventHandler OnReload;
+    public event EventHandler OnViewEnemy;
 
     [SerializeField] private uint damage = 2;
     [SerializeField] private float cooldown = 2f;
     [SerializeField] private float delayAttack = 0.5f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject firePoint;
+    public float attackRange = 1f;
     private float timeAttack = 0f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        IDestroyObject destroyObject = collision.GetComponent<IDestroyObject>();
-        if (destroyObject is ITower || destroyObject is IBase towerBase && towerBase.BaseType == BaseType.TowerBase)
+        timeAttack = delayAttack >= 0 ? delayAttack : 0;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x - attackRange, transform.position.y, transform.position.z));
+    }
+
+    private void Update()
+    {
+        if (timeAttack <= 0) OnReload?.Invoke(this, EventArgs.Empty);
+        else timeAttack -= Time.deltaTime;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.left, attackRange);
+        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attackRange, transform.position.y), Color.red, 0.1f);
+        IDestroyObject destroyObject = null;
+        foreach (RaycastHit2D hit in hits)
         {
-            timeAttack = delayAttack;
-            StartCoroutine(AttackRoutine(destroyObject));
+            if (hit.collider != null)
+            {
+                destroyObject = hit.collider.GetComponent<IDestroyObject>();
+                if (destroyObject != null && destroyObject.BaseType != BaseType.EnemyBase)
+                {
+                    OnViewEnemy?.Invoke(this, new EventBoolArgs(true));
+                    break;
+                }
+                else destroyObject = null;
+            }
+        }
+        if (destroyObject == null) OnViewEnemy?.Invoke(this, new EventBoolArgs(false));
+        else if (timeAttack <= 0)
+        {
+            Attack();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void Attack()
     {
-        StopAllCoroutines();
-    }
-
-    private IEnumerator AttackRoutine(IDestroyObject destroyObject)
-    {
-        while (true)
+        GameObject pref = Instantiate(bulletPrefab, this.transform);
+        if (pref != null)
         {
-            if (timeAttack > 0)
+            pref.transform.position = firePoint.transform.position;
+            IBullet bullet = pref?.GetComponent<IBullet>();
+            if (bullet != null)
             {
-                timeAttack -= Time.deltaTime;
+                bullet.Direction = Direction.Left;
+                bullet.BaseType = BaseType.EnemyBase;
+                bullet.Damage = damage;
+                OnAttack?.Invoke(this, EventArgs.Empty);
             }
-            else
-            {
-                OnReload?.Invoke(this, EventArgs.Empty);
-                Attack(destroyObject);
-                timeAttack = cooldown;
-            }
-            yield return null;
-        }
-    }
-
-    public void Attack(IDestroyObject destroyObject)
-    {
-        if (destroyObject != null)
-        {
-            destroyObject.TakeDamage(damage);
-            OnAttack?.Invoke(this, EventArgs.Empty);
+            timeAttack = cooldown;
         }
     }
 }

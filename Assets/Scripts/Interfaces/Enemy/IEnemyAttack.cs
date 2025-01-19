@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.CustomEventArgs;
+using System;
 
 namespace Assets.Scripts.Interfaces.Enemy
 {
@@ -6,5 +7,6 @@ namespace Assets.Scripts.Interfaces.Enemy
     {
         event EventHandler OnAttack;
         event EventHandler OnReload;
+        event EventHandler OnViewEnemy;
     }
 }

@@ -77,6 +77,7 @@ namespace Assets.Scripts.Tower
                 if (bullet != null)
                 {
                     bullet.Direction = Direction.Right;
+                    bullet.BaseType = Other.BaseType.TowerBase;
                     OnAttack?.Invoke(this, EventArgs.Empty);
                 }
                 attackTime = cooldown;

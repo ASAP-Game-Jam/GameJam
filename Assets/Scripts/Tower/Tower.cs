@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Interfaces.Tower;
+using Assets.Scripts.Other;
 using System;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ namespace Assets.Scripts.Tower
                 }
             }
         }
+
+        public BaseType BaseType => BaseType.TowerBase;
 
         public void TakeDamage(uint damage)
         {

@@ -1,3 +1,4 @@
+using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Enemy;
 using System;
@@ -20,6 +21,12 @@ public class EnemyController : MonoBehaviour, IEnemyController
         speed = Math.Abs(speed);
         acceleration = Math.Abs(acceleration);
         accelerationStop = Math.Abs(accelerationStop);
+        IEnemyAttack attack = GetComponent<IEnemyAttack>();
+        attack.OnViewEnemy += (object sender, EventArgs args) =>
+        {
+            if (args is EventBoolArgs bArgs && bArgs.Value) StopMove();
+            else StartMove();
+        };
     }
 
     private void FixedUpdate()
@@ -28,25 +35,6 @@ public class EnemyController : MonoBehaviour, IEnemyController
             ? (speed >= maxSpeed ? maxSpeed : speed + acceleration * Time.fixedDeltaTime)
             : (speed <= 0 ? 0 : speed - accelerationStop * Time.fixedDeltaTime));
         Move();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Tower")
-            StopMove();
-        else
-            StartMove();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Tower")
-            StopMove();
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        StartMove();
     }
 
     private void Move()

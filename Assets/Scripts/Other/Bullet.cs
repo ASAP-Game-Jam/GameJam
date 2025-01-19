@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Enemy;
+using Assets.Scripts.Other;
 using System;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Assets.Scripts
         [SerializeField] private Direction direction = Direction.Right;
         [SerializeField] private uint damage = 3;
         [SerializeField] private float speed = 7f;
+        [SerializeField] private BaseType baseType;
 
         [SerializeField] float timeLife = 5f;
 
@@ -18,6 +20,8 @@ namespace Assets.Scripts
         public Direction Direction { get => direction; set => direction = value; }
         public uint Damage { get => damage; set => damage = (value > 0 ? value : 1); }
         public float Speed { get => speed; set => speed = (value > 0 ? value : 0.1f); }
+
+        public BaseType BaseType { get => baseType; set => baseType = value; }
 
         private void Update()
         {
@@ -30,9 +34,9 @@ namespace Assets.Scripts
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetComponent<IEnemy>() is IEnemy enemy)
+            if (other.GetComponent<IDestroyObject>() is IDestroyObject destroyObject && destroyObject.BaseType!=this.baseType)
             {
-                enemy.TakeDamage(damage);
+                destroyObject.TakeDamage(damage);
                 OnHit?.Invoke(this, EventArgs.Empty);
                 Destroy(this.gameObject);
             }
