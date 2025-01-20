@@ -1,5 +1,6 @@
 using Assets.Scripts.Enemy;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.Interfaces.Enemy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
     private float spawnTime;
 
     public event EventHandler OnSpawn;
+
+    public uint maxCountEnemy = 20;
+    private uint currentCountEnemy = 0;
+
+    private Timer timer;
 
     public float CoolDown
     {
@@ -38,6 +44,8 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
                     spawnPoints.Add(point.transform);
             }
         }
+        timer = FindObjectOfType<Timer>();
+        currentCountEnemy = (uint)FindObjectsOfType<Enemy>().Length;
     }
     private void Update()
     {
@@ -50,22 +58,33 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
             spawnTime = cooldown;
             Spawn();
         }
+        if (timer != null && !timer.TimerOn)
+            cooldown = 0.4f;
     }
     public void Spawn()
     {
         if (spawnPoints.Count == 0)
             throw new InvalidOperationException();
 
-        Array values = Enum.GetValues(typeof(EnemyType));
-        int index = random.Next(values.Length);
-
-        GameObject obj = fabric.GetPrefab((EnemyType)values.GetValue(index));
-
-        if (obj != null)
+        if (currentCountEnemy < maxCountEnemy)
         {
-            index = random.Next(spawnPoints.Count);
-            GameObject myZombie = Instantiate(obj, spawnPoints[index].position, Quaternion.identity);
-            OnSpawn?.Invoke(this,EventArgs.Empty);
+            Array values = Enum.GetValues(typeof(EnemyType));
+            int index = random.Next(values.Length);
+
+            GameObject obj = fabric.GetPrefab((EnemyType)values.GetValue(index));
+
+            if (obj != null)
+            {
+                index = random.Next(spawnPoints.Count);
+                GameObject myZombie = Instantiate(obj, spawnPoints[index].position, Quaternion.identity);
+                if (myZombie != null)
+                {
+                    currentCountEnemy++;
+                    myZombie.GetComponent<IEnemy>().OnDestroy += 
+                        (object sender, EventArgs e) => { currentCountEnemy--; };
+                    OnSpawn?.Invoke(this, EventArgs.Empty);
+                }
+            }
         }
     }
 }
