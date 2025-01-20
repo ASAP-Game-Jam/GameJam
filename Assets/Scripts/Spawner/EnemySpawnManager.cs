@@ -1,6 +1,6 @@
+using Assets.Scripts.Base;
 using Assets.Scripts.Enemy;
 using Assets.Scripts.Interfaces;
-using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Interfaces.Enemy;
 using Assets.Scripts.Other;
 using System;
@@ -13,7 +13,7 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
     public List<Transform> spawnPoints = new List<Transform>();
 
     private System.Random random = new System.Random();
-    public IBase enemyBase;
+    [SerializeField] public Base enemyBase;
 
     public IEnemyFabric fabric;
 
@@ -85,7 +85,7 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
                 if (myZombie != null)
                 {
                     currentCountEnemy++;
-                    myZombie.GetComponent<IEnemy>().OnDestroy += 
+                    myZombie.GetComponent<IEnemy>().OnDestroy +=
                         (object sender, EventArgs e) => { currentCountEnemy--; };
                     OnSpawn?.Invoke(this, EventArgs.Empty);
                 }
