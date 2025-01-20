@@ -28,7 +28,7 @@ namespace Assets.Scripts.UI.MainMenu
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quiot();
+            Application.Quit();
 #endif
         }
     }
