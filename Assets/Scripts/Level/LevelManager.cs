@@ -44,6 +44,11 @@ public class LevelManager : MonoBehaviour, ILevelManager
             if (args.HP == 0)
             {
                 levelHUD.AddEndOfTheGameCommand(args.BaseType);
+                if (args.BaseType == Assets.Scripts.Other.BaseType.EnemyBase)
+                    foreach (var i in FindObjectsOfType<EnemyController>())
+                    {
+                        i.Direction = Direction.Right;
+                    }
             }
         }
     }

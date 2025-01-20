@@ -15,6 +15,17 @@ public class EnemyController : MonoBehaviour, IEnemyController
     [SerializeField] float accelerationStop = 10f;
     private bool isMove = true;
 
+    public Direction Direction
+    {
+        get { return direction; }
+        set
+        {
+            if (direction == value)
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            direction = value;
+        }
+    }
+
     private void Start()
     {
         maxSpeed = Math.Abs(maxSpeed);
@@ -27,6 +38,7 @@ public class EnemyController : MonoBehaviour, IEnemyController
             if (args is EventBoolArgs bArgs && bArgs.Value) StopMove();
             else StartMove();
         };
+        transform.localScale = new Vector3((direction==Direction.Right?-1:1)*transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void FixedUpdate()
@@ -35,6 +47,8 @@ public class EnemyController : MonoBehaviour, IEnemyController
             ? (speed >= maxSpeed ? maxSpeed : speed + acceleration * Time.fixedDeltaTime)
             : (speed <= 0 ? 0 : speed - accelerationStop * Time.fixedDeltaTime));
         Move();
+        if (transform.localScale.x < -10 || transform.localScale.x > 10)
+            Destroy(this.gameObject);
     }
 
     private void Move()
@@ -46,7 +60,6 @@ public class EnemyController : MonoBehaviour, IEnemyController
             }[(int)direction]
             * speed * Time.fixedDeltaTime);
         OnMoving?.Invoke(this, EventArgs.Empty);
-
     }
     public void StartMove()
     {
