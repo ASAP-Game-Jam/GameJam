@@ -3,8 +3,6 @@ using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Tower;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace Assets.Scripts.Tower
@@ -20,6 +18,7 @@ namespace Assets.Scripts.Tower
         public LayerMask tileMask;
         private ITowerFabric fabric;
         private ILevelManager levelManager;
+        [SerializeField] private Vector3 rocketStartPoint = new Vector3(-11.3039055f, 4.54456806f, 0);
 
         private void Start()
         {
@@ -45,6 +44,8 @@ namespace Assets.Scripts.Tower
                 currentPlantSprite = currentPlant?.GetComponent<SpriteRenderer>().sprite;
                 currentCost = mark.Cost;
                 currentTowerType = mark.TowerType;
+                if (mark.TowerType == TowerType.Rocket)
+                    Spawn(rocketStartPoint);
             }
         }
 
@@ -70,17 +71,24 @@ namespace Assets.Scripts.Tower
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        GameObject obj = Instantiate(currentPlant, hit.collider.transform.position, Quaternion.identity);
-                        cell.AddTower(obj.GetComponent<ITower>());
-                        if (levelManager != null) levelManager.Score -= currentCost;
-                        currentCost = 0;
-                        AddEventForTower(obj);
-                        OnSpawn?.Invoke(this, EventArgs.Empty);
-                        currentPlant = null;
-                        currentPlantSprite = null;
+                        Spawn(hit.collider.transform.position, cell);
                     }
                 }
             }
+        }
+
+        private void Spawn(Vector3 position, ICell cell = null)
+        {
+            if (position == null) return;
+            GameObject obj = Instantiate(currentPlant, position, Quaternion.identity);
+            if (cell != null)
+                cell.AddTower(obj.GetComponent<ITower>());
+            if (levelManager != null) levelManager.Score -= currentCost;
+            currentCost = 0;
+            AddEventForTower(obj);
+            OnSpawn?.Invoke(this, EventArgs.Empty);
+            currentPlant = null;
+            currentPlantSprite = null;
         }
 
         private void AddEventForTower(GameObject obj)
