@@ -4,12 +4,14 @@ using Assets.Scripts.Interfaces.Enemy;
 using Assets.Scripts.Tower;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Audio
 {
     public class ObjectToAudio : MonoBehaviour
     {
         [SerializeField] private AudioManager audioManager;
+        [SerializeField] private Button[] buttons;
         private TowerSpawnManager towerSpawnManager;
         private EnemySpawnManager enemySpawnManager;
 
@@ -22,6 +24,9 @@ namespace Assets.Scripts.Audio
 
             towerSpawnManager.OnSpawn += OnSpawnTower;
             enemySpawnManager.OnSpawn -= OnSpawnEnemy;
+            if (buttons != null && buttons.Length > 0)
+                foreach (Button button in buttons)
+                    button.onClick.AddListener(audioManager.PlayButtonClick);
         }
 
         private void OnSpawnTower(object sender, EventArgs eArgs)
