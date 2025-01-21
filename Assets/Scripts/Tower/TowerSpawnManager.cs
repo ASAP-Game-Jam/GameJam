@@ -45,7 +45,10 @@ namespace Assets.Scripts.Tower
                 currentCost = mark.Cost;
                 currentTowerType = mark.TowerType;
                 if (mark.TowerType == TowerType.Rocket)
+                {
                     Spawn(rocketStartPoint);
+                    Clear();
+                }
             }
         }
 
@@ -64,7 +67,7 @@ namespace Assets.Scripts.Tower
             if (hit.collider && currentPlant)
             {
                 ICell cell = hit.collider.GetComponent<ICell>();
-                if (cell.IsEmpty())
+                if (cell.IsEmpty() && levelManager.Score >= currentCost)
                 {
                     hit.collider.GetComponent<SpriteRenderer>().sprite = currentPlantSprite;
                     hit.collider.GetComponent<SpriteRenderer>().enabled = true;
@@ -73,8 +76,17 @@ namespace Assets.Scripts.Tower
                     {
                         Spawn(hit.collider.transform.position, cell);
                     }
+                    else if (Input.GetMouseButtonDown(1))
+                        Clear();
                 }
             }
+        }
+
+        private void Clear()
+        {
+            currentCost = 0;
+            currentPlant = null;
+            currentPlantSprite = null;
         }
 
         private void Spawn(Vector3 position, ICell cell = null)
@@ -84,11 +96,11 @@ namespace Assets.Scripts.Tower
             if (cell != null)
                 cell.AddTower(obj.GetComponent<ITower>());
             if (levelManager != null) levelManager.Score -= currentCost;
-            currentCost = 0;
             AddEventForTower(obj);
+#if !UNITY_EDITOR
+            Clear();
+#endif
             OnSpawn?.Invoke(this, EventArgs.Empty);
-            currentPlant = null;
-            currentPlantSprite = null;
         }
 
         private void AddEventForTower(GameObject obj)
