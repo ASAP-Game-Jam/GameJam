@@ -18,17 +18,16 @@ public class AudioManager : MonoBehaviour
     // Словарь для хранения громкости каждого звука
     private Dictionary<AudioClip, float> soundVolumes;
 
+    // Пул аудиоисточников для асинхронного воспроизведения
+    private List<AudioSource> audioSources = new List<AudioSource>();
+
     // Аудиоисточник для воспроизведения звуков
-    private AudioSource audioSource;
+    private AudioSource mainAudioSource;
 
     void Start()
     {
-        // Инициализация аудиоисточника
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        // Инициализация основного аудиоисточника
+        mainAudioSource = gameObject.AddComponent<AudioSource>();
 
         // Инициализация громкости для каждого звука
         soundVolumes = new Dictionary<AudioClip, float>
@@ -57,49 +56,92 @@ public class AudioManager : MonoBehaviour
     // Метод для воспроизведения выстрела бластера
     public void PlayBlasterShot()
     {
-        PlaySound(blasterShot);
+        PlaySoundAsync(blasterShot);
     }
 
     // Метод для воспроизведения выстрела пушки
     public void PlayCannonShot()
     {
-        PlaySound(cannonShot);
+        PlaySoundAsync(cannonShot);
     }
 
     // Метод для воспроизведения выстрела танка
     public void PlayTankShot()
     {
-        PlaySound(tankShot);
+        PlaySoundAsync(tankShot);
     }
 
     // Метод для воспроизведения звука строительства
     public void PlayConstructionSound()
     {
-        PlaySound(constructionSound);
+        PlaySoundAsync(constructionSound);
     }
 
     // Метод для воспроизведения звука нажатия клавиши
     public void PlayButtonClick()
     {
-        PlaySound(buttonClick);
+        PlaySoundAsync(buttonClick);
     }
 
     // Метод для воспроизведения запуска ракеты
     public void PlayRocketLaunch()
     {
-        PlaySound(rocketLaunch);
+        PlaySoundAsync(rocketLaunch);
     }
 
     // Метод для воспроизведения взрыва ракеты
     public void PlayRocketExplosion()
     {
-        PlaySound(rocketExplosion);
+        PlaySoundAsync(rocketExplosion);
     }
 
     // Метод для воспроизведения удара палкой
     public void PlayStickHit()
     {
-        PlaySound(stickHit);
+        PlaySoundAsync(stickHit);
+    }
+
+    // Метод для воспроизведения звука асинхронно (не прерывая другие звуки)
+    public void PlaySoundAsync(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            AudioSource audioSource = GetAvailableAudioSource();
+            audioSource.clip = clip;
+            audioSource.loop = false;
+            audioSource.volume = soundVolumes.ContainsKey(clip) ? soundVolumes[clip] : 1.0f;
+            audioSource.Play();
+
+            // Удаляем аудиоисточник из пула после завершения клипа
+            StartCoroutine(ReleaseAudioSourceAfterPlaying(audioSource));
+        }
+        else
+        {
+            Debug.LogWarning("Audio clip is missing!");
+        }
+    }
+
+    // Метод для получения доступного аудиоисточника из пула
+    private AudioSource GetAvailableAudioSource()
+    {
+        AudioSource availableSource = audioSources.Find(source => !source.isPlaying);
+        if (availableSource == null)
+        {
+            availableSource = gameObject.AddComponent<AudioSource>();
+            audioSources.Add(availableSource);
+        }
+        return availableSource;
+    }
+
+    // Корутина для освобождения аудиоисточника после завершения воспроизведения
+    private IEnumerator ReleaseAudioSourceAfterPlaying(AudioSource audioSource)
+    {
+        while (audioSource.isPlaying)
+        {
+            yield return null; // Ждем до тех пор, пока звук играет
+        }
+        audioSource.Stop();
+        audioSource.clip = null;
     }
 
     // Общий метод для воспроизведения звука
@@ -107,12 +149,13 @@ public class AudioManager : MonoBehaviour
     {
         if (clip != null)
         {
-            if (!audioSource.isPlaying || loop)
+            if (!mainAudioSource.isPlaying || loop)
             {
-                audioSource.clip = clip;
-                audioSource.loop = loop;
-                audioSource.volume = soundVolumes.ContainsKey(clip) ? soundVolumes[clip] : 1.0f;
-                audioSource.Play();
+                mainAudioSource.clip = clip;
+                mainAudioSource.loop = loop;
+                mainAudioSource.volume = soundVolumes.ContainsKey(clip) ? soundVolumes[clip] : 1.0f;
+                mainAudioSource.Play();
+
             }
         }
         else
@@ -124,9 +167,25 @@ public class AudioManager : MonoBehaviour
     // Метод для остановки текущего звука
     public void StopSound()
     {
-        if (audioSource.isPlaying)
+        if (mainAudioSource.isPlaying)
         {
-            audioSource.Stop();
+            mainAudioSource.Stop();
+        }
+    }
+
+    // Метод для остановки всех текущих звуков
+    public void StopAllSounds()
+    {
+        foreach (var source in audioSources)
+        {
+            if (source.isPlaying)
+            {
+                source.Stop();
+            }
+        }
+        if (mainAudioSource.isPlaying)
+        {
+            mainAudioSource.Stop();
         }
     }
 
