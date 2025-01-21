@@ -18,9 +18,7 @@ public class LevelManager : MonoBehaviour, ILevelManager
         get => progress.LevelScore;
         set
         {
-            progress.LevelScore = Math.Abs(
-                Math.Max(progress.LevelScore, value) - Math.Min(progress.LevelScore, value)) > 100
-                ? 0 : value;
+            progress.LevelScore = value;
             levelHUD?.AddProgressCommand(progress.LevelScore);
         }
     }
