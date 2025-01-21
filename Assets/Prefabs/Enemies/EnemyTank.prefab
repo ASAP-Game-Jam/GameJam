@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 4358342441866883, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1608775699, guid: 9b5d4bbdf04868443a22e347ada0c497, type: 3}
+      objectReference: {fileID: 21300000, guid: dce7566be36bc6444a2c93904d6ab149, type: 3}
     - target: {fileID: 539063171729177985, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.6
@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: hp
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3299602049770619479, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 66df172dbaa0fa447a5d7926a8e5c33a, type: 2}
     - target: {fileID: 4227217532013034272, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
       propertyPath: attackRange
       value: 2.3
