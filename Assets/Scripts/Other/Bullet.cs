@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Interfaces;
-using Assets.Scripts.Interfaces.Enemy;
+using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Other;
 using System;
 using UnityEngine;
@@ -12,6 +12,8 @@ namespace Assets.Scripts
         [SerializeField] private uint damage = 3;
         [SerializeField] private float speed = 7f;
         [SerializeField] private BaseType baseType;
+        [SerializeField] private bool attackBase = false;
+        [SerializeField] private bool attackObject = true;
 
         [SerializeField] float timeLife = 5f;
 
@@ -34,11 +36,14 @@ namespace Assets.Scripts
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetComponent<IDestroyObject>() is IDestroyObject destroyObject && destroyObject.BaseType!=this.baseType)
+            if (other.GetComponent<IDestroyObject>() is IDestroyObject destroyObject && destroyObject.BaseType != this.baseType)
             {
-                destroyObject.TakeDamage(damage);
-                OnHit?.Invoke(this, EventArgs.Empty);
-                Destroy(this.gameObject);
+                if (destroyObject is IBase && attackBase || destroyObject is not IBase && attackObject)
+                {
+                    destroyObject.TakeDamage(damage);
+                    OnHit?.Invoke(this, EventArgs.Empty);
+                    Destroy(this.gameObject);
+                }
             }
         }
     }

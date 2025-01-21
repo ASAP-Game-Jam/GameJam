@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: damage
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1550812237170591458, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
+      propertyPath: attackBase
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550812237170591458, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
+      propertyPath: attackObject
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4556781854999087490, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -58,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8717950483249294018, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8717950483249294018, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
       propertyPath: m_LocalRotation.w
