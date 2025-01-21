@@ -14,6 +14,7 @@ namespace Assets.Scripts.Tower
         public event EventHandler OnReloaded;
 
         [SerializeField] private List<GameObject> firePoints;
+        [SerializeField] private uint damage = 5;
         [SerializeField] private float cooldown = 3f;
         [SerializeField] private float first_attack_cooldown = 1f;
         private float attackTime;
@@ -100,6 +101,7 @@ namespace Assets.Scripts.Tower
                 if (bullet != null)
                 {
                     bullet.Direction = Direction.Right;
+                    bullet.Damage = damage;
                     bullet.BaseType = Other.BaseType.TowerBase;
                     if (bullet is ILineBullet lineBullet)
                         lineBullet.Points.Enqueue(point);

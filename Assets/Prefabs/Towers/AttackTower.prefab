@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackTower
       objectReference: {fileID: 0}
+    - target: {fileID: 3083156353979359535, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
+      propertyPath: hp
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4519083186720860279, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: cooldown
       value: 3
@@ -177,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dab8174d926cd44b35481dfc40f9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePoints: []
+  damage: 10
   cooldown: 3
   first_attack_cooldown: 1
   endLevelX: 6

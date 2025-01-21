@@ -166,6 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  damage: 3
+  damage: 10
   speed: 7
+  baseType: 0
+  attackBase: 0
+  attackObject: 1
   timeLife: 5
