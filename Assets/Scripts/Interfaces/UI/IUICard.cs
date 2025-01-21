@@ -7,5 +7,6 @@ namespace Assets.Scripts.Interfaces
         event EventHandler OnCardMarked;
         event EventHandler OnCardCancel;
         uint Cost { get; }
+        void Block();
     }
 }

@@ -19,6 +19,8 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
     public IEnemyFabric fabric;
 
     private float cooldown = 15f;
+    [SerializeField] private float startCooldown = 15f;
+    [SerializeField] private float minCooldown = 5f;
     [SerializeField] private float firstEnemyCreate = 10f;
     private float spawnTime;
 
@@ -26,13 +28,14 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
 
     public uint maxCountEnemy = 20;
     private uint currentCountEnemy = 0;
+    private uint countSpawnEnemyOnTime = 1;
 
     private Timer timer;
     public bool spawnerOn = true;
     public float CoolDown
     {
         get { return cooldown; }
-        set { cooldown = (value > 0 && value < 20 ? value : 10); }
+        set { cooldown = (value > 0 && value < startCooldown ? value : 10); }
     }
     public float SpawnTime => spawnTime;
     private void Start()
@@ -63,6 +66,12 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
         }
         else
         {
+            if (timer != null)
+            {
+                cooldown = minCooldown + timer.TimeLeft / 300 * (startCooldown - minCooldown);
+                if ((300 - (int)timer.TimeLeft) % 50 == 0 && timer.TimeLeft < 300)
+                    countSpawnEnemyOnTime += (countSpawnEnemyOnTime < 5 ? 1u : 0);
+            }
             spawnTime = cooldown;
             Spawn();
         }
@@ -77,24 +86,48 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
         if (currentCountEnemy < maxCountEnemy && spawnerOn)
         {
             Array values = Enum.GetValues(typeof(EnemyType));
-            int index = random.Next(values.Length);
-
-            EnemyType enemyType = (EnemyType)values.GetValue(index);
-
-            GameObject obj = fabric.GetPrefab(enemyType);
-
-            if (obj != null)
+            int[] array = new int[spawnPoints.Count];
+            for (int i = 0; i < array.Length; i++)
+                array[i] = i;
+            ShuffleArray(array);
+            Queue<int> queue = new Queue<int>();
+            for (int i = 0; i < array.Length; i++)
+                queue.Enqueue(array[i]);
+            for (int i = 0; i < countSpawnEnemyOnTime; i++)
             {
-                index = random.Next(spawnPoints.Count);
-                GameObject myZombie = Instantiate(obj, spawnPoints[index].position, Quaternion.identity);
-                if (myZombie != null)
+                int index = random.Next(values.Length / (timer.TimeLeft > 300 - 25 ? 3 : timer.TimeLeft > 300 - 60 ? 2 : 1));
+
+                EnemyType enemyType = (EnemyType)values.GetValue(index);
+
+                GameObject obj = fabric.GetPrefab(enemyType);
+
+                if (obj != null)
                 {
-                    currentCountEnemy++;
-                    myZombie.GetComponent<IEnemy>().OnDestroy +=
-                        (object sender, EventArgs e) => { currentCountEnemy--; };
-                    OnSpawn?.Invoke(this, new EventEnemySpawnArgs(myZombie,enemyType));
+                    index = random.Next(spawnPoints.Count);
+                    GameObject myZombie = Instantiate(obj, spawnPoints[queue.Dequeue()].position, Quaternion.identity);
+                    if (myZombie != null)
+                    {
+                        currentCountEnemy++;
+                        myZombie.GetComponent<IEnemy>().OnDestroy +=
+                            (object sender, EventArgs e) => { if (currentCountEnemy > 0) currentCountEnemy--; };
+                        OnSpawn?.Invoke(this, new EventEnemySpawnArgs(myZombie, enemyType));
+                    }
                 }
             }
+        }
+    }
+
+    private void ShuffleArray(int[] array)
+    {
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            // Выбираем случайный индекс от 0 до i
+            int randomIndex = UnityEngine.Random.Range(0, i + 1);
+
+            // Меняем местами текущий элемент с элементом на случайном индексе
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
         }
     }
 }

@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd636fd30a4b8f47a447ca05b179922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeLeft: 600
+  TimeLeft: 300
   TimerOn: 0
   TimerTxt: {fileID: 5030840806044652477}
 --- !u!1 &2356144160621788084
@@ -2334,7 +2334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 100
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cooldown
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
@@ -2546,6 +2550,10 @@ PrefabInstance:
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cooldown
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
@@ -2908,6 +2916,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
       value: 2
       objectReference: {fileID: 0}
@@ -3084,6 +3096,10 @@ PrefabInstance:
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: cooldown
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
