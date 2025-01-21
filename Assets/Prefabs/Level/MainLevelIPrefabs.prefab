@@ -867,7 +867,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158315491606390312, guid: ef31b07106803ad40b7f51c58817d863, type: 3}
       propertyPath: firstEnemyCreate
-      value: 11
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3717820825813632537, guid: ef31b07106803ad40b7f51c58817d863, type: 3}
       propertyPath: m_Name
