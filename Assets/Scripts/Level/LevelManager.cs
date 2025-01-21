@@ -4,14 +4,13 @@ using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Other;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour, ILevelManager
 {
     public LevelHUD levelHUD;
-    [SerializeField] uint startEnergy = 5;
+    [SerializeField] uint startEnergy = 35;
     private LevelProgress progress;
 
     public uint Score

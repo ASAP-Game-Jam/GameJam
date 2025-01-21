@@ -2334,7 +2334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 2
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
+      propertyPath: towerType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6068656760134339673, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2366,7 +2370,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953185881051274954, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_text
-      value: 30
+      value: '100
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 9108613994261662924, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_Type
@@ -2539,11 +2545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6068656760134339673, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2713,11 +2719,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 3
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6068656760134339673, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2741,7 +2747,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953185881051274954, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_text
-      value: 10
+      value: '20
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 9108613994261662924, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_Color.a
@@ -2899,11 +2907,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6068656760134339673, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3077,11 +3085,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 6
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6068656760134339673, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3101,7 +3109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953185881051274954, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_text
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 9108613994261662924, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_Color.a
