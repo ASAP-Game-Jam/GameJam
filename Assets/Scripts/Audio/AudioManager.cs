@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
         // Инициализация громкости для каждого звука
         soundVolumes = new Dictionary<AudioClip, float>
         {
-            { mainTheme, 0.5f },
+            { mainTheme, 0.6f },
             { blasterShot, 1.0f },
             { cannonShot, 1.0f },
             { tankShot, 1.0f },
