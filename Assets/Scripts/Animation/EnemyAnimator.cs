@@ -6,17 +6,41 @@ public class EnemyAnimator : MonoBehaviour
 {
     private Animator animator;
     private EnemyController controller;
+    private EnemyAttack attack;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        controller = GetComponent<EnemyController>();
-        controller.OnMoving += (object sender, EventArgs e) =>
+        if (animator != null)
         {
-            if(e is EventBoolArgs args)
+            controller = GetComponent<EnemyController>();
+            attack = GetComponent<EnemyAttack>();
+
+            if (controller != null)
             {
-                animator.SetBool("isMoving",args.Value);
+                controller.OnMoving += (object sender, EventArgs e) =>
+                {
+                    if (e is EventBoolArgs args)
+                    {
+                        animator.SetBool("isMoving", args.Value);
+                    }
+                };
             }
-        };
+
+            if (attack != null)
+            {
+                attack.OnAttack += (object sender, EventArgs e) =>
+                {
+                    animator.SetBool("isAttack", true);
+                };
+                attack.OnViewEnemy += (object sender, EventArgs e) =>
+                {
+                    if (e is EventBoolArgs args && !args.Value)
+                    {
+                        animator.SetBool("isAttack", false);
+                    }
+                };
+            }
+        }
     }
 }
