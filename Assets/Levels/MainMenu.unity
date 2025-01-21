@@ -327,7 +327,7 @@ MonoBehaviour:
       \u0432\u044B\u0445\u043E\u0434 \u0434\u043B\u044F \u0431\u0430\u0448\u043D\u0438
       \u2014 \u044D\u0442\u043E \u0431\u0435\u0436\u0430\u0442\u044C"
     image: {fileID: 1608775699, guid: 9b5d4bbdf04868443a22e347ada0c497, type: 3}
-  displayTime: 2
+  displayTime: 4
   fadeDuration: 1
 --- !u!1 &495978171
 GameObject:
@@ -1111,6 +1111,10 @@ PrefabInstance:
       propertyPath: buttons.Array.data[1]
       value: 
       objectReference: {fileID: 2009471574}
+    - target: {fileID: 7363329997175532158, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
+      propertyPath: cannonShot
+      value: 
+      objectReference: {fileID: 8300000, guid: d4ab28e9d73137946894edb4a282cd47, type: 3}
     - target: {fileID: 8200326608418299099, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
       propertyPath: m_Name
       value: AudioEffect
