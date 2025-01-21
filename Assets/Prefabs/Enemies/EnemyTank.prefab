@@ -52,14 +52,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1099193049000802120, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
+      propertyPath: maxSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1331687066956841370, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
       propertyPath: hp
-      value: 7
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3299602049770619479, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 66df172dbaa0fa447a5d7926a8e5c33a, type: 2}
+    - target: {fileID: 4227217532013034272, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4227217532013034272, guid: 2a6cbffaecf769444949313ca0cf74ca, type: 3}
       propertyPath: attackRange
       value: 2.3
