@@ -17,13 +17,14 @@ namespace Assets.Scripts.Audio
 
         private void Start()
         {
-            if(audioManager == null) 
+            if (audioManager == null)
                 audioManager = FindAnyObjectByType<AudioManager>();
             towerSpawnManager = FindObjectOfType<TowerSpawnManager>();
             enemySpawnManager = FindObjectOfType<EnemySpawnManager>();
-
-            towerSpawnManager.OnSpawn += OnSpawnTower;
-            enemySpawnManager.OnSpawn -= OnSpawnEnemy;
+            if (towerSpawnManager != null)
+                towerSpawnManager.OnSpawn += OnSpawnTower;
+            if (enemySpawnManager != null)
+                enemySpawnManager.OnSpawn -= OnSpawnEnemy;
             if (buttons != null && buttons.Length > 0)
                 foreach (Button button in buttons)
                     button.onClick.AddListener(audioManager.PlayButtonClick);
