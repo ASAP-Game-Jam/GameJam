@@ -696,6 +696,10 @@ PrefabInstance:
       propertyPath: buttons.Array.data[1]
       value: 
       objectReference: {fileID: 2693894333555236878}
+    - target: {fileID: 7363329997175532158, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
+      propertyPath: rocketLaunch
+      value: 
+      objectReference: {fileID: 8300000, guid: ba5814daa2bde2e4995f9280b2bc4f90, type: 3}
     - target: {fileID: 8200326608418299099, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
       propertyPath: m_Name
       value: AudioEffect
@@ -3490,10 +3494,6 @@ PrefabInstance:
     - target: {fileID: 4124937860240504427, guid: 7cc622772bdaeb44cbd6adba7c18c3b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 213.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236097306240631095, guid: 7cc622772bdaeb44cbd6adba7c18c3b6, type: 3}
-      propertyPath: startEnergy
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5105223897554414446, guid: 7cc622772bdaeb44cbd6adba7c18c3b6, type: 3}
       propertyPath: objectList.Array.data[2].prefab

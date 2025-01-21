@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelHUD: {fileID: 0}
-  startEnergy: 30
+  startEnergy: 15
 --- !u!1001 &1807594660678620687
 PrefabInstance:
   m_ObjectHideFlags: 0
