@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour, IEnemyController
                     Vector2.left, Vector2.right
             }[(int)direction]
             * speed * Time.fixedDeltaTime);
-        OnMoving?.Invoke(this, EventArgs.Empty);
+        OnMoving?.Invoke(this, new EventBoolArgs(isMove));
     }
     public void StartMove()
     {
