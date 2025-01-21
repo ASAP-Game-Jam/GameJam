@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour, IEnemyController
         get { return direction; }
         set
         {
-            if (direction == value)
+            if (direction != value)
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             direction = value;
         }
