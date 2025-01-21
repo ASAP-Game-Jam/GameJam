@@ -47,7 +47,10 @@ namespace Assets.Scripts.Audio
 
                             break;
                         case TowerType.Rocket:
-
+                            {
+                                audioManager.PlayRocketLaunch();
+                                gameObject.GetComponent<IBullet>().OnHit += (object sender, EventArgs e) => { audioManager.PlayRocketExplosion(); };
+                            }
                             break;
                         case TowerType.Totem:
 
@@ -71,6 +74,7 @@ namespace Assets.Scripts.Audio
                             gameObject.GetComponent<IEnemyAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayTankShot(); };
                             break;
                         case EnemyType.Stick:
+                            gameObject.GetComponent<IEnemyAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayStickHit(); };
                             break;
                         case EnemyType.FingerGun:
                             gameObject.GetComponent<IEnemyAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayBlasterShot(); };

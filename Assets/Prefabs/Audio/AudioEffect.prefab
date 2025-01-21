@@ -51,6 +51,9 @@ MonoBehaviour:
   tankShot: {fileID: 8300000, guid: 42f05044fb0220f42b6a99a2d0468a3c, type: 3}
   constructionSound: {fileID: 8300000, guid: fcb40852548f7d548928f7bb3e4ef72b, type: 3}
   buttonClick: {fileID: 8300000, guid: 51b85c865c29d114f92823d57c339b20, type: 3}
+  rocketLaunch: {fileID: 8300000, guid: 29a164512f2cb534ea1d391c23bab223, type: 3}
+  rocketExplosion: {fileID: 8300000, guid: ecfb73889e1289f4c832ff79e392547e, type: 3}
+  stickHit: {fileID: 8300000, guid: 97ed3a1ab8e0d2d4b9c6c7d08896adf0, type: 3}
 --- !u!114 &2305394951663043926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +67,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 7363329997175532158}
+  buttons: []
