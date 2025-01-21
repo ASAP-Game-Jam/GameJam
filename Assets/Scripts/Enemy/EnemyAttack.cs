@@ -27,15 +27,15 @@ public class EnemyAttack : MonoBehaviour, IEnemyAttack
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x - attackRange, transform.position.y, transform.position.z));
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x - attackRange * Mathf.Sign(transform.localScale.x), transform.position.y, transform.position.z));
     }
 
     private void Update()
     {
         if (timeAttack <= 0) OnReload?.Invoke(this, EventArgs.Empty);
         else timeAttack -= Time.deltaTime;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.left, attackRange);
-        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attackRange, transform.position.y), Color.red, 0.1f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Mathf.Sign(transform.localScale.x) == 1 ? Vector2.left : Vector2.right, attackRange);
+        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attackRange * Mathf.Sign(transform.localScale.x), transform.position.y), Color.red, 0.1f);
         IDestroyObject destroyObject = null;
         foreach (RaycastHit2D hit in hits)
         {

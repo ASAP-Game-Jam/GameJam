@@ -17,7 +17,8 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
 
     public IEnemyFabric fabric;
 
-    private float cooldown = 10f;
+    private float cooldown = 15f;
+    [SerializeField] private float firstEnemyCreate = 10f;
     private float spawnTime;
 
     public event EventHandler OnSpawn;
@@ -29,12 +30,13 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
     public bool spawnerOn = true;
     public float CoolDown
     {
-        get { return spawnTime; }
-        set { spawnTime = (value > 0 && value < 20 ? value : 10); }
+        get { return cooldown; }
+        set { cooldown = (value > 0 && value < 20 ? value : 10); }
     }
     public float SpawnTime => spawnTime;
     private void Start()
     {
+        spawnTime = firstEnemyCreate;
         if (fabric == null)
             fabric = FindObjectOfType<EnemyFabric>();
         if (spawnPoints.Count == 0)
