@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTheme: {fileID: 8300000, guid: 9f03fa4508200524dacbe6bec8dbf3ad, type: 3}
   blasterShot: {fileID: 8300000, guid: 614966b1df44c3846997296c2f772024, type: 3}
-  cannonShot: {fileID: 8300000, guid: e14edb7081bb7e64bac6aa0bbcba352d, type: 3}
-  tankShot: {fileID: 8300000, guid: 42f05044fb0220f42b6a99a2d0468a3c, type: 3}
+  cannonShot: {fileID: 8300000, guid: d4ab28e9d73137946894edb4a282cd47, type: 3}
+  tankShot: {fileID: 8300000, guid: 2991f59ba30fa02408cefdaf5f334af7, type: 3}
   constructionSound: {fileID: 8300000, guid: fcb40852548f7d548928f7bb3e4ef72b, type: 3}
   buttonClick: {fileID: 8300000, guid: 51b85c865c29d114f92823d57c339b20, type: 3}
   rocketLaunch: {fileID: 8300000, guid: 29a164512f2cb534ea1d391c23bab223, type: 3}

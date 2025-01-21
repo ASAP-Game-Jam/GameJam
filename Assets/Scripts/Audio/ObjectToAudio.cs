@@ -24,7 +24,7 @@ namespace Assets.Scripts.Audio
             if (towerSpawnManager != null)
                 towerSpawnManager.OnSpawn += OnSpawnTower;
             if (enemySpawnManager != null)
-                enemySpawnManager.OnSpawn -= OnSpawnEnemy;
+                enemySpawnManager.OnSpawn += OnSpawnEnemy;
             if (buttons != null && buttons.Length > 0)
                 foreach (Button button in buttons)
                     button.onClick.AddListener(audioManager.PlayButtonClick);
@@ -47,16 +47,15 @@ namespace Assets.Scripts.Audio
                         case TowerType.Generator:
 
                             break;
-                        case TowerType.Rocket:
-                            {
-                                audioManager.PlayRocketLaunch();
-                                gameObject.GetComponent<IBullet>().OnHit += (object sender, EventArgs e) => { audioManager.PlayRocketExplosion(); };
-                            }
-                            break;
                         case TowerType.Totem:
 
                             break;
                     }
+                }
+                else if (gameObject.GetComponent<IBullet>() is IBullet bullet)
+                {
+                    audioManager.PlayRocketLaunch();
+                    gameObject.GetComponent<IBullet>().OnHit += (object sender, EventArgs e) => { audioManager.PlayRocketExplosion(); };
                 }
             }
         }
