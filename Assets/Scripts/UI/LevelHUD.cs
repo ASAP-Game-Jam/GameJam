@@ -21,16 +21,16 @@ public partial class LevelHUD : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
 
     [SerializeField] private Image healthImage;
+    private float leftHealth, rightHealth, lengthHealth;
 
     [SerializeField] private Button menu;
-
-    [SerializeField] private GameObject[] healthDivs;
 
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] private Button restartGameButton;
     [SerializeField] private TMP_Text endText;
 
     private ILevelManager levelManager;
+    RectTransform healthRectTransform;
 
     // Создадим очередь команд
     public readonly UICommandQueue CommandQueue = new UICommandQueue();
@@ -44,6 +44,12 @@ public partial class LevelHUD : MonoBehaviour
         menu?.onClick.AddListener(AddMainMenuCommand);
         levelManager = FindObjectOfType<LevelManager>();
         StartCoroutine(AsyncUpdate());
+        healthRectTransform = healthImage.gameObject.GetComponent<RectTransform>();
+        RectTransform parentRectTransform = healthRectTransform.parent.GetComponent<RectTransform>();
+
+        leftHealth = healthRectTransform.offsetMin.x;
+        rightHealth = healthRectTransform.offsetMax.x;
+        lengthHealth = parentRectTransform.rect.width - leftHealth - rightHealth;
     }
 
     // Функция для добавления команды прогресса
@@ -66,6 +72,11 @@ public partial class LevelHUD : MonoBehaviour
     public void AddMainMenuCommand()
     {
         CommandQueue.TryEnqueueCommand(new MainMenuCommand());
+    }
+
+    public void AddBaseHPCommand(uint maxHp,uint hp)
+    {
+        CommandQueue.TryEnqueueCommand(new EnemyBaseHPCommand(maxHp,hp));
     }
 
     // Метод обработки команд из очереди
@@ -100,6 +111,10 @@ public partial class LevelHUD : MonoBehaviour
                         break;
                     case RestartCommand:
                         levelManager.ReloadGame();
+                        break;
+                    case EnemyBaseHPCommand baseHP:
+                        float newLength = (baseHP.HP / (float)baseHP.MaxHP - 1) * lengthHealth + rightHealth;
+                        healthRectTransform.offsetMax = new Vector2(newLength, healthRectTransform.offsetMax.y);
                         break;
                 }
             }

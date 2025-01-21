@@ -9,5 +9,6 @@ namespace Assets.Scripts.Interfaces
         event EventHandler OnTakeDamage;
         event EventHandler OnDestroy;
         void TakeDamage(uint damage);
+        uint HP { get; }
     }
 }

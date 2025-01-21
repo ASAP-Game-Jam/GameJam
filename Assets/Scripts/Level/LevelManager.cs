@@ -2,7 +2,9 @@ using Assets.Scripts.Base;
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Base;
+using Assets.Scripts.Other;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -52,7 +54,23 @@ public class LevelManager : MonoBehaviour, ILevelManager
             }
         }
     }
-
+    public void HoldOnBase(Base baseObject)
+    {
+        if (baseObject != null)
+        {
+            switch (baseObject.BaseType)
+            {
+                case BaseType.EnemyBase:
+                    baseObject.OnTakeDamage += (object sender, EventArgs args) =>
+                    {
+                        if (args is EventBaseArgs baseArgs)
+                            levelHUD.AddBaseHPCommand(baseArgs.MaxHP, baseArgs.HP);
+                    };
+                    baseObject.TakeDamage(0);
+                    break;
+            }
+        }
+    }
     public void ReloadGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

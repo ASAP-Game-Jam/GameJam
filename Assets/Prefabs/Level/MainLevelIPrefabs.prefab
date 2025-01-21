@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelHUD: {fileID: 0}
   startEnergy: 5
+  enemyBase: {fileID: 0}
 --- !u!1001 &1807594660678620687
 PrefabInstance:
   m_ObjectHideFlags: 0
