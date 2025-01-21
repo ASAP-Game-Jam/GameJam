@@ -1,6 +1,9 @@
-﻿using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts.Enemy;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Interfaces.Bullet;
 using Assets.Scripts.Interfaces.Enemy;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Tower
@@ -10,6 +13,7 @@ namespace Assets.Scripts.Tower
         public event EventHandler OnAttack;
         public event EventHandler OnReloaded;
 
+        [SerializeField] private List<GameObject> firePoints;
         [SerializeField] private float cooldown = 3f;
         [SerializeField] private float first_attack_cooldown = 1f;
         private float attackTime;
@@ -26,6 +30,14 @@ namespace Assets.Scripts.Tower
         private void Awake()
         {
             attackTime = first_attack_cooldown < 0 ? 1 : first_attack_cooldown;
+        }
+
+        private void Start()
+        {
+            if (firePoints != null)
+                foreach (var i in firePoints)
+                    if (IsHit(i))
+                        CreateBullet(i.transform.position);
         }
 
         private void FixedUpdate()
@@ -49,25 +61,36 @@ namespace Assets.Scripts.Tower
         {
             if (attackTime <= 0 && bulletPrefab != null)
             {
-                float x = transform.position.x;
-                x = Mathf.Min(x+distanceAttack,endLevelX)-x;
-                RaycastHit2D[] hits = Physics2D.RaycastAll(new Vector2(transform.position.x, transform.position.y), Vector2.right,x);
+                if (IsHit(firePoint))
+                    CreateBullet(firePoint.transform.position);
 
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + distanceAttack, transform.position.y), Color.red, 0.1f);
+                if (firePoints != null)
+                    foreach (var i in firePoints)
+                        if (IsHit(i))
+                            CreateBullet(i.transform.position);
 
-                foreach (var hit in hits)
-                {
-                    IEnemy enemy = hit.collider.gameObject.GetComponent<IEnemy>();
-                    if (enemy != null)
-                    {
-                        CreateBullet();
-                        break;
-                    }
-                }
             }
         }
 
-        private void CreateBullet()
+        private bool IsHit(GameObject pointObject)
+        {
+            float x = pointObject.transform.position.x;
+            x = Mathf.Min(x + distanceAttack, endLevelX) - x;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(
+                new Vector2(pointObject.transform.position.x, pointObject.transform.position.y), Vector2.right, x);
+
+            Debug.DrawLine(new Vector2(pointObject.transform.position.x, transform.position.y), new Vector2(pointObject.transform.position.x + distanceAttack, pointObject.transform.position.y), Color.red, 0.1f);
+
+            foreach (var hit in hits)
+            {
+                IEnemy enemy = hit.collider.gameObject.GetComponent<IEnemy>();
+                if (enemy != null)
+                    return true;
+            }
+            return false;
+        }
+
+        private void CreateBullet(Vector3 point)
         {
             GameObject pref = Instantiate(bulletPrefab, this.transform);
             if (pref != null)
@@ -78,6 +101,8 @@ namespace Assets.Scripts.Tower
                 {
                     bullet.Direction = Direction.Right;
                     bullet.BaseType = Other.BaseType.TowerBase;
+                    if (bullet is ILineBullet lineBullet)
+                        lineBullet.Points.Enqueue(point);
                     OnAttack?.Invoke(this, EventArgs.Empty);
                 }
                 attackTime = cooldown;
