@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelHUD: {fileID: 0}
-  startEnergy: 15
+  startEnergy: 25
 --- !u!1001 &1807594660678620687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,7 +867,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158315491606390312, guid: ef31b07106803ad40b7f51c58817d863, type: 3}
       propertyPath: firstEnemyCreate
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3717820825813632537, guid: ef31b07106803ad40b7f51c58817d863, type: 3}
       propertyPath: m_Name

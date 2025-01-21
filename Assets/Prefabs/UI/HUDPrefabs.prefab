@@ -2549,7 +2549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cooldown
@@ -2727,7 +2727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: cost
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5143609897471937023, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: towerType
@@ -2755,7 +2755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953185881051274954, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_text
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9108613994261662924, guid: 9e37cc36e99d42146b7885efbc6c1051, type: 3}
       propertyPath: m_Color.a

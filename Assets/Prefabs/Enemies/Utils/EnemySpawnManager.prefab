@@ -45,4 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
-  cooldown: 3
+  enemyBase: {fileID: 0}
+  startCooldown: 15
+  minCooldown: 5
+  firstEnemyCreate: 10
+  maxCountEnemy: 20
+  spawnerOn: 1

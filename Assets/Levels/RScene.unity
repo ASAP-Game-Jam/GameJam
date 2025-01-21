@@ -3412,6 +3412,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6584992888607585307, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: m_text
+      value: '20
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 8262014046075882168, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: m_Name
       value: HUDCanvas
