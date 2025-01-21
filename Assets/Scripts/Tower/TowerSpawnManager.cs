@@ -100,7 +100,7 @@ namespace Assets.Scripts.Tower
 #if !UNITY_EDITOR
             Clear();
 #endif
-            OnSpawn?.Invoke(this, EventArgs.Empty);
+            OnSpawn?.Invoke(this, new EventTowerSpawnArgs(obj,currentTowerType));
         }
 
         private void AddEventForTower(GameObject obj)

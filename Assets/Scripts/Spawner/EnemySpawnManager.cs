@@ -1,4 +1,5 @@
 using Assets.Scripts.Base;
+using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Enemy;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Enemy;
@@ -78,7 +79,9 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
             Array values = Enum.GetValues(typeof(EnemyType));
             int index = random.Next(values.Length);
 
-            GameObject obj = fabric.GetPrefab((EnemyType)values.GetValue(index));
+            EnemyType enemyType = (EnemyType)values.GetValue(index);
+
+            GameObject obj = fabric.GetPrefab(enemyType);
 
             if (obj != null)
             {
@@ -89,7 +92,7 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
                     currentCountEnemy++;
                     myZombie.GetComponent<IEnemy>().OnDestroy +=
                         (object sender, EventArgs e) => { currentCountEnemy--; };
-                    OnSpawn?.Invoke(this, EventArgs.Empty);
+                    OnSpawn?.Invoke(this, new EventEnemySpawnArgs(myZombie,enemyType));
                 }
             }
         }
