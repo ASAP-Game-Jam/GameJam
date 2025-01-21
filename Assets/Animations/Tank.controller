@@ -33,7 +33,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TankWalk
-  m_Speed: 1
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4586055546647556019}
@@ -149,10 +149,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -4721733764939463611}
-    m_Position: {x: 190, y: 330, z: 0}
+    m_Position: {x: 40, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4272887906477428397}
-    m_Position: {x: 430.59006, y: 227.05746, z: 0}
+    m_Position: {x: 40, y: 230, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
