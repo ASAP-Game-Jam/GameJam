@@ -68,15 +68,21 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnerManager
         {
             if (timer != null)
             {
-                cooldown = minCooldown + timer.TimeLeft / 300 * (startCooldown - minCooldown);
-                if ((300 - (int)timer.TimeLeft) % 50 == 0 && timer.TimeLeft < 300)
-                    countSpawnEnemyOnTime += (countSpawnEnemyOnTime < 5 ? 1u : 0);
+                if (timer.TimerOn)
+                {
+                    cooldown = minCooldown + timer.TimeLeft / 300 * (startCooldown - minCooldown);
+                    if ((300 - (int)timer.TimeLeft) % 60 == 0 && timer.TimeLeft < 300)
+                        countSpawnEnemyOnTime += (countSpawnEnemyOnTime < 5 ? 1u : 0);
+                }
+                else
+                {
+                    cooldown = 0.4f;
+                }
             }
             spawnTime = cooldown;
             Spawn();
         }
-        if (timer != null && !timer.TimerOn)
-            cooldown = 0.4f;
+
     }
     public void Spawn()
     {
