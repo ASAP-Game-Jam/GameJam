@@ -6,6 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(IDestroyObject))]
 public class DestroyObjectHitEffect : MonoBehaviour
 {
+    private static Color _selectColor = new Color(1, 0.8f, 0.8f, 1);
+    private static float _delayDamage = 0.23f;
+    public static Color SelectColor { get => _selectColor; set => _selectColor = value; }
+    public static float DelayDamage { get => _delayDamage; set => _delayDamage = value > 0 ? value : 0.3f; }
+
     private IDestroyObject _destroyObject;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
@@ -39,7 +44,7 @@ public class DestroyObjectHitEffect : MonoBehaviour
 
     private IEnumerator DamageCoroutine()
     {
-        _spriteRenderer.color = Color.red; // Красим в красный
+        _spriteRenderer.color = _selectColor; // Красим в красный
         yield return new WaitForSeconds(0.3f); // Задержка
         _spriteRenderer.color = _originalColor; // Возвращаем цвет
     }
