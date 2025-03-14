@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Tower;
+using Assets.Scripts.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,9 @@ namespace Assets.Scripts.Tower
 
         private void Start()
         {
+            UIModifyButton removeButton = FindFirstObjectByType<UIModifyButton>();
+            if (removeButton != null) 
+                removeButton.OnSelect += (object sender, EventArgs args) => { Clear(); };
             levelManager = FindAnyObjectByType<LevelManager>();
             foreach (var i in FindObjectsOfType<UIButton>())
                 i.OnCardMarked += BuyEntity;
@@ -82,7 +86,7 @@ namespace Assets.Scripts.Tower
             }
         }
 
-        private void Clear()
+        public void Clear()
         {
             currentCost = 0;
             currentPlant = null;
@@ -93,6 +97,8 @@ namespace Assets.Scripts.Tower
         {
             if (position == null) return;
             GameObject obj = Instantiate(currentPlant, position, Quaternion.identity);
+            if(obj != null)
+                obj.GetComponent<ITower>().Cost = currentCost;
             if (cell != null)
                 cell.AddTower(obj.GetComponent<ITower>());
             if (levelManager != null) levelManager.Score -= currentCost;

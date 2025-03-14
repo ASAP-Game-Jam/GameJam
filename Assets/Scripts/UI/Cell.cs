@@ -1,9 +1,9 @@
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Tower;
+using Assets.Scripts.Tower;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Cell : MonoBehaviour, ICell
 {
@@ -29,6 +29,7 @@ public class Cell : MonoBehaviour, ICell
     public void CellUnTaken()
     {
         this.isTaken = false;
+        tower = null;
     }
 
     public void AddTower(ITower tower)
@@ -44,5 +45,18 @@ public class Cell : MonoBehaviour, ICell
     public bool IsEmpty()
     {
         return !this.isTaken;
+    }
+
+    public void RemoveTower()
+    {
+        if (tower != null && tower is Tower t)
+        {
+            t.HP = 0;
+        }
+    }
+
+    public ITower GetTower()
+    {
+        return tower;
     }
 }

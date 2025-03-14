@@ -8,5 +8,7 @@ namespace Assets.Scripts.Interfaces
         event EventHandler OnCellClick;
         void AddTower(ITower tower);
         bool IsEmpty();
+        ITower GetTower();
+        void RemoveTower();
     }
 }

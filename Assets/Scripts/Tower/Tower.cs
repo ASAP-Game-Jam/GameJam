@@ -27,6 +27,8 @@ namespace Assets.Scripts.Tower
 
         public BaseType BaseType => BaseType.TowerBase;
 
+        public uint Cost { get; set; }
+
         public void TakeDamage(uint damage)
         {
             HP = (HP >=damage?HP-damage:0);
