@@ -132,14 +132,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7352236265743798417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146bf29d764681c40a5c442af70d8962, type: 3}
+  m_Script: {fileID: 11500000, guid: 3024456389298dd44add2538f01df5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1
-  direction: 0
-  speed: 0
-  acceleration: 2
-  accelerationStop: 10
+  damage: 2
+  cooldown: 2
+  delayAttack: 0.5
+  spawnObject: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}
+  spawnPoint: {fileID: 2411722489136190781}
+  attackRange: 1
+  baseAttack: 1
 --- !u!70 &6650052050204070547
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -211,15 +213,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7352236265743798417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0f30b81f404f34b8d6234e047fc0a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 74473dd9174019f4fa53c2ac267c3db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  cooldown: 2
-  delayAttack: 0.5
-  bulletPrefab: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}
-  firePoint: {fileID: 2411722489136190781}
-  attackRange: 1
+  radiusLife: 20
+  maxSpeed: 3
+  direction: 1
+  speed: 0
+  acceleration: 2
+  accelerationStop: 10
 --- !u!114 &3819190229204366414
 MonoBehaviour:
   m_ObjectHideFlags: 0

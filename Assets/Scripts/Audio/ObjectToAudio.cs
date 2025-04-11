@@ -71,13 +71,13 @@ namespace Assets.Scripts.Audio
                     switch (args.EnemyType)
                     {
                         case EnemyType.Tank:
-                            gameObject.GetComponent<IEnemyAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayTankShot(); };
+                            gameObject.GetComponent<IAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayTankShot(); };
                             break;
                         case EnemyType.Stick:
-                            gameObject.GetComponent<IEnemyAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayStickHit(); };
+                            gameObject.GetComponent<IAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayStickHit(); };
                             break;
                         case EnemyType.FingerGun:
-                            gameObject.GetComponent<IEnemyAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayBlasterShot(); };
+                            gameObject.GetComponent<IAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayBlasterShot(); };
                             break;
                     }
                 }

@@ -5,16 +5,16 @@ using UnityEngine;
 public class EnemyAnimator : MonoBehaviour
 {
     private Animator animator;
-    private EnemyController controller;
-    private EnemyAttack attack;
+    private UnitController controller;
+    private UnitAttack attack;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         if (animator != null)
         {
-            controller = GetComponent<EnemyController>();
-            attack = GetComponent<EnemyAttack>();
+            controller = GetComponent<UnitController>();
+            attack = GetComponent<UnitAttack>();
 
             if (controller != null)
             {
@@ -33,7 +33,7 @@ public class EnemyAnimator : MonoBehaviour
                 {
                     animator.SetBool("isAttack", true);
                 };
-                attack.OnViewEnemy += (object sender, EventArgs e) =>
+                attack.OnViewEnemyObject += (object sender, EventArgs e) =>
                 {
                     if (e is EventBoolArgs args && !args.Value)
                     {

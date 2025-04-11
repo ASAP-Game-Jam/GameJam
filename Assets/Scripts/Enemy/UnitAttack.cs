@@ -5,23 +5,35 @@ using Assets.Scripts.Other;
 using System;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour, IEnemyAttack
+[RequireComponent(typeof(IDestroyObject))]
+public class UnitAttack : MonoBehaviour, IAttack
 {
     public event EventHandler OnAttack;
     public event EventHandler OnReload;
-    public event EventHandler OnViewEnemy;
+    public event EventHandler OnViewEnemyObject;
 
     [SerializeField] private uint damage = 2;
     [SerializeField] private float cooldown = 2f;
     [SerializeField] private float delayAttack = 0.5f;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject firePoint;
-    public float attackRange = 1f;
+    [SerializeField] private GameObject spawnObject;
+    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private float attackRange = 1f;
+    [SerializeField] private bool baseAttack = true;
+    private Direction direction = Direction.None;
+    private BaseType baseType;
     private float timeAttack = 0f;
 
     private void Start()
     {
         timeAttack = delayAttack >= 0 ? delayAttack : 0;
+        if (GetComponent<IDestroyObject>() is IDestroyObject dist && dist != null)
+            baseType = dist.BaseType;
+        else
+            Debug.LogError("UnitAttack: IDestroyObject not found");
+        if(GetComponent<IController>() is IController c && c!=null)
+        {
+            direction = c.Direction;
+        }
     }
 
     private void OnDrawGizmos()
@@ -42,15 +54,15 @@ public class EnemyAttack : MonoBehaviour, IEnemyAttack
             if (hit.collider != null)
             {
                 destroyObject = hit.collider.GetComponent<IDestroyObject>();
-                if (destroyObject != null && destroyObject.BaseType != BaseType.EnemyBase)
+                if (destroyObject != null && destroyObject.BaseType != baseType)
                 {
-                    OnViewEnemy?.Invoke(this, new EventBoolArgs(true));
+                    OnViewEnemyObject?.Invoke(this, new EventBoolArgs(true));
                     break;
                 }
                 else destroyObject = null;
             }
         }
-        if (destroyObject == null) OnViewEnemy?.Invoke(this, new EventBoolArgs(false));
+        if (destroyObject == null) OnViewEnemyObject?.Invoke(this, new EventBoolArgs(false));
         else if (timeAttack <= 0)
         {
             Attack();
@@ -59,15 +71,15 @@ public class EnemyAttack : MonoBehaviour, IEnemyAttack
 
     public void Attack()
     {
-        GameObject pref = Instantiate(bulletPrefab, this.transform);
+        GameObject pref = Instantiate(spawnObject, this.transform);
         if (pref != null)
         {
-            pref.transform.position = firePoint.transform.position;
+            pref.transform.position = spawnPoint.transform.position;
             IBullet bullet = pref?.GetComponent<IBullet>();
             if (bullet != null)
             {
-                bullet.Direction = Direction.Left;
-                bullet.BaseType = BaseType.EnemyBase;
+                bullet.Direction = this.direction;
+                bullet.BaseType = baseType;
                 bullet.Damage = damage;
                 OnAttack?.Invoke(this, EventArgs.Empty);
             }

@@ -2,9 +2,10 @@
 
 namespace Assets.Scripts.Interfaces.Enemy
 {
-    public interface IEnemyController
+    public interface IController
     {
         event EventHandler OnMoving;
+        Direction Direction { get; }
         void StartMove();
         void StopMove();
     }

@@ -3,10 +3,10 @@ using System;
 
 namespace Assets.Scripts.Interfaces.Enemy
 {
-    public interface IEnemyAttack
+    public interface IAttack
     {
         event EventHandler OnAttack;
         event EventHandler OnReload;
-        event EventHandler OnViewEnemy;
+        event EventHandler OnViewEnemyObject;
     }
 }

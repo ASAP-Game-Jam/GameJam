@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Enemy;
-using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Bullet;
 using Assets.Scripts.Interfaces.Enemy;
 using System;
@@ -10,20 +9,20 @@ namespace Assets.Scripts.Tower
 {
     public class TowerAttack : MonoBehaviour, ITowerAttack
     {
-        public event EventHandler OnAttack;
+        public virtual event EventHandler OnAttack;
         public event EventHandler OnReloaded;
 
         [SerializeField] private List<GameObject> firePoints;
         [SerializeField] private uint damage = 5;
-        [SerializeField] private float cooldown = 3f;
-        [SerializeField] private float first_attack_cooldown = 1f;
-        private float attackTime;
+        [SerializeField] protected float cooldown = 3f;
+        [SerializeField] protected float first_attack_cooldown = 1f;
+        protected float attackTime;
 
         private ILevelManager levelManager;
         // Дистанция атаки должна быть чем конец карты
         [SerializeField] private float endLevelX = 6;
         public float distanceAttack = 20;
-        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] protected GameObject bulletPrefab;
         [SerializeField] private GameObject firePoint;
         [SerializeField] private IBullet bullet;
         public IBullet Bullet { get => bullet; set => bullet = value; }
@@ -73,7 +72,7 @@ namespace Assets.Scripts.Tower
             }
         }
 
-        private bool IsHit(GameObject pointObject)
+        public virtual bool IsHit(GameObject pointObject)
         {
             float x = pointObject.transform.position.x;
             x = Mathf.Min(x + distanceAttack, endLevelX) - x;
@@ -91,7 +90,7 @@ namespace Assets.Scripts.Tower
             return false;
         }
 
-        private void CreateBullet(Vector3 point)
+        public virtual void CreateBullet(Vector3 point)
         {
             GameObject pref = Instantiate(bulletPrefab, this.transform);
             if (pref != null)

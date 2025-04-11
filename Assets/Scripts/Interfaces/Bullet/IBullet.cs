@@ -11,5 +11,5 @@ namespace Assets.Scripts.Interfaces
         uint Damage { get; set; }
         float Speed { get; set; }
     }
-    public enum Direction { Left, Right };
+    public enum Direction { None, Left, Right };
 }

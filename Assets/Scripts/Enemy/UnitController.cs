@@ -4,9 +4,12 @@ using Assets.Scripts.Interfaces.Enemy;
 using System;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IEnemyController
+public class UnitController : MonoBehaviour, IController
 {
     public event EventHandler OnMoving;
+
+    [SerializeField] private float radiusLife = 20f;
+    private Vector3 spawnPoint;
 
     [SerializeField] float maxSpeed = 3f;
     [SerializeField] Direction direction = Direction.Left;
@@ -28,17 +31,27 @@ public class EnemyController : MonoBehaviour, IEnemyController
 
     private void Start()
     {
+        spawnPoint = transform.position;
         maxSpeed = Math.Abs(maxSpeed);
         speed = Math.Abs(speed);
         acceleration = Math.Abs(acceleration);
         accelerationStop = Math.Abs(accelerationStop);
-        IEnemyAttack attack = GetComponent<IEnemyAttack>();
-        attack.OnViewEnemy += (object sender, EventArgs args) =>
+        IAttack attack = GetComponent<IAttack>();
+        if (attack != null)
+            attack.OnViewEnemyObject += (object sender, EventArgs args) =>
+            {
+                if (args is EventBoolArgs bArgs && bArgs.Value) StopMove();
+                else StartMove();
+            };
+        transform.localScale = new Vector3(
+        direction switch
         {
-            if (args is EventBoolArgs bArgs && bArgs.Value) StopMove();
-            else StartMove();
-        };
-        transform.localScale = new Vector3((direction==Direction.Right?-1:1)*transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            Direction.Right => -1,
+            Direction.Left => 1,
+            _ => 0
+        } * transform.localScale.x,
+        transform.localScale.y,
+        transform.localScale.z);
     }
 
     private void FixedUpdate()
@@ -51,12 +64,20 @@ public class EnemyController : MonoBehaviour, IEnemyController
             Destroy(this.gameObject);
     }
 
+    private void Update()
+    {
+        if(Vector3.Distance(spawnPoint, transform.position) > radiusLife)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void Move()
     {
 
         transform.Translate(
-            new Vector2[2] {
-                    Vector2.left, Vector2.right
+            new Vector2[3] {
+                    Vector2.zero,Vector2.left, Vector2.right
             }[(int)direction]
             * speed * Time.fixedDeltaTime);
         OnMoving?.Invoke(this, new EventBoolArgs(isMove));
