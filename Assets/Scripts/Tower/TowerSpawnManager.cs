@@ -97,11 +97,11 @@ namespace Assets.Scripts.Tower
         {
             if (position == null) return;
             GameObject obj = Instantiate(currentPlant, position, Quaternion.identity);
-            if(obj != null)
-                obj.GetComponent<ITower>().Cost = currentCost;
+            //if(obj != null)
+            //    obj.GetComponent<ITower>().Cost = currentCost; // Нафига я ему даю цену? Ведь у него и так есть цена. Это точно я писал? Я найду ответ
             if (cell != null)
                 cell.AddTower(obj.GetComponent<ITower>());
-            if (levelManager != null) levelManager.Score -= currentCost;
+            if (levelManager != null) levelManager.Score -= currentCost; // Убрать монетки тк купили башню
             AddEventForTower(obj);
 #if !UNITY_EDITOR
             Clear();

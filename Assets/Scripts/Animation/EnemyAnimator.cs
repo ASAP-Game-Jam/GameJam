@@ -1,4 +1,5 @@
 using Assets.Scripts.CustomEventArgs;
+using Assets.Scripts.Interfaces.Enemy;
 using System;
 using UnityEngine;
 
@@ -20,9 +21,9 @@ public class EnemyAnimator : MonoBehaviour
             {
                 controller.OnMoving += (object sender, EventArgs e) =>
                 {
-                    if (e is EventBoolArgs args)
+                    if (sender is IController ctr)
                     {
-                        animator.SetBool("isMoving", args.Value);
+                        animator.SetBool("isMoving", ctr.IsMove);
                     }
                 };
             }
@@ -35,7 +36,7 @@ public class EnemyAnimator : MonoBehaviour
                 };
                 attack.OnViewEnemyObject += (object sender, EventArgs e) =>
                 {
-                    if (e is EventBoolArgs args && !args.Value)
+                    if (e is EventUnitViewArgs args && !args.Value)
                     {
                         animator.SetBool("isAttack", false);
                     }

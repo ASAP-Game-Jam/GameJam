@@ -6,6 +6,7 @@ namespace Assets.Scripts.Interfaces.Enemy
     {
         event EventHandler OnMoving;
         Direction Direction { get; }
+        bool IsMove { get; }
         void StartMove();
         void StopMove();
     }

@@ -1,5 +1,6 @@
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Interfaces.Enemy;
 using Assets.Scripts.Other;
 using System;
@@ -23,6 +24,8 @@ public class UnitAttack : MonoBehaviour, IAttack
     private BaseType baseType;
     private float timeAttack = 0f;
 
+    public uint Damage => damage;
+
     private void Start()
     {
         timeAttack = delayAttack >= 0 ? delayAttack : 0;
@@ -30,7 +33,7 @@ public class UnitAttack : MonoBehaviour, IAttack
             baseType = dist.BaseType;
         else
             Debug.LogError("UnitAttack: IDestroyObject not found");
-        if(GetComponent<IController>() is IController c && c!=null)
+        if (GetComponent<IController>() is IController c && c != null)
         {
             direction = c.Direction;
         }
@@ -56,34 +59,39 @@ public class UnitAttack : MonoBehaviour, IAttack
                 destroyObject = hit.collider.GetComponent<IDestroyObject>();
                 if (destroyObject != null && destroyObject.BaseType != baseType)
                 {
-                    OnViewEnemyObject?.Invoke(this, new EventBoolArgs(true));
+                    OnViewEnemyObject?.Invoke(this, new EventUnitViewArgs(true,destroyObject));
                     break;
                 }
                 else destroyObject = null;
             }
         }
-        if (destroyObject == null) OnViewEnemyObject?.Invoke(this, new EventBoolArgs(false));
-        else if (timeAttack <= 0)
+        if (destroyObject == null) OnViewEnemyObject?.Invoke(this, new EventUnitViewArgs(false,destroyObject));
+        if (timeAttack <= 0)
+            Attack(destroyObject);
+    }
+
+    public virtual void Attack(IDestroyObject enemy)
+    {
+
+        if (enemy == null) ;
+        else
         {
-            Attack();
+            GameObject pref = Instantiate(spawnObject, this.transform);
+            if (pref != null)
+            {
+                pref.transform.position = spawnPoint.transform.position;
+                IBullet bullet = pref?.GetComponent<IBullet>();
+                if (bullet != null)
+                {
+                    bullet.Direction = this.direction;
+                    bullet.BaseType = baseType;
+                    bullet.Damage = damage;
+                    OnAttack?.Invoke(this, EventArgs.Empty);
+                }
+                CoolDownReset();
+            }
         }
     }
 
-    public void Attack()
-    {
-        GameObject pref = Instantiate(spawnObject, this.transform);
-        if (pref != null)
-        {
-            pref.transform.position = spawnPoint.transform.position;
-            IBullet bullet = pref?.GetComponent<IBullet>();
-            if (bullet != null)
-            {
-                bullet.Direction = this.direction;
-                bullet.BaseType = baseType;
-                bullet.Damage = damage;
-                OnAttack?.Invoke(this, EventArgs.Empty);
-            }
-            timeAttack = cooldown;
-        }
-    }
+    public void CoolDownReset() => timeAttack = cooldown;
 }

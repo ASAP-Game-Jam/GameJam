@@ -171,7 +171,7 @@ namespace TMPro.Examples
                     Handles.DrawDottedLine(meanlineStart, meanlineEnd, dottedLineSize);
                 }
 
-                //Draw Base line
+                //Draw _base line
                 Vector3 baselineStart = m_Transform.TransformPoint(new Vector3(origin, baseline, 0));
                 Vector3 baselineEnd = m_Transform.TransformPoint(new Vector3(advance, baseline, 0));
 
@@ -218,10 +218,10 @@ namespace TMPro.Examples
                    Handles.Label(labelPosition, "Ascent Line", style);
                    //Handles.Label(labelPosition, "Ascent Line (" + ascentlineMetrics.ToString("f3") + ")" , style);
 
-                   // Base Line
+                   // _base Line
                    labelPosition = m_Transform.TransformPoint(new Vector3(center, baseline, 0));
-                   Handles.Label(labelPosition, "Base Line", style);
-                   //Handles.Label(labelPosition, "Base Line (" + baselineMetrics.ToString("f3") + ")" , style);
+                   Handles.Label(labelPosition, "_base Line", style);
+                   //Handles.Label(labelPosition, "_base Line (" + baselineMetrics.ToString("f3") + ")" , style);
 
                    // Descent line
                    labelPosition = m_Transform.TransformPoint(new Vector3(center, descentline, 0));
@@ -504,7 +504,7 @@ namespace TMPro.Examples
                 Handles.color = Color.yellow;
                 Handles.DrawDottedLine(ascentlineStart, ascentlineEnd, dottedLineSize);
 
-                // Draw Base line
+                // Draw _base line
                 Vector3 baseLineStart = m_Transform.TransformPoint(new Vector3(lineBottomLeft, baseline, 0));
                 Vector3 baseLineEnd = m_Transform.TransformPoint(new Vector3(lineTopRight, baseline, 0));
 
@@ -534,9 +534,9 @@ namespace TMPro.Examples
                     style.alignment = TextAnchor.MiddleRight;
                     Handles.Label(labelPosition, "Ascent Line", style);
 
-                    // Base Line
+                    // _base Line
                     labelPosition = m_Transform.TransformPoint(new Vector3(lineBottomLeft, baseline, 0));
-                    Handles.Label(labelPosition, "Base Line", style);
+                    Handles.Label(labelPosition, "_base Line", style);
 
                     // Descent line
                     labelPosition = m_Transform.TransformPoint(new Vector3(lineBottomLeft, descentline, 0));

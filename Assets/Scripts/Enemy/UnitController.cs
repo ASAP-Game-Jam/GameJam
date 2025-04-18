@@ -16,7 +16,7 @@ public class UnitController : MonoBehaviour, IController
     [SerializeField] float speed = 0f;
     [SerializeField] float acceleration = 2f;
     [SerializeField] float accelerationStop = 10f;
-    private bool isMove = true;
+    public bool IsMove { get; private set; } = true;
 
     public Direction Direction
     {
@@ -36,13 +36,7 @@ public class UnitController : MonoBehaviour, IController
         speed = Math.Abs(speed);
         acceleration = Math.Abs(acceleration);
         accelerationStop = Math.Abs(accelerationStop);
-        IAttack attack = GetComponent<IAttack>();
-        if (attack != null)
-            attack.OnViewEnemyObject += (object sender, EventArgs args) =>
-            {
-                if (args is EventBoolArgs bArgs && bArgs.Value) StopMove();
-                else StartMove();
-            };
+        
         transform.localScale = new Vector3(
         direction switch
         {
@@ -52,11 +46,22 @@ public class UnitController : MonoBehaviour, IController
         } * transform.localScale.x,
         transform.localScale.y,
         transform.localScale.z);
+        IAttackHandle(GetComponent<IAttack>());
+    }
+
+    protected virtual void IAttackHandle(IAttack attack)
+    {
+        if (attack != null)
+            attack.OnViewEnemyObject += (object sender, EventArgs args) =>
+            {
+                if (args is EventUnitViewArgs bArgs && bArgs.Value) StopMove();
+                else StartMove();
+            };
     }
 
     private void FixedUpdate()
     {
-        speed = (isMove
+        speed = (IsMove
             ? (speed >= maxSpeed ? maxSpeed : speed + acceleration * Time.fixedDeltaTime)
             : (speed <= 0 ? 0 : speed - accelerationStop * Time.fixedDeltaTime));
         Move();
@@ -80,15 +85,15 @@ public class UnitController : MonoBehaviour, IController
                     Vector2.zero,Vector2.left, Vector2.right
             }[(int)direction]
             * speed * Time.fixedDeltaTime);
-        OnMoving?.Invoke(this, new EventBoolArgs(isMove));
+        OnMoving?.Invoke(this, EventArgs.Empty);
     }
     public void StartMove()
     {
-        isMove = true;
+        IsMove = true;
     }
 
     public void StopMove()
     {
-        isMove = false;
+        IsMove = false;
     }
 }
