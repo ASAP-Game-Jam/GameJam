@@ -13,6 +13,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1550812237170591458, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
+      propertyPath: baseType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550812237170591458, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
+      propertyPath: direction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550812237170591458, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
       propertyPath: attackBase
       value: 1
       objectReference: {fileID: 0}
