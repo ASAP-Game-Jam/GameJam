@@ -12,7 +12,7 @@ namespace Assets.Scripts.Tower
 
         public override void CreateBullet(Vector3 point)
         {
-            GameObject pref = Instantiate(bulletPrefab, this.transform);
+            GameObject pref = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
             if (pref != null)
             {
                 OnAttack?.Invoke(this, EventArgs.Empty);

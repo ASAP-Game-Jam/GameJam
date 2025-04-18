@@ -5,6 +5,7 @@ using Assets.Scripts.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Tower
 {
@@ -96,11 +97,13 @@ namespace Assets.Scripts.Tower
         private void Spawn(Vector3 position, ICell cell = null)
         {
             if (position == null) return;
+            if (currentTowerType==TowerType.BearBarracks && !EnergyInLines(cell)) return;
             GameObject obj = Instantiate(currentPlant, position, Quaternion.identity);
-            //if(obj != null)
-            //    obj.GetComponent<ITower>().Cost = currentCost; // Нафига я ему даю цену? Ведь у него и так есть цена. Это точно я писал? Я найду ответ
+            var tower = obj.GetComponent<ITower>();
+            if(tower != null)
+                tower.TowerType = currentTowerType;
             if (cell != null)
-                cell.AddTower(obj.GetComponent<ITower>());
+                cell.AddTower(tower);
             if (levelManager != null) levelManager.Score -= currentCost; // Убрать монетки тк купили башню
             AddEventForTower(obj);
 #if !UNITY_EDITOR
@@ -122,6 +125,29 @@ namespace Assets.Scripts.Tower
             }
         }
 
+        private bool EnergyInLines(ICell cell)
+        {
+            if (cell == null) return false;
+            
+            Debug.DrawRay(cell.Position, Vector2.right * 2, Color.green, 1f);
+            Debug.DrawRay(cell.Position, Vector2.left * 2, Color.red, 1f);
+
+            RaycastHit2D[] hits = {
+                Physics2D.Raycast(
+                    new Vector3(cell.Position.x+1,cell.Position.y,cell.Position.z),
+                    Vector2.right, 1,tileMask),
+                Physics2D.Raycast(
+                    new Vector3(cell.Position.x-1,cell.Position.y,cell.Position.z),
+                    Vector2.right, 1,tileMask)
+            };
+
+            foreach (var hit in hits)
+            {
+                if (hit.collider && hit.collider.GetComponent<ICell>()?.GetTower()?.TowerType == TowerType.Generator)
+                    return true;
+            }
+            return false;
+        }
         private void UpdateEnergy(object sender, EventArgs args)
         {
             if (args is EventEnergyArgs energyArgs)

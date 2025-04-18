@@ -28,6 +28,7 @@ namespace Assets.Scripts.Tower
         public BaseType BaseType => BaseType.TowerBase;
 
         public uint Cost { get; set; }
+        public TowerType TowerType { get; set; }
 
         public void TakeDamage(uint damage)
         {

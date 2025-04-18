@@ -3,6 +3,7 @@ using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Tower;
 using Assets.Scripts.Tower;
 using System;
+using System.Drawing;
 using UnityEngine;
 
 public class Cell : MonoBehaviour, ICell
@@ -13,6 +14,8 @@ public class Cell : MonoBehaviour, ICell
 
     [SerializeField] private bool isTaken;
 
+    public Vector3 Position => transform.position;
+    
     private void Start()
     {
     }
