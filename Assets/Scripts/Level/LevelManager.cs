@@ -1,90 +1,95 @@
+using Assets.Scripts.Base;
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
-using Assets.Scripts.Interfaces.Enemy;
-using Assets.Scripts.Interfaces.Tower;
+using Assets.Scripts.Interfaces.Base;
 using Assets.Scripts.Other;
-using Assets.Scripts.Tower;
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour, ILevelManager
 {
-    [SerializeField] private LevelHUD levelHUD;
-
+    public LevelHUD levelHUD;
+    [SerializeField] uint startEnergy = 35;
     private LevelProgress progress;
-    private Queue<IEnemy>[] countEnemiesForLine;
-    private ISpawnerManager spawnerManager;
-    [SerializeField] private GameObject[] towerPrefabs;
 
-    private ICellandITower cellTower;
+    public uint Score
+    {
+        get => progress.LevelScore;
+        set
+        {
+            progress.LevelScore = value;
+            levelHUD?.AddProgressCommand(progress.LevelScore);
+        }
+    }
+
     private void Awake()
     {
-        cellTower = new CellTowerConnect();
         progress = new LevelProgress();
-        spawnerManager = null;// FindFirstObjectByType<SpawnerManager>();
-        if (spawnerManager != null)
-            spawnerManager.OnSpawn += SpawnNewEnemy;
-        foreach (Tower tower in FindObjectsOfType<Tower>())
-            tower.OnDestroy += TowerIsDestroy;
-        foreach (var i in FindObjectsOfType<UIButton>())
+        foreach (IBase i in FindObjectsOfType<Base>())
         {
-            i.OnCardMarked += TowerSelected;
-            i.OnCardCancel += TowerUnSelected;
-        }
-        foreach (var i in FindObjectsOfType<Cell>())
-        {
-            i.OnCellClick += CellSelected;
+            i.OnDestroy += this.EndLevel;
         }
     }
-    private void SpawnNewEnemy(object sender, EventArgs args)
+    private void Start()
     {
-        int index = -1;
-        // if(args is Event e) index = e.index;
-        if (index >= 0 && index < countEnemiesForLine.Length)
-            countEnemiesForLine[index].Enqueue(null); // null заменить объектом из args
+        levelHUD = FindObjectOfType<LevelHUD>();
+        Score = startEnergy;
     }
-    public bool IsEnemyOnLine(uint index)
+    private void EndLevel(object sender, EventArgs eventArgs)
     {
-        return countEnemiesForLine[index].Count > 0;
-    }
-    private void TowerSelected(object sender, EventArgs args)
-    {
-        if (args is EventMarkedArgs mark && sender is IUICard card)
+        if (eventArgs is EventBaseArgs args)
         {
-            cellTower.Card = card;
-            cellTower.Type = mark.TowerType;
-        }
-    }
-    private void TowerUnSelected(object sender, EventArgs args)
-    {
-        cellTower.Card = null;
-    }
-    private void CellSelected(object sender, EventArgs args)
-    {
-        if (sender is Cell cell && args is EventCellArgs cellArgs && !cellArgs.IsTaken)
-        {
-            cellTower.Cell = cell;
-            if (cellTower.Card != null && cellTower != null)
+            if (args.HP == 0)
             {
-                SpawnTower();
+                levelHUD.AddEndOfTheGameCommand(args.BaseType);
+                if (args.BaseType == Assets.Scripts.Other.BaseType.EnemyBase)
+                    foreach (var i in FindObjectsOfType<UnitController>())
+                    {
+                        i.Direction = Direction.Right;
+                    }
             }
         }
     }
-    private void SpawnTower()
+    public void HoldOnBase(Base baseObject)
     {
-        if (cellTower.Cell != null && cellTower.Card != null && towerPrefabs.Length > 0)
+        if (baseObject != null)
         {
-            if (cellTower.Cell is Cell cell)
+            switch (baseObject.BaseType)
             {
-                var obj = Instantiate(towerPrefabs[(int)cellTower.Type],cell.gameObject.transform);
-                cell.AddTower(obj.GetComponent<ITower>());
-                Debug.Log("SpawnTower");
+                case BaseType.EnemyBase:
+                    baseObject.OnTakeDamage += (object sender, EventArgs args) =>
+                    {
+                        if (args is EventBaseArgs baseArgs)
+                            levelHUD.AddBaseHPCommand(baseArgs.MaxHP, baseArgs.HP);
+                    };
+                    baseObject.TakeDamage(0);
+                    break;
             }
         }
     }
-    private void TowerIsDestroy(object sender, EventArgs args)
+    public void ReloadGame()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SaveGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LoadGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ExitGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
