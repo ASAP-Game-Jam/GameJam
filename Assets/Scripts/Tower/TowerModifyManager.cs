@@ -55,7 +55,7 @@ namespace Assets.Scripts.Tower
                     {
                         ITower tower = cell.GetTower();
                         _levelManager.Score += (uint)((float)tower.Cost * percentGetToDestroy);
-                        cell.RemoveTower();
+                        cell.CellUnTaken();
                         _selectButton.Cancel();
                     }
                 }

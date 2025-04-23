@@ -34,5 +34,9 @@ namespace Assets.Scripts.Tower
         {
             HP = (HP >=damage?HP-damage:0);
         }
+
+        public void Activate()
+        {
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Assets.Scripts.Base
 
         private void Awake()
         {
-            _maxhp = _hp;
+            Activate();
         }
 
         private void Start()
@@ -35,6 +35,11 @@ namespace Assets.Scripts.Base
             EventBaseArgs args = new EventBaseArgs(damage, _maxhp == 0 ? _hp == 0 ? 1 : _hp : _maxhp, _hp, BaseType);
             OnTakeDamage?.Invoke(this, args);
             if (_hp == 0) OnDestroy?.Invoke(this, args);
+        }
+
+        public void Activate()
+        {
+            _maxhp = _hp;
         }
     }
 }

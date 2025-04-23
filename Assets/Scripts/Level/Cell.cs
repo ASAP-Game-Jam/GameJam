@@ -1,9 +1,7 @@
 using Assets.Scripts.CustomEventArgs;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Tower;
-using Assets.Scripts.Tower;
 using System;
-using System.Drawing;
 using UnityEngine;
 
 public class Cell : MonoBehaviour, ICell
@@ -15,7 +13,7 @@ public class Cell : MonoBehaviour, ICell
     [SerializeField] private bool isTaken;
 
     public Vector3 Position => transform.position;
-    
+
     private void Start()
     {
     }
@@ -26,12 +24,16 @@ public class Cell : MonoBehaviour, ICell
 
     public void CellTaken()
     {
+        if (tower != null)
+            tower.Activate();
         this.isTaken = true;
     }
 
     public void CellUnTaken()
     {
         this.isTaken = false;
+        if (tower?.HP > 0)
+            tower.Deactivate();
         tower = null;
     }
 
@@ -39,8 +41,8 @@ public class Cell : MonoBehaviour, ICell
     {
         if (tower != null && IsEmpty())
         {
-            CellTaken();
             this.tower = tower;
+            CellTaken();
             tower.OnDestroy += (object sender, EventArgs e) => CellUnTaken();
         }
     }
@@ -48,14 +50,6 @@ public class Cell : MonoBehaviour, ICell
     public bool IsEmpty()
     {
         return !this.isTaken;
-    }
-
-    public void RemoveTower()
-    {
-        if (tower != null && tower is Tower t)
-        {
-            t.HP = 0;
-        }
     }
 
     public ITower GetTower()

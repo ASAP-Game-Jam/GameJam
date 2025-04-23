@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Interfaces.Tower;
 using System;
-using System.Drawing;
 using UnityEngine;
 
 namespace Assets.Scripts.Interfaces
@@ -12,6 +11,7 @@ namespace Assets.Scripts.Interfaces
         void AddTower(ITower tower);
         bool IsEmpty();
         ITower GetTower();
-        void RemoveTower();
+        public void CellTaken();
+        public void CellUnTaken();
     }
 }

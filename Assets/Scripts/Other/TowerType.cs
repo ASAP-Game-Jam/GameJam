@@ -1,1 +1,1 @@
-public enum TowerType { Generator, Cannon, Totem, LazerGun, Rocket, BearBarracks };
+public enum TowerType { Generator, Cannon, Totem, LazerGun, Rocket, BearBarracks, Bomb };

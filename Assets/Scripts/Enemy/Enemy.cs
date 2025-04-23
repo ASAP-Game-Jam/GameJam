@@ -24,7 +24,7 @@ namespace Assets.Scripts.Enemy
 
         private void Awake()
         {
-            OnDestroy += (object sender, EventArgs args) => { Destroy(this.gameObject); };
+            Activate();
         }
 
         public void TakeDamage(uint damage)
@@ -32,6 +32,9 @@ namespace Assets.Scripts.Enemy
             HP -= damage > hp ? hp : damage;
         }
 
-
+        public void Activate()
+        {
+            OnDestroy += (object sender, EventArgs args) => { Destroy(this.gameObject); };
+        }
     }
 }
