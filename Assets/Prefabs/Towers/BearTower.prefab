@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoints: []
   damage: 0
-  cooldown: 10
+  cooldown: 12
   first_attack_cooldown: 5
   endLevelX: 0
   distanceAttack: 0
