@@ -32,6 +32,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyTower
       objectReference: {fileID: 0}
+    - target: {fileID: 3083156353979359535, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
+      propertyPath: hp
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5575420677275043083, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

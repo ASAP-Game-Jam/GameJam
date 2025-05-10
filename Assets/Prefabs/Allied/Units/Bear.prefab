@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4342117883767035948, guid: f4b1a7e770fa3ff448749ad8243083ed, type: 3}
       propertyPath: hp
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8575274915882369961, guid: f4b1a7e770fa3ff448749ad8243083ed, type: 3}
       propertyPath: m_Pivot.x
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusLife: 20
-  maxSpeed: 2
+  maxSpeed: 0.6
   direction: 2
   speed: 0
   acceleration: 1
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e9d6af4a279584f8f303ffeeac9ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 15
   cooldown: 2
   delayAttack: 0.5
   spawnObject: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}
