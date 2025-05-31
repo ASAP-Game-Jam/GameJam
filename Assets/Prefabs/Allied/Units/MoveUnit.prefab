@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2612983463195483139}
   - component: {fileID: 735940039413190643}
   - component: {fileID: 6476751591390872226}
+  - component: {fileID: -8986236034885125889}
   m_Layer: 9
   m_Name: MoveUnit
   m_TagString: Tower
@@ -251,6 +252,20 @@ MonoBehaviour:
   spawnPoint: {fileID: 8272048804173601163}
   attackRange: 0.7
   baseAttack: 1
+--- !u!114 &-8986236034885125889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909902234930665665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0073d5f15b3694b875eb433ec683da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minZ: -0.1
+  coefficient: 100
 --- !u!1 &8272048804173601163
 GameObject:
   m_ObjectHideFlags: 0
