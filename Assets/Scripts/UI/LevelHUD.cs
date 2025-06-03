@@ -9,6 +9,8 @@ using UnityEngine.UI;
 //  ласс управл€ющий интерфейсом на уровне
 public partial class LevelHUD : MonoBehaviour
 {
+    [SerializeField] private string textWin = "You win";
+    [SerializeField] private string textDefead = "You defead";
     // —сылка на текстовый виджет в котором отображаетс€ счет игрока
     [SerializeField] private TMP_Text scoreText;
 
@@ -101,7 +103,7 @@ public partial class LevelHUD : MonoBehaviour
                         {
                             if(endText != null)
                             {
-                                endText.text = $"You are {endGame.BaseType switch { BaseType.EnemyBase => "Win", BaseType.TowerBase => "Defeat", _=>"ERROR" }}";
+                                endText.text = $" {endGame.BaseType switch { BaseType.EnemyBase => textWin, BaseType.TowerBase => textDefead, _=>"ERROR" }}";
                             }
                             endGamePanel.SetActive(true);
                             break;

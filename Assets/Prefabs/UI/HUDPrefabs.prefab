@@ -2410,6 +2410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9072762121af742a85d73d3aeb9510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textWin: "\u0412\u044B \u043F\u043E\u0431\u0435\u0434\u0438\u043B\u0438"
+  textDefead: "\u0412\u044B \u043F\u0440\u043E\u0438\u0433\u0440\u0430\u043B\u0438"
   scoreText: {fileID: 1768250380006957099}
   tower1: {fileID: 3078117053165015948}
   tower2: {fileID: 0}
