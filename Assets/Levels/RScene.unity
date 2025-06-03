@@ -3412,6 +3412,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 743168838048597690, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u0435\u043D\u044E"
+      objectReference: {fileID: 0}
     - target: {fileID: 6584992888607585307, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: m_text
       value: '20
@@ -3519,7 +3523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4236097306240631095, guid: 7cc622772bdaeb44cbd6adba7c18c3b6, type: 3}
       propertyPath: startEnergy
-      value: 1000
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4773864056886116855, guid: 7cc622772bdaeb44cbd6adba7c18c3b6, type: 3}
       propertyPath: m_AnchoredPosition.x

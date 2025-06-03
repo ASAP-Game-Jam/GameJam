@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: "\u0437\u0430\u043D\u043E\u0432\u043E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3366b3a3c08ee1a45981d1425148090a, type: 2}
   m_sharedMaterial: {fileID: 2009428843908432054, guid: 3366b3a3c08ee1a45981d1425148090a, type: 2}
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: "\u041C\u0435\u043D\u044E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3366b3a3c08ee1a45981d1425148090a, type: 2}
   m_sharedMaterial: {fileID: 2009428843908432054, guid: 3366b3a3c08ee1a45981d1425148090a, type: 2}
