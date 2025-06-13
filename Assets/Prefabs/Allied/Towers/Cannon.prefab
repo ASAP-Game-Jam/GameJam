@@ -157,7 +157,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7653807706205395591}
+      addedObject: {fileID: 4960709713418002791}
   m_SourcePrefab: {fileID: 100100000, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
 --- !u!224 &3601209226064769804 stripped
 RectTransform:
@@ -169,7 +169,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
   m_PrefabInstance: {fileID: 8981812797854447111}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7653807706205395591
+--- !u!114 &4960709713418002791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,14 +178,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8739024794591415644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3dab8174d926cd44b35481dfc40f9a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 719f714263b153443a05a142b22a8437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoints: []
-  damage: 10
-  cooldown: 3
-  first_attack_cooldown: 1
-  endLevelX: 6
-  distanceAttack: 20
-  bulletPrefab: {fileID: 9134297695911617197, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
-  firePoint: {fileID: 2043217238603982948}
+  _distanceAttack: 1
+  AutoStart: 1
+  damage: 0
+  _cooldown: 1.5
+  _forAllFirstAttackCooldown: 0.4
+  MaxXDistanceAttack: 1
+  Bullet: {fileID: 0}
