@@ -285,15 +285,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4019861234570000324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c729d8f6a03090e45ba0b0f857661d29, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b32bcc7b67bc514886561723f889c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerType: 0
-  cost: 0
-  text: {fileID: 6953185881051274954}
-  cooldownText: {fileID: 4171851561094184871}
-  fog: {fileID: 5162861343052612676}
-  cooldown: 5
+  AlliedType: 0
+  Cost: 0
 --- !u!1 &5162861343052612676
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2494179903430408728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -510,7 +506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TEXT
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3366b3a3c08ee1a45981d1425148090a, type: 2}
   m_sharedMaterial: {fileID: 2009428843908432054, guid: 3366b3a3c08ee1a45981d1425148090a, type: 2}

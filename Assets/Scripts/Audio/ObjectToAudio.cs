@@ -1,8 +1,6 @@
-﻿using Assets.Scripts.CustomEventArgs;
-using Assets.Scripts.Interfaces;
-using Assets.Scripts.Interfaces.Enemy;
-using Assets.Scripts.Tower;
-using System;
+﻿using Assets.Scripts.GameObjects;
+using Assets.Scripts.GameObjects.Attacks;
+using Assets.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,76 +10,58 @@ namespace Assets.Scripts.Audio
     {
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private Button[] buttons;
-        private TowerSpawnManager towerSpawnManager;
-        private EnemySpawnManager enemySpawnManager;
 
         private void Start()
         {
             if (audioManager == null)
                 audioManager = FindAnyObjectByType<AudioManager>();
-            towerSpawnManager = FindObjectOfType<TowerSpawnManager>();
-            enemySpawnManager = FindObjectOfType<EnemySpawnManager>();
-            if (towerSpawnManager != null)
-                towerSpawnManager.OnSpawn += OnSpawnTower;
-            if (enemySpawnManager != null)
-                enemySpawnManager.OnSpawn += OnSpawnEnemy;
+            if (LevelManager.AllyManager != null)
+                LevelManager.AllyManager.OnSpawned += OnSpawnTower;
+            if (LevelManager.EnemyManager != null)
+                LevelManager.EnemyManager.OnSpawned += OnSpawnEnemy;
             if (buttons != null && buttons.Length > 0)
                 foreach (Button button in buttons)
                     button.onClick.AddListener(audioManager.PlayButtonClick);
         }
 
-        private void OnSpawnTower(object sender, EventArgs eArgs)
+        private void OnSpawnTower(AllyType type, GameObject obj)
         {
-            if (eArgs is EventTowerSpawnArgs args)
+
+            audioManager.PlayConstructionSound();
+            var attack = obj.GetComponent<BasicAttack>();
+            switch (type)
             {
-                GameObject gameObject = args.GameObject;
-                if (gameObject.GetComponent<IDestroyObject>() is IDestroyObject destroyObject && destroyObject != null)
-                {
-                    audioManager.PlayConstructionSound();
-                    switch (args.TowerType)
-                    {
-                        case TowerType.Cannon:
-                        case TowerType.LazerGun:
-                            gameObject.GetComponent<ITowerAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayCannonShot(); };
-                            break;
-                        case TowerType.Generator:
+                case AllyType.Cannon:
+                case AllyType.LazerGun:
+                    attack.OnAttacking += () => { audioManager.PlayCannonShot(); };
+                    break;
+                case AllyType.Generator:
 
-                            break;
-                        case TowerType.Totem:
+                    break;
+                case AllyType.Totem:
 
-                            break;
-                    }
-                }
-                else if (gameObject.GetComponent<IBullet>() is IBullet bullet)
-                {
-                    audioManager.PlayRocketLaunch();
-                    gameObject.GetComponent<IBullet>().OnHit += (object sender, EventArgs e) => { audioManager.PlayRocketExplosion(); };
-                }
+                    break;
             }
         }
 
-        private void OnSpawnEnemy(object sender, EventArgs eArgs)
+
+        private void OnSpawnEnemy(EnemyType type, GameObject obj)
         {
-            if (eArgs is EventEnemySpawnArgs args)
+            audioManager.PlayConstructionSound();
+            var attack = obj.GetComponent<BasicAttack>();
+            switch (type)
             {
-                GameObject gameObject = args.GameObject;
-                if (gameObject.GetComponent<IDestroyObject>() is IDestroyObject destroyObject && destroyObject != null)
-                {
-                    audioManager.PlayConstructionSound();
-                    switch (args.EnemyType)
-                    {
-                        case EnemyType.Tank:
-                            gameObject.GetComponent<IAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayTankShot(); };
-                            break;
-                        case EnemyType.Stick:
-                            gameObject.GetComponent<IAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayStickHit(); };
-                            break;
-                        case EnemyType.FingerGun:
-                            gameObject.GetComponent<IAttack>().OnAttack += (object sender, EventArgs e) => { audioManager.PlayBlasterShot(); };
-                            break;
-                    }
-                }
+                case EnemyType.Tank:
+                    attack.OnAttacking += () => audioManager.PlayTankShot();
+                    break;
+                case EnemyType.Stick:
+                    attack.OnAttacking += () => audioManager.PlayStickHit();
+                    break;
+                case EnemyType.FingerGun:
+                    attack.OnAttacking += () => audioManager.PlayBlasterShot();
+                    break;
             }
         }
     }
 }
+
