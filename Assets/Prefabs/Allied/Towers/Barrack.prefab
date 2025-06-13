@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7a877b941947177449e176b4e8276611, type: 3}
     - target: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: m_Name
-      value: BearTower
+      value: Barrack
       objectReference: {fileID: 0}
     - target: {fileID: 3083156353979359535, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: hp
@@ -149,36 +149,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5575420677275043083, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7236259724715586537}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -7366868557745951758}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
---- !u!1 &1001395773554176782 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
-  m_PrefabInstance: {fileID: 578470383366047829}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-7366868557745951758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001395773554176782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccba0edf997401d4ba4f5e0264ce1c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoints: []
-  damage: 0
-  cooldown: 18
-  first_attack_cooldown: 5
-  endLevelX: 0
-  distanceAttack: 0
-  bulletPrefab: {fileID: 3590173712807350434, guid: afabc6f5abda5a94d8eadfb9296ff4f3, type: 3}
-  firePoint: {fileID: 2898293143490568135}
 --- !u!224 &4997021066968091998 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5575420677275043083, guid: 39fccdc4df393a446b638246b41fce22, type: 3}

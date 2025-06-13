@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: -2731623707433183703}
   - component: {fileID: -124307553452609931}
   - component: {fileID: -7501607890651738628}
-  - component: {fileID: 4125519151600526655}
-  - component: {fileID: 8776800804048817239}
+  - component: {fileID: 1048829441418191831}
+  - component: {fileID: 6085324501542693433}
+  - component: {fileID: 3155279788320438716}
   m_Layer: 9
   m_Name: Bomb
   m_TagString: Tower
@@ -186,7 +187,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4125519151600526655
+--- !u!114 &1048829441418191831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,14 +196,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 424059203088825179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fa29010c857c04d9897b81494da507, type: 3}
+  m_Script: {fileID: 11500000, guid: 95839a63610925d438e812f3a4fc73f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusDamage: 2
-  damage: 50
-  flyTime: 0.85
-  startPosition: {x: -1, y: 4, z: 0}
---- !u!114 &8776800804048817239
+--- !u!114 &6085324501542693433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,7 +208,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 424059203088825179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b0073d5f15b3694b875eb433ec683da, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cb3503bda5fe0a478ba59523f5701fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coefficient: 100
+  _distanceAttack: 1
+  AutoStart: 1
+  damage: 0
+--- !u!114 &3155279788320438716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424059203088825179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92280db1643042a4d914c906acb13218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isMove: 1
+  _currentSpeed: 0
+  _points: []
+  _currentIndexPoint: 0
+  _nextPoint: 1
