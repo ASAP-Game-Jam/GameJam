@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Managers
 {
-    public enum PlacementType { OnAnchorCell,OnCell, Anywhere, Activate }
+    public enum PlacementType { OnAnchorCell, OnCell, Anywhere, Activate }
     [Serializable]
     public struct TypeObject<TKey, TValue>
     {
@@ -21,10 +21,12 @@ namespace Assets.Scripts.Managers
     {
         public List<TypeObject<AllyType, GameObject>> PlacementObjects = new List<TypeObject<AllyType, GameObject>>();
         public LayerMask CellTileMask;
-        public event Action<AllyType,GameObject> OnSpawned;
+        public event Action<AllyType, GameObject> OnSpawned;
         public EStatusManager Status { get; private set; }
         public Vector3 SpawnActivateObjects;
         private (TypeObject<AllyType, GameObject> TypeObject, int Cost) selectObject;
+        private Sprite selectSprite;
+        private SpriteRenderer selectRenderer;
 
         public void Shutdown()
         {
@@ -44,17 +46,18 @@ namespace Assets.Scripts.Managers
         private void OnSelectObject((AllyType type, int cost) obj)
         {
             selectObject = (PlacementObjects.Find(match => match.Key == obj.type), obj.cost);
+            selectSprite = selectObject.TypeObject.Value?.GetComponent<SpriteRenderer>()?.sprite;
         }
 
         private IEnumerator GameUpdate()
         {
+            Vector3 clickPoint;
             while (Status == EStatusManager.Started)
             {
-
-                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && LevelManager.StateManager.IsEnergy(selectObject.Cost) && selectObject.TypeObject.Key != AllyType.None)
+                if (!EventSystem.current.IsPointerOverGameObject() && LevelManager.StateManager.IsEnergy(selectObject.Cost) && selectObject.TypeObject.Key != AllyType.None)
                 {
                     bool spawn = true;
-                    Vector3 clickPoint = selectObject.TypeObject.PlacementType == PlacementType.Activate ? SpawnActivateObjects : Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    clickPoint = selectObject.TypeObject.PlacementType == PlacementType.Activate ? SpawnActivateObjects : Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     Cell cell = null;
                     if (selectObject.TypeObject.PlacementType <= PlacementType.OnCell)
                     {
@@ -70,6 +73,7 @@ namespace Assets.Scripts.Managers
                             cell = hit.collider?.GetComponent<Cell>();
                             if (cell != null && cell.IsEmpty)
                             {
+                                ViewSelect(hit.collider?.GetComponent<SpriteRenderer>());
                                 spawn = true;
                                 clickPoint = cell.transform.position;
                                 break;
@@ -78,7 +82,7 @@ namespace Assets.Scripts.Managers
                     }
                     else
                         clickPoint = new Vector3(clickPoint.x, clickPoint.y, clickPoint.y / 100);
-                    if (spawn)
+                    if (spawn && Input.GetMouseButtonDown(0))
                     {
                         // Появление
                         var obj = Instantiate(selectObject.TypeObject.Value, clickPoint, Quaternion.identity);
@@ -87,6 +91,9 @@ namespace Assets.Scripts.Managers
                             obj.transform.parent = null;
                             LevelManager.StateManager.ChangeEnergy(-selectObject.Cost);
                             OnSpawned?.Invoke(selectObject.TypeObject.Key, obj);
+                            selectSprite = null;
+                            if (selectRenderer != null)
+                                selectRenderer.enabled = false;
                             if (cell != null && obj.GetComponent<IBasicEntity>() is IBasicEntity entity && selectObject.TypeObject.PlacementType == PlacementType.OnAnchorCell)
                             {
                                 cell.AddObject(entity);
@@ -96,11 +103,24 @@ namespace Assets.Scripts.Managers
                         }
                     }
                 }
-
                 yield return null;
             }
         }
 
+        private void ViewSelect(SpriteRenderer render)
+        {
+            if (render != null && selectSprite != null)
+            {
+                if (selectRenderer != render)
+                {
+                    if (selectRenderer != null)
+                        selectRenderer.enabled = false;
 
+                    selectRenderer = render;
+                    selectRenderer.enabled = true;
+                    selectRenderer.sprite = selectSprite;
+                }
+            }
+        }
     }
 }

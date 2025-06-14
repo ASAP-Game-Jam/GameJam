@@ -15,7 +15,10 @@ GameObject:
   - component: {fileID: -7501607890651738628}
   - component: {fileID: 1048829441418191831}
   - component: {fileID: 6085324501542693433}
-  - component: {fileID: 3155279788320438716}
+  - component: {fileID: 1393977953246911116}
+  - component: {fileID: 209607083326003439}
+  - component: {fileID: 8744853214281655201}
+  - component: {fileID: -3217564548530396974}
   m_Layer: 9
   m_Name: Bomb
   m_TagString: Tower
@@ -206,7 +209,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424059203088825179}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cb3503bda5fe0a478ba59523f5701fd, type: 3}
   m_Name: 
@@ -214,7 +217,7 @@ MonoBehaviour:
   _distanceAttack: 1
   AutoStart: 1
   damage: 0
---- !u!114 &3155279788320438716
+--- !u!114 &1393977953246911116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +230,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMove: 1
-  _currentSpeed: 0
-  _points: []
+  _currentSpeed: 5
+  _points:
+  - {x: -2, y: 4, z: 0}
   _currentIndexPoint: 0
   _nextPoint: 1
+  _spawnPointIsFirst: 0
+  _spawnPointIsLast: 1
+  _allPointsIsLocal: 1
+--- !u!114 &209607083326003439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424059203088825179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c8f246f95e17f40b70a476a773a21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minZ: -0.2
+  coefficient: 100
+--- !u!114 &8744853214281655201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424059203088825179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1269735ec741dfd439d778b01393da52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3217564548530396974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424059203088825179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6807d362aa7dcf94e8366d55c0d30eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onViewEnemy: 0

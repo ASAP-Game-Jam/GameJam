@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7293635702651191653}
   - component: {fileID: 1879863726902533664}
+  - component: {fileID: 5753167564166891696}
+  - component: {fileID: 3975708087450173144}
   m_Layer: 0
   m_Name: EnemyBase
   m_TagString: Untagged
@@ -77,3 +79,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5753167564166891696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318741731005459496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7bb68a1bb1b327478e8d84a1b96a8e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3975708087450173144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318741731005459496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67e466f1978a25418b85ed23741b33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 1
