@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: 3127724691386649251}
   - component: {fileID: 1953934088867412128}
   - component: {fileID: 1955768783776536097}
+  - component: {fileID: -4470805029787559134}
+  - component: {fileID: -7527639160674704767}
+  - component: {fileID: -119793387714023957}
+  - component: {fileID: -7097153995999084141}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -152,3 +156,57 @@ CircleCollider2D:
   m_Offset: {x: 0.22639227, y: -0.022776961}
   serializedVersion: 2
   m_Radius: 0.27019942
+--- !u!114 &-4470805029787559134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681050408390779276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95839a63610925d438e812f3a4fc73f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7527639160674704767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681050408390779276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fafc0db363d7c5429ab38776e20c996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-119793387714023957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681050408390779276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104eb4c5a3d00124ebfbfa356af2486e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceAttack: 1
+  AutoStart: 1
+  damage: 10
+--- !u!114 &-7097153995999084141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681050408390779276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996dd2c3eeb7fca48a336df777d6cb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isMove: 1
+  _currentSpeed: 2
+  _direction: 2

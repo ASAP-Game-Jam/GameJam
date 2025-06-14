@@ -1707,6 +1707,7 @@ GameObject:
   - component: {fileID: 4244690608045317701}
   - component: {fileID: 499766318508133581}
   - component: {fileID: 7399044907909108418}
+  - component: {fileID: 3524703313777976894}
   m_Layer: 5
   m_Name: HealthPanel
   m_TagString: Untagged
@@ -1773,6 +1774,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3524703313777976894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162699509587361550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bafdd683ca527924b9e4d3a917f86469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontObject: {fileID: 1505806834497873668}
+  backObject: {fileID: 3395152338731030003}
+  fractionType: 0
 --- !u!1 &6274030171334607240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1877,7 @@ GameObject:
   - component: {fileID: 4829310518904517259}
   - component: {fileID: 8008238830669063206}
   - component: {fileID: 1164502295351120910}
+  - component: {fileID: 9208740517030790811}
   m_Layer: 5
   m_Name: BatteryPannel
   m_TagString: Untagged
@@ -1928,6 +1945,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9208740517030790811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284672558758553659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd71047ec5d216f4ca43b7e1531d0716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyText: {fileID: 1768250380006957099}
 --- !u!1 &6891615365384832453
 GameObject:
   m_ObjectHideFlags: 0
