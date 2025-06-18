@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.GameObjects.Moving
+namespace Assets.Scripts.GameObjects.Addons
 {
     public class ZFixedOnMove : MonoBehaviour
     {

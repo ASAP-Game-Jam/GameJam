@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GameObjects.Entities;
+using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.GameObjects.Entities
+namespace Assets.Scripts.GameObjects.Addons
 {
     [RequireComponent(typeof(IBasicEntity))]
     public class HitEffect : MonoBehaviour

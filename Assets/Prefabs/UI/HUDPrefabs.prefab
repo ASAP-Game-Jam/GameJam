@@ -1788,7 +1788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frontObject: {fileID: 1505806834497873668}
   backObject: {fileID: 3395152338731030003}
-  fractionType: 0
+  fractionType: 2
 --- !u!1 &6274030171334607240
 GameObject:
   m_ObjectHideFlags: 0

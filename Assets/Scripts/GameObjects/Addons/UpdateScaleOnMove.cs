@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.GameObjects.Moving;
+using UnityEngine;
 
-namespace Assets.Scripts.GameObjects.Moving
+namespace Assets.Scripts.GameObjects.Addons
 {
     [RequireComponent(typeof(IDirectionMove))]
     public class UpdateScaleOnMove : MonoBehaviour

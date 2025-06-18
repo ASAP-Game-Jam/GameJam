@@ -1,6 +1,7 @@
-﻿using Assets.Scripts.GameObjects.Moving;
+﻿using Assets.Scripts.GameObjects.Attacks;
+using Assets.Scripts.GameObjects.Moving;
 using UnityEngine;
-namespace Assets.Scripts.GameObjects.Attacks
+namespace Assets.Scripts.GameObjects.Addons
 {
     [RequireComponent(typeof(BasicAttack))]
     [RequireComponent(typeof(AMovable))]

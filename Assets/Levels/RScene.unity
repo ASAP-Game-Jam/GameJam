@@ -3256,11 +3256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3975708087450173144, guid: a6a9214db692c3b4a94757d35fc44623, type: 3}
       propertyPath: _hp
-      value: 1
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7293635702651191653, guid: a6a9214db692c3b4a94757d35fc44623, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 9.32
       objectReference: {fileID: 0}
     - target: {fileID: 7293635702651191653, guid: a6a9214db692c3b4a94757d35fc44623, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3430,7 +3430,7 @@ MonoBehaviour:
   CellTileMask:
     serializedVersion: 2
     m_Bits: 256
-  SpawnActivateObjects: {x: 0, y: 0, z: 0}
+  SpawnActivateObjects: {x: -9, y: 3, z: 0}
 --- !u!114 &1907869763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3455,7 +3455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb55a3a1d8d65794da41a71da5de923c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energy: 125
+  _energy: 1250
 --- !u!1 &1935262004
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ namespace Assets.Scripts.Managers
         public void Select(UIEntityButton button)
         {
             UIButton?.UnSelect();
-            UIButton = UIButton == button ? null : button;
+            UIButton = button;//UIButton == button ? null : button;
             OnSelected?.Invoke(Unit);
         }
     }

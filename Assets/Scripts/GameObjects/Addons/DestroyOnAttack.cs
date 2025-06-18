@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.GameObjects.Entities
+namespace Assets.Scripts.GameObjects.Addons
 
 {
     [RequireComponent(typeof(BasicAttack))]
