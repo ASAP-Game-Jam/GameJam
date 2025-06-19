@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.0261438
+      objectReference: {fileID: 0}
+    - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.5205971
+      objectReference: {fileID: 0}
     - target: {fileID: 2148622610703781620, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
       propertyPath: maxSpeed
       value: 0.35
@@ -91,5 +103,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3529818130801908550}
   m_SourcePrefab: {fileID: 100100000, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+--- !u!1 &6704425879836671571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+  m_PrefabInstance: {fileID: 4252106403822366402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3529818130801908550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6704425879836671571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719f714263b153443a05a142b22a8437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceAttack: 2
+  AutoStart: 1
+  damage: 10
+  _cooldown: 1.5
+  _forAllFirstAttackCooldown: 0.4
+  MaxXDistanceAttack: 4
+  AttackPointOffset: {x: -0.58, y: 0.31}
+  Bullet: {fileID: 0}

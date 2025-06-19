@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 6737341531813734673}
   - component: {fileID: 249700922198201520}
   - component: {fileID: 5523970175045639166}
+  - component: {fileID: 1527275435734713774}
   m_Layer: 5
   m_Name: TimerPanel
   m_TagString: Untagged
@@ -378,6 +379,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1527275435734713774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236129125503808576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac45737501e45f40a27161e9287a459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 5030840806044652477}
 --- !u!1 &2356144160621788084
 GameObject:
   m_ObjectHideFlags: 0

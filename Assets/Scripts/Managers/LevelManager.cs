@@ -8,6 +8,8 @@ namespace Assets.Scripts.Managers
     [RequireComponent(typeof(BaseManager))]
     [RequireComponent(typeof(EnemyManager))]
     [RequireComponent(typeof(GameManager))]
+    [RequireComponent(typeof(WaveManager))]
+    [RequireComponent(typeof(TimerManager))]
     public class LevelManager : BasicManager
     {
         public static StateManager StateManager { get; private set; }
@@ -15,7 +17,9 @@ namespace Assets.Scripts.Managers
         public static AllyManager AllyManager { get; private set; }
         public static BaseManager BaseManager { get; private set; }
         public static EnemyManager EnemyManager { get; private set; }
+        public static WaveManager WaveManager { get; private set; }
         public static GameManager GameManager { get; private set; }
+        public static TimerManager TimerManager { get; private set; }
 
         private void Awake()
         {
@@ -25,6 +29,8 @@ namespace Assets.Scripts.Managers
             BaseManager = GetComponent<BaseManager>();
             EnemyManager = GetComponent<EnemyManager>();
             GameManager = GetComponent<GameManager>();
+            WaveManager = GetComponent<WaveManager>();
+            TimerManager = GetComponent<TimerManager>();
 
             managers.Add(StateManager);
             managers.Add(UIManager);
@@ -32,6 +38,8 @@ namespace Assets.Scripts.Managers
             managers.Add(BaseManager);
             managers.Add(EnemyManager);
             managers.Add(GameManager);
+            managers.Add(WaveManager);
+            managers.Add(TimerManager);
         }
     }
 }
