@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.7128906
+      objectReference: {fileID: 0}
+    - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.422652
+      objectReference: {fileID: 0}
     - target: {fileID: 2148622610703781620, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
       propertyPath: maxSpeed
       value: 0.55
@@ -89,7 +101,36 @@ PrefabInstance:
       value: EnemyFingerGun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2411722489136190781, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 616445960367398960}
   m_SourcePrefab: {fileID: 100100000, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+--- !u!1 &4724117988029149038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7352236265743798417, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+  m_PrefabInstance: {fileID: 2848266909494149119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &616445960367398960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4724117988029149038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719f714263b153443a05a142b22a8437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceAttack: 3
+  AutoStart: 1
+  damage: 4
+  _cooldown: 1.5
+  _forAllFirstAttackCooldown: 0.4
+  MaxXDistanceAttack: 4
+  AttackPointOffset: {x: -0.89, y: 0.38}
+  Bullet: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}

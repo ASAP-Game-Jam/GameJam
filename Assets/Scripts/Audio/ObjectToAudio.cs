@@ -18,7 +18,7 @@ namespace Assets.Scripts.Audio
             if (LevelManager.AllyManager != null)
                 LevelManager.AllyManager.OnSpawned += OnSpawnTower;
             if (LevelManager.EnemyManager != null)
-                LevelManager.EnemyManager.OnSpawned += OnSpawnEnemy;
+                LevelManager.EnemyManager.OnEnemySpawned += OnSpawnEnemy;
             if (buttons != null && buttons.Length > 0)
                 foreach (Button button in buttons)
                     button.onClick.AddListener(audioManager.PlayButtonClick);

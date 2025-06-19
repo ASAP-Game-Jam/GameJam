@@ -12,14 +12,15 @@ namespace Assets.Scripts.GameObjects.Attacks
         public override event Action OnAttacking;
         public override event Action<bool> OnViewEnemy;
         public float MaxXDistanceAttack = 4f;
+        public Vector2 AttackPointOffset = Vector2.zero;
         public GameObject Bullet;
 
         public float CurrentDistance => Math.Min(DistanceAttack, Math.Abs(transform.position.x - MaxXDistanceAttack));
         protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(AttackPoint, new Vector3(transform.position.x + CurrentDistance * Mathf.Sign(transform.localScale.x)
-                , transform.position.y, transform.position.z));
+            Gizmos.DrawLine(AttackPoint, new Vector3(AttackPoint.x + CurrentDistance * Mathf.Sign(transform.localScale.x)
+                , AttackPoint.y, AttackPoint.z));
         }
         protected override IEnumerator Attack()
         {
@@ -72,6 +73,6 @@ namespace Assets.Scripts.GameObjects.Attacks
             }
         }
         protected virtual Vector3 AttackPoint
-            => this.transform.position;
+            => this.transform.position + new Vector3(AttackPointOffset.x, AttackPointOffset.y);
     }
 }
