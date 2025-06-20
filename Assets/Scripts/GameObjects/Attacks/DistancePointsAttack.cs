@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.GameObjects.Attacks
 {
@@ -12,7 +11,7 @@ namespace Assets.Scripts.GameObjects.Attacks
             base.Start();
             base.OnViewEnemy += (e) =>
             {
-                if (!e) indexPoint = (indexPoint+1)%attackPoints.Length;
+                if (!e) indexPoint = (indexPoint + 1) % attackPoints.Length;
             };
         }
         protected override void OnDrawGizmos()
@@ -24,7 +23,7 @@ namespace Assets.Scripts.GameObjects.Attacks
                 {
                     var point = attackPoint.transform.position;// + this.transform.position;
                     Gizmos.DrawLine(point,
-                        new Vector3(point.x + CurrentDistance * Mathf.Sign(transform.localScale.x),
+                        new Vector3(point.x + GetDistance(point) * Mathf.Sign(transform.localScale.x),
                         point.y, point.z));
                 }
             }

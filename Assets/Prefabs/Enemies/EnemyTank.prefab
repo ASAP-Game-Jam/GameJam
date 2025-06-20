@@ -135,7 +135,7 @@ MonoBehaviour:
   _forAllFirstAttackCooldown: 0.4
   MaxXDistanceAttack: 4
   AttackPointOffset: {x: -0.58, y: 0.31}
-  Bullet: {fileID: 0}
+  Bullet: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}
 --- !u!114 &2349852779366243824
 MonoBehaviour:
   m_ObjectHideFlags: 0

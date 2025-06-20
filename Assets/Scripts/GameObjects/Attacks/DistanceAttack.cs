@@ -15,11 +15,12 @@ namespace Assets.Scripts.GameObjects.Attacks
         public Vector2 AttackPointOffset = Vector2.zero;
         public GameObject Bullet;
 
-        public float CurrentDistance => Math.Min(DistanceAttack, Math.Abs(transform.position.x - MaxXDistanceAttack));
+        protected float GetDistance(Vector3 point)
+            => Math.Min(DistanceAttack, Math.Abs(point.x - MaxXDistanceAttack));
         protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(AttackPoint, new Vector3(AttackPoint.x + CurrentDistance * Mathf.Sign(transform.localScale.x)
+            Gizmos.DrawLine(AttackPoint, new Vector3(AttackPoint.x + GetDistance(AttackPoint) * Mathf.Sign(transform.localScale.x)
                 , AttackPoint.y, AttackPoint.z));
         }
         protected override IEnumerator Attack()
@@ -32,7 +33,7 @@ namespace Assets.Scripts.GameObjects.Attacks
                 enemyEntity = null;
                 if (enemyEntity == null)
                 {
-                    RaycastHit2D[] hits = Physics2D.RaycastAll(AttackPoint, Mathf.Sign(currentTransform.localScale.x) == -1 ? Vector2.left : Vector2.right, DistanceAttack);
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(AttackPoint, Mathf.Sign(currentTransform.localScale.x) == -1 ? Vector2.left : Vector2.right, GetDistance(AttackPoint));
 
                     enemyEntity = null;
                     foreach (RaycastHit2D hit in hits)
@@ -59,6 +60,8 @@ namespace Assets.Scripts.GameObjects.Attacks
                     {
                         OnAttacking?.Invoke();
                         enemyEntity = null;
+
+                        obj.GetComponent<Transform>()?.SetParent(null);
 
                         new PointFirstDirectionSecondMove(obj, transform.position, AttackPoint);
 
