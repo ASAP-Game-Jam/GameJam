@@ -25,9 +25,10 @@ namespace Assets.Scripts.Managers
         }
         private void UnSelect(AllyType type, GameObject obj)
         {
-#if !UNITY_EDITOR
+//#if !UNITY_EDITOR
+            UIButton?.ActivateCooldown();
             UIButton = null;
-#endif
+//#endif
         }
         public void Select(UIEntityButton button)
         {
