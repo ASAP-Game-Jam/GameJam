@@ -12,7 +12,7 @@ namespace Assets.Scripts.GameObjects.Attacks
         public override event Action<bool> OnViewEnemy;
 
         [SerializeField] private int damage;
-        public int Damage => damage;
+        public int Damage { get => damage; set => damage = value >= 0 ? value : 0; }
 
         protected override IEnumerator Attack()
         {
