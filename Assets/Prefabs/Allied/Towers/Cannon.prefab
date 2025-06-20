@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2043217238603982948
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2972686176352285671}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2972686176352285671
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043217238603982948}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.46400923, y: 0.0050052544, z: -0.07373348}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3601209226064769804}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8981812797854447111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: ba37dae8f05e49d4baff1ec5f370b9cc, type: 3}
     - target: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: m_Name
-      value: AttackTower
+      value: Cannon
       objectReference: {fileID: 0}
     - target: {fileID: 3083156353979359535, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: hp
@@ -150,20 +119,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2751239042207161466, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5575420677275043083, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2972686176352285671}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4960709713418002791}
   m_SourcePrefab: {fileID: 100100000, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
---- !u!224 &3601209226064769804 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5575420677275043083, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
-  m_PrefabInstance: {fileID: 8981812797854447111}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8739024794591415644 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
@@ -181,10 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719f714263b153443a05a142b22a8437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceAttack: 1
+  _distanceAttack: 20
   AutoStart: 1
-  damage: 0
+  damage: 5
   _cooldown: 1.5
   _forAllFirstAttackCooldown: 0.4
-  MaxXDistanceAttack: 1
-  Bullet: {fileID: 0}
+  MaxXDistanceAttack: 2.5
+  AttackPointOffset: {x: 0.46, y: 0}
+  Bullet: {fileID: 9134297695911617197, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}

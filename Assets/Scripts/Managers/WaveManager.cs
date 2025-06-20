@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.GameObjects;
+using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.GameObjects;
 
 namespace Assets.Scripts.Managers
 {
@@ -90,6 +90,11 @@ namespace Assets.Scripts.Managers
             Debug.Log("WaveManager: Время вышло!");
             // Дополнительные действия по окончании игрового уровня или финальной волне можно реализовать здесь.
             LevelManager.EnemyManager.spawnCooldown = 5;
+            LevelManager.EnemyManager.IncreaseEnemiesPerWave(5);
+            foreach (var type in enemyTypePriorityList)
+            {
+                LevelManager.EnemyManager.AddAllowedEnemyType(type);
+            }
         }
     }
 }

@@ -60,8 +60,10 @@ namespace Assets.Scripts.GameObjects.Attacks
                         OnAttacking?.Invoke();
                         enemyEntity = null;
 
-                        // TODO: Настроить Bullet
                         new PointFirstDirectionSecondMove(obj, transform.position, AttackPoint);
+
+                        if(obj.TryGetComponent<DamageAttack>(out DamageAttack basicAttack))
+                            basicAttack.Damage = this.Damage;
 
                         yield return new WaitForSeconds(Cooldown);
                     }
