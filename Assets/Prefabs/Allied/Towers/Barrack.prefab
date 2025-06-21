@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bearPrefab: {fileID: 3590173712807350434, guid: afabc6f5abda5a94d8eadfb9296ff4f3, type: 3}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 7236259724715586537}
   _cooldown: 10
   _firstSpawnCoolDown: 10
 --- !u!1 &2898293143490568135

@@ -13,10 +13,11 @@ namespace Assets.Scripts.GameObjects.Attacks
         public override event Action<bool> OnViewEnemy;
         public float MaxXDistanceAttack = 4f;
         public Vector2 AttackPointOffset = Vector2.zero;
-        public GameObject Bullet;
+        [SerializeField] protected GameObject Bullet;
+        [SerializeField] private bool xCoordIsDistance = false;
 
         protected float GetDistance(Vector3 point)
-            => Math.Min(DistanceAttack, Math.Abs(point.x - MaxXDistanceAttack));
+            => xCoordIsDistance? Math.Min(DistanceAttack, Math.Abs(point.x - MaxXDistanceAttack)) : DistanceAttack;
         protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
@@ -55,7 +56,7 @@ namespace Assets.Scripts.GameObjects.Attacks
                 }
                 if (enemyEntity != null)
                 {
-                    GameObject obj = Instantiate(Bullet, transform.position, Quaternion.identity, currentTransform);
+                    GameObject obj = Instantiate(Bullet, AttackPoint, Quaternion.identity, currentTransform);
                     if (obj != null)
                     {
                         OnAttacking?.Invoke();
@@ -63,9 +64,10 @@ namespace Assets.Scripts.GameObjects.Attacks
 
                         obj.GetComponent<Transform>()?.SetParent(null);
 
-                        new PointFirstDirectionSecondMove(obj, transform.position, AttackPoint);
+                        if (obj.GetComponent<StaticPointsMove>() != null)
+                            new PointFirstDirectionSecondMove(obj, transform.position, AttackPoint);
 
-                        if(obj.TryGetComponent<DamageAttack>(out DamageAttack basicAttack))
+                        if (obj.TryGetComponent<DamageAttack>(out DamageAttack basicAttack))
                             basicAttack.Damage = this.Damage;
 
                         yield return new WaitForSeconds(Cooldown);
