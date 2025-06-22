@@ -90,7 +90,7 @@ namespace Assets.Scripts.UI
 
         private void OnRetryClicked()
         {
-            LevelManager.GameManager?.EndGame();
+            LevelManager.GameManager?.ReloadScene();
         }
     }
 }
