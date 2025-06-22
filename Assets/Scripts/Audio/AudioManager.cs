@@ -1,204 +1,161 @@
+п»їusing System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class SoundLimit
+{
+    public SoundType type;
+    [Tooltip("0 = Р±РµР· РѕРіСЂР°РЅРёС‡РµРЅРёР№")]
+    public int maxSimultaneous;
+}
+public enum SoundType
+{
+    MainTheme, BlasterShot, CannonShot, TankShot,
+    ConstructionSound, ButtonClick, RocketLaunch,
+    RocketExplosion, StickHit
+}
+
+public static class AudioEvents
+{
+    public static event Action<SoundType> OnPlaySound;
+    public static void Play(SoundType type) => OnPlaySound?.Invoke(type);
+}
+
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    // Переменные для звуковых клипов
+    [Header("Main")]
     public AudioClip mainTheme;
-    public AudioClip blasterShot;
-    public AudioClip cannonShot;
-    public AudioClip tankShot;
     public AudioClip constructionSound;
     public AudioClip buttonClick;
+
+    [Header("Ally")]
+    public AudioClip cannonShot;
     public AudioClip rocketLaunch;
     public AudioClip rocketExplosion;
+
+    [Header("Enemy")]
+    public AudioClip blasterShot;
+    public AudioClip tankShot;
     public AudioClip stickHit;
 
-    // Словарь для хранения громкости каждого звука
+    [Header("Sound Limits (0 = no limit)")]
+    [SerializeField] private SoundLimit[] soundLimits;
+
+    private Dictionary<SoundType, AudioClip> clipMap;
     private Dictionary<AudioClip, float> soundVolumes;
+    private List<AudioSource> pool;
+    private AudioSource musicSource;
 
-    // Пул аудиоисточников для асинхронного воспроизведения
-    private List<AudioSource> audioSources = new List<AudioSource>();
+    // РќРѕРІС‹Рµ РїРѕР»СЏ РґР»СЏ Р»РёРјРёС‚РѕРІ Рё СѓС‡С‘С‚Р° Р°РєС‚РёРІРЅС‹С… РёСЃС‚РѕС‡РЅРёРєРѕРІ
+    private Dictionary<SoundType, int> _maxSimultaneous;
+    private Dictionary<SoundType, List<AudioSource>> _activeSources;
 
-    // Аудиоисточник для воспроизведения звуков
-    private AudioSource mainAudioSource;
-
-    void Start()
+    private void Awake()
     {
-        // Инициализация основного аудиоисточника
-        mainAudioSource = gameObject.AddComponent<AudioSource>();
-
-        // Инициализация громкости для каждого звука
-        soundVolumes = new Dictionary<AudioClip, float>
+        // 1. Р—Р°РїРѕР»РЅСЏРµРј РєР°СЂС‚Сѓ С‚РёРїР° в†’ РєР»РёРї
+        clipMap = new Dictionary<SoundType, AudioClip>
         {
-            { mainTheme, 0.6f },
-            { blasterShot, 1.0f },
-            { cannonShot, 1.0f },
-            { tankShot, 1.0f },
-            { constructionSound, 1.0f },
-            { buttonClick, 1.0f },
-            { rocketLaunch, 1.0f },
-            { rocketExplosion, 1.0f },
-            { stickHit, 1.0f }
+            { SoundType.MainTheme,        mainTheme },
+            { SoundType.ConstructionSound,constructionSound },
+            { SoundType.ButtonClick,      buttonClick },
+            { SoundType.CannonShot,       cannonShot },
+            { SoundType.RocketLaunch,     rocketLaunch },
+            { SoundType.RocketExplosion,  rocketExplosion },
+            { SoundType.BlasterShot,      blasterShot },
+            { SoundType.TankShot,         tankShot },
+            { SoundType.StickHit,         stickHit }
         };
 
-        // Воспроизведение главной музыкальной темы на старте
-        PlayMainTheme();
+        // 2. РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РіСЂРѕРјРєРѕСЃС‚Рё
+        soundVolumes = new Dictionary<AudioClip, float>();
+        foreach (var kv in clipMap)
+            if (kv.Value != null)
+                soundVolumes[kv.Value] = 1f;
+        if (mainTheme != null) soundVolumes[mainTheme] = 0.6f;
+
+        // 3. РџСѓР» Рё РёСЃС‚РѕС‡РЅРёРє РјСѓР·С‹РєРё
+        pool = new List<AudioSource>();
+        musicSource = GetComponent<AudioSource>();
+        musicSource.playOnAwake = false;
+
+        // 4. РЎРѕР±РёСЂР°РµРј Р»РёРјРёС‚С‹
+        _maxSimultaneous = new Dictionary<SoundType, int>();
+        foreach (var sl in soundLimits)
+            _maxSimultaneous[sl.type] = sl.maxSimultaneous;
+
+        // 5. Р“РѕС‚РѕРІРёРј С…СЂР°РЅРёР»РёС‰Рµ Р°РєС‚РёРІРЅС‹С… РёСЃС‚РѕС‡РЅРёРєРѕРІ РїРѕ С‚РёРїСѓ
+        _activeSources = new Dictionary<SoundType, List<AudioSource>>();
+        foreach (SoundType t in Enum.GetValues(typeof(SoundType)))
+            _activeSources[t] = new List<AudioSource>();
+
+        // 6. РџРѕРґРїРёСЃС‹РІР°РµРјСЃСЏ РЅР° РєР°РЅР°Р» СЃРѕР±С‹С‚РёР№
+        AudioEvents.OnPlaySound += HandlePlaySound;
     }
 
-    // Метод для воспроизведения главной музыкальной темы
-    public void PlayMainTheme()
+    private void OnDestroy()
     {
-        PlaySound(mainTheme, true); // Повторяется в цикле
+        AudioEvents.OnPlaySound -= HandlePlaySound;
     }
 
-    // Метод для воспроизведения выстрела бластера
-    public void PlayBlasterShot()
+    private void HandlePlaySound(SoundType type)
     {
-        PlaySoundAsync(blasterShot);
-    }
-
-    // Метод для воспроизведения выстрела пушки
-    public void PlayCannonShot()
-    {
-        PlaySoundAsync(cannonShot);
-    }
-
-    // Метод для воспроизведения выстрела танка
-    public void PlayTankShot()
-    {
-        PlaySoundAsync(tankShot);
-    }
-
-    // Метод для воспроизведения звука строительства
-    public void PlayConstructionSound()
-    {
-        PlaySoundAsync(constructionSound);
-    }
-
-    // Метод для воспроизведения звука нажатия клавиши
-    public void PlayButtonClick()
-    {
-        PlaySoundAsync(buttonClick);
-    }
-
-    // Метод для воспроизведения запуска ракеты
-    public void PlayRocketLaunch()
-    {
-        PlaySoundAsync(rocketLaunch);
-    }
-
-    // Метод для воспроизведения взрыва ракеты
-    public void PlayRocketExplosion()
-    {
-        PlaySoundAsync(rocketExplosion);
-    }
-
-    // Метод для воспроизведения удара палкой
-    public void PlayStickHit()
-    {
-        PlaySoundAsync(stickHit);
-    }
-
-    // Метод для воспроизведения звука асинхронно (не прерывая другие звуки)
-    public void PlaySoundAsync(AudioClip clip)
-    {
-        if (clip != null)
-        {
-            AudioSource audioSource = GetAvailableAudioSource();
-            audioSource.clip = clip;
-            audioSource.loop = false;
-            audioSource.volume = soundVolumes.ContainsKey(clip) ? soundVolumes[clip] : 1.0f;
-            audioSource.Play();
-
-            // Удаляем аудиоисточник из пула после завершения клипа
-            StartCoroutine(ReleaseAudioSourceAfterPlaying(audioSource));
-        }
+        if (type == SoundType.MainTheme)
+            PlayMusic();
         else
-        {
-            Debug.LogWarning("Audio clip is missing!");
-        }
+            PlaySFX(type);
     }
 
-    // Метод для получения доступного аудиоисточника из пула
-    private AudioSource GetAvailableAudioSource()
+    private void PlayMusic()
     {
-        AudioSource availableSource = audioSources.Find(source => !source.isPlaying);
-        if (availableSource == null)
-        {
-            availableSource = gameObject.AddComponent<AudioSource>();
-            audioSources.Add(availableSource);
-        }
-        return availableSource;
+        if (!clipMap.TryGetValue(SoundType.MainTheme, out var clip) || clip == null)
+            return;
+
+        musicSource.clip = clip;
+        musicSource.volume = soundVolumes[clip];
+        musicSource.loop = true;
+        if (!musicSource.isPlaying)
+            musicSource.Play();
     }
 
-    // Корутина для освобождения аудиоисточника после завершения воспроизведения
-    private IEnumerator ReleaseAudioSourceAfterPlaying(AudioSource audioSource)
+    private void PlaySFX(SoundType type)
     {
-        while (audioSource.isPlaying)
+        if (!clipMap.TryGetValue(type, out var clip) || clip == null)
+            return;
+
+        var activeList = _activeSources[type];
+        _maxSimultaneous.TryGetValue(type, out int maxAllowed);
+
+        // Р•СЃР»Рё Р»РёРјРёС‚ Р·Р°РґР°РЅ Рё РјС‹ СѓР¶Рµ РґРѕСЃС‚РёРіР»Рё вЂ” РїСЂРѕРїСѓСЃРєР°РµРј РЅРѕРІС‹Р№ Р·РІСѓРє
+        if (maxAllowed > 0 && activeList.Count >= maxAllowed)
+            return;
+
+        // РќР°С…РѕРґРёРј СЃРІРѕР±РѕРґРЅС‹Р№ AudioSource РІ РѕР±С‰РµРј РїСѓР»Рµ
+        AudioSource src = pool.Find(s => !s.isPlaying);
+        if (src == null)
         {
-            yield return null; // Ждем до тех пор, пока звук играет
+            src = gameObject.AddComponent<AudioSource>();
+            pool.Add(src);
         }
-        audioSource.Stop();
-        audioSource.clip = null;
+
+        src.clip = clip;
+        src.volume = soundVolumes[clip];
+        src.loop = false;
+        src.Play();
+
+        // Р РµРіРёСЃС‚СЂРёСЂСѓРµРј РµРіРѕ РєР°Рє Р°РєС‚РёРІРЅС‹Р№
+        activeList.Add(src);
+        StartCoroutine(ReleaseWhenDone(type, src));
     }
 
-    // Общий метод для воспроизведения звука
-    private void PlaySound(AudioClip clip, bool loop = false)
+    private IEnumerator ReleaseWhenDone(SoundType type, AudioSource src)
     {
-        if (clip != null)
-        {
-            if (!mainAudioSource.isPlaying || loop)
-            {
-                mainAudioSource.clip = clip;
-                mainAudioSource.loop = loop;
-                mainAudioSource.volume = soundVolumes.ContainsKey(clip) ? soundVolumes[clip] : 1.0f;
-                mainAudioSource.Play();
+        yield return new WaitWhile(() => src.isPlaying);
+        src.clip = null;
 
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Audio clip is missing!");
-        }
-    }
-
-    // Метод для остановки текущего звука
-    public void StopSound()
-    {
-        if (mainAudioSource.isPlaying)
-        {
-            mainAudioSource.Stop();
-        }
-    }
-
-    // Метод для остановки всех текущих звуков
-    public void StopAllSounds()
-    {
-        foreach (var source in audioSources)
-        {
-            if (source.isPlaying)
-            {
-                source.Stop();
-            }
-        }
-        if (mainAudioSource.isPlaying)
-        {
-            mainAudioSource.Stop();
-        }
-    }
-
-    // Метод для регулировки громкости конкретного звука
-    public void SetVolume(AudioClip clip, float volume)
-    {
-        if (soundVolumes.ContainsKey(clip))
-        {
-            soundVolumes[clip] = Mathf.Clamp(volume, 0f, 1f);
-        }
-        else
-        {
-            Debug.LogWarning("Audio clip not found in volume settings!");
-        }
+        // РЈР±РёСЂР°РµРј РёР· СЃРїРёСЃРєР° Р°РєС‚РёРІРЅС‹С…
+        _activeSources[type].Remove(src);
     }
 }

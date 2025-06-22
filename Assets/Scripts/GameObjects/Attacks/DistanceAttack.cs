@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.GameObjects.Entities;
 using Assets.Scripts.GameObjects.Fractions;
 using Assets.Scripts.GameObjects.Moving;
+using Assets.Scripts.Level;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,13 +12,11 @@ namespace Assets.Scripts.GameObjects.Attacks
     {
         public override event Action OnAttacking;
         public override event Action<bool> OnViewEnemy;
-        public float MaxXDistanceAttack = 4f;
         public Vector2 AttackPointOffset = Vector2.zero;
         [SerializeField] protected GameObject Bullet;
-        [SerializeField] private bool xCoordIsDistance = false;
 
         protected float GetDistance(Vector3 point)
-            => xCoordIsDistance? Math.Min(DistanceAttack, Math.Abs(point.x - MaxXDistanceAttack)) : DistanceAttack;
+            => base.Fraction.Fraction == FractionType.Ally ? Math.Min(DistanceAttack, Math.Abs(point.x - GlobalSettings.MaxRayX)) : DistanceAttack;
         protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;

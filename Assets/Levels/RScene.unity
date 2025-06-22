@@ -442,8 +442,9 @@ GameObject:
   m_Component:
   - component: {fileID: 129512850}
   - component: {fileID: 129512851}
+  - component: {fileID: 129512852}
   m_Layer: 0
-  m_Name: FPS
+  m_Name: GameSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,7 +477,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fda71275d14d494a8e00d799a1ce298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FrameRate: 2
+  FrameRate: 60
+--- !u!114 &129512852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129512849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee9e96e71bf48c4cb7b10c3a54176e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRayX: 2.5
 --- !u!1001 &154390468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1166,10 +1180,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2305394951663043926, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
-      propertyPath: buttons.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2305394951663043926, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
       propertyPath: buttons.Array.data[0]
       value: 
       objectReference: {fileID: 2693894333555236879}
@@ -1177,10 +1187,6 @@ PrefabInstance:
       propertyPath: buttons.Array.data[1]
       value: 
       objectReference: {fileID: 2693894333555236878}
-    - target: {fileID: 7363329997175532158, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
-      propertyPath: rocketLaunch
-      value: 
-      objectReference: {fileID: 8300000, guid: ba5814daa2bde2e4995f9280b2bc4f90, type: 3}
     - target: {fileID: 8200326608418299099, guid: 63065149c7eb69748aca550a923e01d7, type: 3}
       propertyPath: m_Name
       value: AudioEffect
@@ -3493,7 +3499,7 @@ MonoBehaviour:
     Value: {fileID: 528453251560122957, guid: b130144c06721ce40a9d9dc0b022f2f5, type: 3}
     PlacementType: 0
   - Key: 4
-    Value: {fileID: 929925782788937054, guid: 75aa0468feb573f479c9be44deae504f, type: 3}
+    Value: {fileID: 7148968515891141361, guid: 75aa0468feb573f479c9be44deae504f, type: 3}
     PlacementType: 0
   - Key: 5
     Value: {fileID: 7681050408390779276, guid: 41fa14f5ac5479f4d9afa96dd0e3bd35, type: 3}

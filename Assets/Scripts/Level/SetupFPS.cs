@@ -12,8 +12,6 @@ namespace Assets.Scripts.Level
         public int FrameRate;
         void Start()
         {
-            // Установка целевой частоты кадров
-            FrameRate = 60; // Задайте желаемую частоту кадров
             UnityEngine.Application.targetFrameRate = FrameRate;
             UnityEngine.Debug.Log($"Target frame rate set to {FrameRate} FPS.");
         }
