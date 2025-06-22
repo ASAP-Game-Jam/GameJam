@@ -16,13 +16,11 @@ namespace Assets.Scripts.Managers
 
         public void Startup()
         {
-            LevelManager.BaseManager.OnEndingGame += EndGame;
             Status = EStatusManager.Started;
         }
 
-        public void EndGame(FractionType type)
+        public void EndGame()
         {
-            Debug.Log($"Win: {type}");
             StartCoroutine(ReloadScene());
         }
 
