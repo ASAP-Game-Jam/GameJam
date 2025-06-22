@@ -2073,6 +2073,7 @@ GameObject:
   - component: {fileID: 4213589667099876582}
   - component: {fileID: 3965248553233040102}
   - component: {fileID: 1329460550485591639}
+  - component: {fileID: 8651893341388379152}
   m_Layer: 5
   m_Name: SellEntityButton
   m_TagString: Untagged
@@ -2183,6 +2184,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8651893341388379152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965146866374607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96fa566cbaa13c94493d8e79f260ec29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8130269549692583614
 GameObject:
   m_ObjectHideFlags: 0

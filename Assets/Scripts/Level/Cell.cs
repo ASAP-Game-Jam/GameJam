@@ -9,6 +9,10 @@ namespace Assets.Scripts.Level
         public bool IsAnchor = true;
         public bool IsEmpty { get; private set; } = true;
         private IBasicEntity target;
+        public IBasicEntity Target
+        {
+            get => target;
+        }
         public void AddObject(IBasicEntity obj)
         {
             if (!IsEmpty)

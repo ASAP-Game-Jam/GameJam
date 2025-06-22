@@ -19,6 +19,17 @@ namespace Assets.Scripts.GameObjects.Entities
 
         public int MaxHP { get; private set; }
 
+        private int _cost = 0;
+        public int Cost
+        {
+            get => _cost;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Cost cannot be negative.");
+                _cost = value;
+            }
+        }
         private void Awake()
         {
             MaxHP = _hp;

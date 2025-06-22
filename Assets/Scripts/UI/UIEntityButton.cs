@@ -12,6 +12,8 @@ namespace Assets.Scripts.UI
         [SerializeField] public int Cost = 10;
         [SerializeField] public float CooldownPerSeconds = 5f;
         [SerializeField] private GameObject fog;
+        private float originalWidth;
+        RectTransform rect;
 
         private bool isActive = true;
         private Coroutine coroutine;
@@ -29,6 +31,8 @@ namespace Assets.Scripts.UI
 
         private void Awake()
         {
+            rect = fog.GetComponent<RectTransform>();
+            originalWidth = rect.rect.width;
             GetComponent<Button>().onClick.AddListener(Select);
         }
         public void Select()
@@ -51,7 +55,6 @@ namespace Assets.Scripts.UI
             IsActive = false;
 
             // Получаем RectTransform элемента fog
-            RectTransform rect = fog.GetComponent<RectTransform>();
             if (rect == null)
             {
                 Debug.LogWarning("RectTransform не найден на элементе fog.");
@@ -62,7 +65,6 @@ namespace Assets.Scripts.UI
             rect.pivot = new Vector2(1f, 0.5f);
 
             // Сохраняем исходную ширину (учитывая, что anchors должны быть настроены так, чтобы размер не изменялся автоматически)
-            float originalWidth = rect.rect.width;
             float elapsedTime = 0f;
 
             // В процессе кулдауна изменяем ширину от исходной до 0

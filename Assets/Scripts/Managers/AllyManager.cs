@@ -168,6 +168,8 @@ namespace Assets.Scripts.Managers
                 return;
 
             obj.transform.parent = null;
+            if(obj.TryGetComponent<IBasicEntity>(out IBasicEntity costEntity))
+                costEntity.Cost = _selectedObject.Cost;
             LevelManager.StateManager.ChangeEnergy(-_selectedObject.Cost);
             OnSpawned?.Invoke(_selectedObject.TypeObject.Key, obj);
 
