@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
-    [RequireComponent(typeof(Image))]
     public class GameOverWindow : MonoBehaviour
     {
         [Header("UI Elements")]
@@ -29,7 +28,7 @@ namespace Assets.Scripts.UI
 
         private void Awake()
         {
-            backgroundImage = GetComponent<Image>();
+            backgroundImage = overlayPanel.GetComponent<Image>();
             retryButton.onClick.AddListener(OnRetryClicked);
             SetAlpha(0f);
             overlayPanel.SetActive(false);
