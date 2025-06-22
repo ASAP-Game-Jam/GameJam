@@ -180,7 +180,7 @@ Animator:
   m_GameObject: {fileID: 424059203088825179}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69e2c56aec99a5f49990d4a2a8ef2c80, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -290,3 +290,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onViewEnemy: 0
+  destroyTime: 0.7

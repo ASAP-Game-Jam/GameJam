@@ -12,6 +12,7 @@ namespace Assets.Scripts.GameObjects.Entities
         public event Action<IBasicEntity, int> OnTakenDamage;
         public event Action<IBasicEntity> OnDestroyed;
         [SerializeField] private int _hp = 1;
+        [SerializeField] private float destroyedTime = 0.5f;
         private IFraction _fraction;
         public bool IsDestroyed { get; private set; }
         public int HP => _hp;
@@ -39,7 +40,7 @@ namespace Assets.Scripts.GameObjects.Entities
             {
                 IsDestroyed = true;
                 OnDestroyed?.Invoke(this);
-                yield return null;
+                yield return new WaitForSeconds(destroyedTime);
                 Destroy(this.gameObject);
             }
         }
