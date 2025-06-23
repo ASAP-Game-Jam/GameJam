@@ -286,8 +286,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 424059203088825179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807d362aa7dcf94e8366d55c0d30eeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 207c728a0e2e8094ea4f29f94eb56d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onViewEnemy: 0
-  destroyTime: 0.7
+  destroyTime: 0.5

@@ -32,6 +32,12 @@ namespace Assets.Scripts.Managers
         private Sprite _selectedSprite;
         private SpriteRenderer _selectedRenderer;
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(SpawnActivateObjects, 0.2f);
+        }
+
         public void Startup()
         {
             LevelManager.UIManager.OnSelected += OnSelectObject;
