@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.GameObjects.Addons
+namespace Assets.Scripts.GameObjects.Addons.Destroyed
 
 {
     [RequireComponent(typeof(BasicAttack))]

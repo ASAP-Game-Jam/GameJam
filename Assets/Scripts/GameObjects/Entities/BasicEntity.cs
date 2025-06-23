@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.GameObjects.Fractions;
+using System;
 using System.Collections;
-using Assets.Scripts.GameObjects.Fractions;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjects.Entities
@@ -16,7 +16,7 @@ namespace Assets.Scripts.GameObjects.Entities
         private IFraction _fraction;
         public bool IsDestroyed { get; private set; }
         public int HP => _hp;
-
+        public bool DestroyedWhenHPIsZero { get; private set; } = true;
         public int MaxHP { get; private set; }
 
         private int _cost = 0;
@@ -51,9 +51,15 @@ namespace Assets.Scripts.GameObjects.Entities
             {
                 IsDestroyed = true;
                 OnDestroyed?.Invoke(this);
-                yield return new WaitForSeconds(destroyedTime);
-                Destroy(this.gameObject);
+                yield return null;
+                if (DestroyedWhenHPIsZero)
+                    Destroy(this.gameObject);
             }
+        }
+
+        public void StopDestroyedByHPIsZero()
+        {
+            DestroyedWhenHPIsZero = false;
         }
     }
 }

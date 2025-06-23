@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: 7562594616941846890}
   - component: {fileID: 4428081968923856893}
   - component: {fileID: 485525275777664260}
-  - component: {fileID: 5293685984790131714}
   - component: {fileID: 8956332572489129475}
   - component: {fileID: 2206668335615692147}
+  - component: {fileID: 3512160882715699926}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -243,18 +243,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5293685984790131714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9134297695911617197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d4b87acbd933d4aa2c30971c1744d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8956332572489129475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,3 +278,15 @@ MonoBehaviour:
   _spawnPointIsFirst: 0
   _spawnPointIsLast: 0
   _allPointsIsLocal: 0
+--- !u!114 &3512160882715699926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9134297695911617197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b89fb7f5383534489b241506a4a32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

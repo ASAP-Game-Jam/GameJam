@@ -16,7 +16,7 @@ namespace Assets.Scripts.GameObjects.Attacks
         [SerializeField] protected GameObject Bullet;
 
         protected float GetDistance(Vector3 point)
-            => base.Fraction.Fraction == FractionType.Ally ? Math.Min(DistanceAttack, Math.Abs(point.x - GlobalSettings.MaxRayX)) : DistanceAttack;
+            => !Application.isPlaying ? DistanceAttack : (base.Fraction.Fraction == FractionType.Ally ? Math.Min(DistanceAttack, Math.Abs(point.x - GlobalSettings.MaxRayX)) : DistanceAttack);
         protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;

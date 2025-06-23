@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: -3867711490535547017}
   - component: {fileID: -1001570470276590918}
   - component: {fileID: 5207042886501038962}
+  - component: {fileID: -2343311163460931571}
   m_Layer: 9
   m_Name: Bear
   m_TagString: Tower
@@ -230,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 5
+  destroyedTime: 0.5
 --- !u!114 &1827527871768101168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +306,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPause: 1
+--- !u!114 &-2343311163460931571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590173712807350434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31aafb01526341a44a41d79f32a6e24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkCount: 5
+  blinkInterval: 0.1
 --- !u!1 &6458081058597491176
 GameObject:
   m_ObjectHideFlags: 0
