@@ -124,7 +124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4724117988029149038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 719f714263b153443a05a142b22a8437, type: 3}
   m_Name: 
@@ -134,10 +134,8 @@ MonoBehaviour:
   damage: 4
   _cooldown: 1.5
   _forAllFirstAttackCooldown: 0.4
-  MaxXDistanceAttack: 4
   AttackPointOffset: {x: -0.89, y: 0.38}
   Bullet: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}
-  xCoordIsDistance: 0
 --- !u!114 &3806106497173754710
 MonoBehaviour:
   m_ObjectHideFlags: 0
