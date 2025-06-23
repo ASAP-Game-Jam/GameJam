@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.GameObjects.Entities;
+using Assets.Scripts.Managers;
 using System.Collections;
 using UnityEngine;
 
@@ -7,12 +8,12 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
     [RequireComponent(typeof(BasicEntity))]
     public class DeathEffectBlink : MonoBehaviour
     {
-        [Header("Настройки мигания")]
-        [Tooltip("Количество циклов мигания (один цикл = затухание и восстановление прозрачности)")]
+        [Header("Локальные настройки мигания (используются, если DeathEffectManager отсутствует)")]
+        [Tooltip("Количество циклов мигания (один цикл = исчезновение + восстановление прозрачности)")]
         public int blinkCount = 5;
 
-        [Tooltip("Длительность одного состояния (затухания или восстановления) в секундах")]
-        public float blinkInterval = 0.1f; // быстрое мигание
+        [Tooltip("Длительность одного состояния мигания (в секундах)")]
+        public float blinkInterval = 0.1f;
 
         private SpriteRenderer spriteRenderer;
         private Color originalColor;
@@ -23,9 +24,12 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
             if (spriteRenderer != null)
                 originalColor = spriteRenderer.color;
 
+            // Получаем базовую сущность и подписываемся на событие уничтожения
             BasicEntity basicEntity = GetComponent<BasicEntity>();
-            basicEntity.OnDestroyed += (_) => PlayDeathEffect(); // Подписываемся на событие уничтожения
-            basicEntity.StopDestroyedByHPIsZero(); // Останавливаем уничтожение при HP = 0, чтобы использовать эффект мигания
+            basicEntity.OnDestroyed += (_) => PlayDeathEffect();
+            // Отключаем нативное уничтожение объекта при достижении HP <= 0,
+            // чтобы эффект мигания сработал перед удалением.
+            basicEntity.StopDestroyedByHPIsZero();
         }
 
         /// <summary>
@@ -38,27 +42,27 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
 
         private IEnumerator BlinkAndDestroy()
         {
-            // Выполняем заданное число циклов мигания
-            for (int i = 0; i < blinkCount; i++)
-            {
-                // Устанавливаем полную прозрачность (миг – исчезновение)
-                SetAlpha(0f);
-                yield return new WaitForSeconds(blinkInterval);
-                // Восстанавливаем оригинальную прозрачность
-                SetAlpha(originalColor.a);
-                yield return new WaitForSeconds(blinkInterval);
-            }
+            // Если у LevelManager установлены настройки DeathEffectManager,
+            // берем параметры оттуда, иначе используем локально заданные.
+            int effectiveBlinkCount = LevelManager.DeathEffectManager != null ?
+                LevelManager.DeathEffectManager.blinkCount : blinkCount;
+            float effectiveBlinkInterval = LevelManager.DeathEffectManager != null ?
+                LevelManager.DeathEffectManager.blinkInterval : blinkInterval;
 
-            // По завершении эффекта можно дополнительно вызвать событие OnDestroyed,
-            // если подобное событие требуется (либо его уже вызывает BasicEntity),
-            // а затем удалить объект.
+            for (int i = 0; i < effectiveBlinkCount; i++)
+            {
+                SetAlpha(0f);
+                yield return new WaitForSeconds(effectiveBlinkInterval);
+                SetAlpha(originalColor.a);
+                yield return new WaitForSeconds(effectiveBlinkInterval);
+            }
             Destroy(gameObject);
         }
 
         /// <summary>
-        /// Устанавливает заданное значение альфа-канала для SpriteRenderer.
+        /// Устанавливает заданное значение альфа-канала для компонента SpriteRenderer.
         /// </summary>
-        /// <param name="alpha">Новое значение альфа-канала</param>
+        /// <param name="alpha">Новое значение прозрачности</param>
         private void SetAlpha(float alpha)
         {
             if (spriteRenderer != null)
