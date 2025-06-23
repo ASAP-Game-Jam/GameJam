@@ -4116,6 +4116,10 @@ PrefabInstance:
       propertyPath: AlliedType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3616212036339280410, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: CooldownPerSeconds
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4069257120566492025, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -51
@@ -4123,6 +4127,10 @@ PrefabInstance:
     - target: {fileID: 4506563016116969325, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: AlliedType
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4506563016116969325, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: CooldownPerSeconds
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4829310518904517259, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4133,12 +4141,24 @@ PrefabInstance:
       value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 5327391667570793289, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: Cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327391667570793289, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: AlliedType
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327391667570793289, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: CooldownPerSeconds
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5970851549614353692, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: AlliedType
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970851549614353692, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: CooldownPerSeconds
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6274030171334607240, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: m_IsActive
@@ -4158,6 +4178,10 @@ PrefabInstance:
       propertyPath: AlliedType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6915072928594939333, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: CooldownPerSeconds
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8262014046075882168, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: m_Name
       value: HUDCanvas
@@ -4165,6 +4189,10 @@ PrefabInstance:
     - target: {fileID: 8970590395364844334, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: AlliedType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970590395364844334, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
+      propertyPath: CooldownPerSeconds
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
