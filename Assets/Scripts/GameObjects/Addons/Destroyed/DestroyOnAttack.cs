@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.GameObjects.Attacks;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,13 +11,16 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
         BasicAttack attack;
         private bool isDestroy = false;
 
+        Coroutine destroyCoroutine;
+
         private void Start()
         {
             attack = GetComponent<BasicAttack>();
             attack.OnViewEnemy += (e) => { if (e) attack.Shutdown(); };
             attack.OnAttacking += () =>
             {
-                StartCoroutine(Destroyed());
+                if (destroyCoroutine == null)
+                    destroyCoroutine = StartCoroutine(Destroyed());
             };
         }
         private IEnumerator Destroyed()
@@ -33,6 +35,7 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
                 }*/
                 Destroy(gameObject);
             }
+            destroyCoroutine = null;
         }
     }
 }
