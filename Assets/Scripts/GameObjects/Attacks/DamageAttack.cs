@@ -8,7 +8,7 @@ namespace Assets.Scripts.GameObjects.Attacks
 {
     public class DamageAttack : BasicAttack
     {
-        public override event Action OnAttacking;
+        public override event Action<IBasicEntity,GameObject> OnAttacking;
         public override event Action<bool> OnViewEnemy;
 
         [SerializeField] private int damage;
@@ -27,7 +27,7 @@ namespace Assets.Scripts.GameObjects.Attacks
                         {
                             OnViewEnemy?.Invoke(true);
                             entity.TakeDamage(Damage);
-                            OnAttacking?.Invoke();
+                            OnAttacking?.Invoke(entity,hit.collider.gameObject);
                             attacking = true;
                         }
                     }

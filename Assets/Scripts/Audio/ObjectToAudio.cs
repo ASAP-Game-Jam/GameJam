@@ -75,6 +75,6 @@ public class ObjectToAudio : MonoBehaviour
     {
         var atk = go.GetComponent<BasicAttack>();
         if (atk != null)
-            atk.OnAttacking += () => AudioEvents.Play(sound);
+            atk.OnAttacking += (_, _) => AudioEvents.Play(sound);
     }
 }

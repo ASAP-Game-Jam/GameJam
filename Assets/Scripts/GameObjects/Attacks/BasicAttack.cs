@@ -10,7 +10,7 @@ namespace Assets.Scripts.GameObjects.Attacks
     [RequireComponent(typeof(ITarget))]
     public class BasicAttack : MonoBehaviour
     {
-        public virtual event Action OnAttacking;
+        public virtual event Action<IBasicEntity, GameObject> OnAttacking;
         public virtual event Action<bool> OnViewEnemy;
         [Header("BasicAttack Parameters")]
         [SerializeField] private float _distanceAttack = 1f;
@@ -50,7 +50,7 @@ namespace Assets.Scripts.GameObjects.Attacks
                         {
                             OnViewEnemy?.Invoke(true);
                             entity?.TakeDamage(entity.HP);
-                            OnAttacking?.Invoke();
+                            OnAttacking?.Invoke(entity, hit.collider.gameObject);
                             attacking = true;
                             break;
                         }

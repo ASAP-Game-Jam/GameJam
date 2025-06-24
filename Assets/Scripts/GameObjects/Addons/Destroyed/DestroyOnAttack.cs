@@ -17,7 +17,7 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
         {
             attack = GetComponent<BasicAttack>();
             attack.OnViewEnemy += (e) => { if (e) attack.Shutdown(); };
-            attack.OnAttacking += () =>
+            attack.OnAttacking += (_, _) =>
             {
                 if (destroyCoroutine == null)
                     destroyCoroutine = StartCoroutine(Destroyed());

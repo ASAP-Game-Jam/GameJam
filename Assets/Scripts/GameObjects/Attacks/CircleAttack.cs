@@ -9,7 +9,7 @@ namespace Assets.Scripts.GameObjects.Attacks
     public class CircleAttack : DamageAttack
     {
 
-        public override event Action OnAttacking;
+        public override event Action<IBasicEntity, GameObject> OnAttacking;
         public override event Action<bool> OnViewEnemy;
         protected override IEnumerator Attack()
         {
@@ -29,20 +29,17 @@ namespace Assets.Scripts.GameObjects.Attacks
                         CheckEntity(entity))
                     {
                         entity.TakeDamage(this.Damage);
+                        OnAttacking?.Invoke(entity, col.gameObject);
+                        OnViewEnemy?.Invoke(true);
                         attackedAtLeastOne = true;
                     }
                 }
 
                 if (attackedAtLeastOne)
-                {
-                    OnAttacking?.Invoke();
-                    OnViewEnemy?.Invoke(true);
                     Shutdown();
-                }
                 else
-                {
                     OnViewEnemy?.Invoke(false);
-                }
+
                 yield return null;
             }
         }

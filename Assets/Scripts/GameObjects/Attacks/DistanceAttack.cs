@@ -10,7 +10,7 @@ namespace Assets.Scripts.GameObjects.Attacks
 {
     public class DistanceAttack : AttackWithTime
     {
-        public override event Action OnAttacking;
+        public override event Action<IBasicEntity, GameObject> OnAttacking;
         public override event Action<bool> OnViewEnemy;
         public Vector2 AttackPointOffset = Vector2.zero;
         [SerializeField] protected GameObject Bullet;
@@ -25,57 +25,48 @@ namespace Assets.Scripts.GameObjects.Attacks
         }
         protected override IEnumerator Attack()
         {
-            // Ищет противника в одной линии и атакует
-            IBasicEntity enemyEntity = null;
+            bool viewEnemy = false;
             Transform currentTransform = transform;
             while (IsActive)
             {
-                enemyEntity = null;
-                if (enemyEntity == null)
-                {
-                    RaycastHit2D[] hits = Physics2D.RaycastAll(AttackPoint, Mathf.Sign(currentTransform.localScale.x) == -1 ? Vector2.left : Vector2.right, GetDistance(AttackPoint));
+                RaycastHit2D[] hits = Physics2D.RaycastAll(AttackPoint, Mathf.Sign(currentTransform.localScale.x) == -1 ? Vector2.left : Vector2.right, GetDistance(AttackPoint));
 
-                    enemyEntity = null;
-                    foreach (RaycastHit2D hit in hits)
+                viewEnemy = false;
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.collider != null && (hit.collider.GetComponent<IFraction>()?.Fraction ?? this.Fraction.Fraction) != this.Fraction.Fraction)
                     {
-                        if (hit.collider != null && (hit.collider.GetComponent<IFraction>()?.Fraction ?? this.Fraction.Fraction) != this.Fraction.Fraction)
+                        if (hit.collider.GetComponent<IBasicEntity>() is IBasicEntity enemyEntity && CheckEntity(enemyEntity))
                         {
-                            enemyEntity = hit.collider.GetComponent<IBasicEntity>();
-                            if (enemyEntity != null && CheckEntity(enemyEntity))
+                            viewEnemy = true;
+                            OnViewEnemy?.Invoke(viewEnemy);
+                            yield return new WaitForSeconds(ForAllFirstAttackCooldown);
+                            GameObject obj = Instantiate(Bullet, AttackPoint, Quaternion.identity, currentTransform);
+                            if (obj != null)
                             {
-                                break;
+                                OnAttacking?.Invoke(enemyEntity, hit.collider.gameObject);
+                                enemyEntity = null;
+
+                                obj.GetComponent<Transform>()?.SetParent(null);
+
+                                if (obj.GetComponent<StaticPointsMove>() != null)
+                                    new PointFirstDirectionSecondMove(obj, transform.position, AttackPoint);
+
+                                if (obj.TryGetComponent<DamageAttack>(out DamageAttack basicAttack))
+                                    basicAttack.Damage = this.Damage;
+
+                                yield return new WaitForSeconds(Cooldown);
                             }
-                            else enemyEntity = null;
+                            break;
                         }
+                        else enemyEntity = null;
+
                     }
-                    OnViewEnemy?.Invoke(enemyEntity != null);
 
-                    if (enemyEntity != null) // Если спереди челик, то 1-я атака ждет
-                        yield return new WaitForSeconds(ForAllFirstAttackCooldown);
                 }
-                if (enemyEntity != null)
-                {
-                    GameObject obj = Instantiate(Bullet, AttackPoint, Quaternion.identity, currentTransform);
-                    if (obj != null)
-                    {
-                        OnAttacking?.Invoke();
-                        enemyEntity = null;
-
-                        obj.GetComponent<Transform>()?.SetParent(null);
-
-                        if (obj.GetComponent<StaticPointsMove>() != null)
-                            new PointFirstDirectionSecondMove(obj, transform.position, AttackPoint);
-
-                        if (obj.TryGetComponent<DamageAttack>(out DamageAttack basicAttack))
-                            basicAttack.Damage = this.Damage;
-
-                        yield return new WaitForSeconds(Cooldown);
-                    }
-                    else
-                        yield return null;
-                }
-                else
-                    yield return null;
+                if (!viewEnemy)
+                    OnViewEnemy?.Invoke(viewEnemy);
+                yield return null;
             }
         }
         protected virtual Vector3 AttackPoint
