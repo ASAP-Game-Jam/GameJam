@@ -4165,7 +4165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327391667570793289, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: CooldownPerSeconds
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5970851549614353692, guid: 3ff8ef0ea1f7c8f4288822518994fb65, type: 3}
       propertyPath: AlliedType
