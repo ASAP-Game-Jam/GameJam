@@ -95,6 +95,11 @@ public class AudioManager : MonoBehaviour
         AudioEvents.OnPlaySound += HandlePlaySound;
     }
 
+    private void Start()
+    {
+        AudioEvents.Play(SoundType.MainTheme);
+    }
+
     private void OnDestroy()
     {
         AudioEvents.OnPlaySound -= HandlePlaySound;
