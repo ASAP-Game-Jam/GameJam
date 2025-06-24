@@ -52,6 +52,8 @@ MonoBehaviour:
   cannonShot: {fileID: 8300000, guid: d4ab28e9d73137946894edb4a282cd47, type: 3}
   rocketLaunch: {fileID: 8300000, guid: ba5814daa2bde2e4995f9280b2bc4f90, type: 3}
   rocketExplosion: {fileID: 8300000, guid: ecfb73889e1289f4c832ff79e392547e, type: 3}
+  bombLaunch: {fileID: 8300000, guid: 60c97ef5632c21c4e8b2a043a0208a6f, type: 3}
+  bombExplosion: {fileID: 8300000, guid: 96b0b894ab8da42469fc6852bc0a46b5, type: 3}
   blasterShot: {fileID: 8300000, guid: 614966b1df44c3846997296c2f772024, type: 3}
   tankShot: {fileID: 8300000, guid: 2991f59ba30fa02408cefdaf5f334af7, type: 3}
   stickHit: {fileID: 8300000, guid: 97ed3a1ab8e0d2d4b9c6c7d08896adf0, type: 3}

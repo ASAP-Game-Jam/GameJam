@@ -12,7 +12,7 @@ public class SoundLimit
 }
 public enum SoundType
 {
-    MainTheme, BlasterShot, CannonShot, TankShot,
+    MainTheme, BlasterShot, BombLaunch, BombExplosion, CannonShot, TankShot,
     ConstructionSound, ButtonClick, RocketLaunch,
     RocketExplosion, StickHit
 }
@@ -35,6 +35,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip cannonShot;
     public AudioClip rocketLaunch;
     public AudioClip rocketExplosion;
+    public AudioClip bombLaunch;
+    public AudioClip bombExplosion;
 
     [Header("Enemy")]
     public AudioClip blasterShot;
