@@ -213,7 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dcb57d2fb8d2743b435a6fafa37867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 1
+  _hp: 30
+  destroyedTime: 0.5
 --- !u!114 &6897728837767101211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bearPrefab: {fileID: 3590173712807350434, guid: afabc6f5abda5a94d8eadfb9296ff4f3, type: 3}
   spawnPoint: {fileID: 7236259724715586537}
-  _cooldown: 10
-  _firstSpawnCoolDown: 10
+  _cooldown: 18
+  _firstSpawnCoolDown: 5
 --- !u!1 &2898293143490568135
 GameObject:
   m_ObjectHideFlags: 0

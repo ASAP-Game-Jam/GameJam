@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dcb57d2fb8d2743b435a6fafa37867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 5
+  _hp: 50
   destroyedTime: 0.5
 --- !u!114 &1827527871768101168
 MonoBehaviour:
@@ -244,10 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e357f2f0952439e4c843af567832b0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceAttack: 1
+  _distanceAttack: 0.7
   AutoStart: 1
-  damage: 3
-  _cooldown: 1.5
+  damage: 15
+  _cooldown: 2
   _forAllFirstAttackCooldown: 0.4
 --- !u!114 &9218665245632523816
 MonoBehaviour:
@@ -264,7 +264,7 @@ MonoBehaviour:
   _isMove: 1
   _currentSpeed: 0
   _direction: 2
-  _maxSpeed: 2
+  _maxSpeed: 0.6
   _acceleration: 1
   _deceleration: 8
 --- !u!114 &-3867711490535547017

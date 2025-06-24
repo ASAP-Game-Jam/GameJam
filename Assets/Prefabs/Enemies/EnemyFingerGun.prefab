@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1642446876085658843, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: _maxSpeed
+      value: 0.55
+      objectReference: {fileID: 0}
     - target: {fileID: -368499220824657956, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0.28
@@ -88,6 +92,10 @@ PrefabInstance:
       propertyPath: hp
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 5770448827143434170, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
+      propertyPath: _hp
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7330347680002705041, guid: 6536fbc373ad23f46a494a0a11dd288c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.626
@@ -129,10 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719f714263b153443a05a142b22a8437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceAttack: 3
+  _distanceAttack: 2.5
   AutoStart: 1
-  damage: 4
-  _cooldown: 1.5
+  damage: 15
+  _cooldown: 2.5
   _forAllFirstAttackCooldown: 0.4
   AttackPointOffset: {x: -0.89, y: 0.38}
   Bullet: {fileID: 3724153535787648887, guid: 47eebb57934fb39448dfe58eced74cdf, type: 3}

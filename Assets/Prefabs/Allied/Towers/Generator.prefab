@@ -34,10 +34,14 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7a00d082d9a3bd0409355bf8f03980ba, type: 3}
     - target: {fileID: 424059203088825179, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: m_Name
-      value: EnergyTower
+      value: Generator
       objectReference: {fileID: 0}
     - target: {fileID: 3083156353979359535, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: hp
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725267424861668556, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
+      propertyPath: _hp
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5575420677275043083, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
@@ -146,4 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _generateCount: 5
-  _cooldown: 3
+  _cooldown: 5

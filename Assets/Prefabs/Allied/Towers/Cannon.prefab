@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: hp
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3725267424861668556, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
+      propertyPath: _hp
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4519083186720860279, guid: 39fccdc4df393a446b638246b41fce22, type: 3}
       propertyPath: cooldown
       value: 3
@@ -144,8 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distanceAttack: 20
   AutoStart: 1
-  damage: 5
-  _cooldown: 1.5
+  damage: 10
+  _cooldown: 3
   _forAllFirstAttackCooldown: 0.4
   AttackPointOffset: {x: 0.46, y: 0}
   Bullet: {fileID: 9134297695911617197, guid: 95e558b1789d0ff4bbb15d116ab0f144, type: 3}
