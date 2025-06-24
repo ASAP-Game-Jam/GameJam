@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee9e96e71bf48c4cb7b10c3a54176e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRayX: 4.38
+  maxRayX: 2.5
 --- !u!1001 &154390468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3469,7 +3469,7 @@ MonoBehaviour:
   firstWaveSpawnDelay: 30
   spawnCooldown: 30
   enemiesPerWave: 1
-  waveSpawnIntervalInside: 0.4
+  waveSpawnIntervalInside: 0.2
   spawnLockDuration: 1
   autoSpawnEnabled: 1
 --- !u!114 &1907869761
@@ -3546,7 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb55a3a1d8d65794da41a71da5de923c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energy: 25
+  _energy: 1250
 --- !u!114 &1907869765
 MonoBehaviour:
   m_ObjectHideFlags: 0
