@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distanceAttack: 1
   AutoStart: 1
-  damage: 5
+  damage: 50
 --- !u!114 &1393977953246911116
 MonoBehaviour:
   m_ObjectHideFlags: 0
