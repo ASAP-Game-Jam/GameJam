@@ -21,7 +21,7 @@ namespace Assets.Scripts.GameObjects.Addons
         void Pause(bool isView)
         {
             if (isView) amovable.Shutdown();
-            else if (!amovable.IsMove && amovable.enabled) amovable.Startup();
+            else if (amovable.enabled) amovable.Startup();
 
             if (!isPause && isView)
                 basicAttack.OnViewEnemy -= Pause;

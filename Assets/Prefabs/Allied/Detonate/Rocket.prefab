@@ -41,7 +41,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -4.925907, y: -6.5177355}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &3127724691386649251
 SpriteRenderer:
@@ -223,3 +223,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b89fb7f5383534489b241506a4a32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnAttackType: 0

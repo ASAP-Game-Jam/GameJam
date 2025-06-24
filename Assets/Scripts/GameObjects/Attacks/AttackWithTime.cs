@@ -42,6 +42,9 @@ namespace Assets.Scripts.GameObjects.Attacks
                         }
                     }
                 }
+                if (!viewEnemy)
+                    OnViewEnemy?.Invoke(viewEnemy);
+                yield return null;
             }
         }
     }

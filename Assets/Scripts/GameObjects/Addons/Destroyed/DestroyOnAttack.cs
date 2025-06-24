@@ -1,13 +1,21 @@
 ﻿using Assets.Scripts.GameObjects.Attacks;
+using Assets.Scripts.GameObjects.Entities;
 using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjects.Addons.Destroyed
 
 {
+    public enum DestroyOnAttackType
+    {
+        All,
+        Entity,
+        Base
+    }
     [RequireComponent(typeof(BasicAttack))]
     public class DestroyOnAttack : MonoBehaviour
     {
+        [SerializeField] private DestroyOnAttackType destroyOnAttackType = DestroyOnAttackType.All;
         BasicAttack attack;
         private bool isDestroy = false;
 
@@ -16,10 +24,19 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
         private void Start()
         {
             attack = GetComponent<BasicAttack>();
-            attack.OnViewEnemy += (e) => { if (e) attack.Shutdown(); };
-            attack.OnAttacking += (_, _) =>
+            attack.OnAttacking += (type, _) =>
             {
-                if (destroyCoroutine == null)
+                bool isAttack = false;
+                switch (type)
+                {
+                    case IBasicEntity when destroyOnAttackType == DestroyOnAttackType.All:
+                    case IEntity when destroyOnAttackType == DestroyOnAttackType.Entity:
+                    case IBase when destroyOnAttackType == DestroyOnAttackType.Base:
+                        isAttack = true;
+                        attack.Shutdown();
+                        break;
+                }
+                if (destroyCoroutine == null && isAttack)
                     destroyCoroutine = StartCoroutine(Destroyed());
             };
         }
@@ -29,7 +46,7 @@ namespace Assets.Scripts.GameObjects.Addons.Destroyed
             {
                 isDestroy = true;
                 yield return null;
-                /*while (attack.IsAttack)
+                /*while (isAttack.IsAttack)
                 {
                     yield return null;
                 }*/

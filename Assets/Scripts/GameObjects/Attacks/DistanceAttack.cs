@@ -44,7 +44,7 @@ namespace Assets.Scripts.GameObjects.Attacks
                             GameObject obj = Instantiate(Bullet, AttackPoint, Quaternion.identity, currentTransform);
                             if (obj != null)
                             {
-                                OnAttacking?.Invoke(enemyEntity, hit.collider.gameObject);
+                                OnAttacking?.Invoke(enemyEntity, hit.collider?.gameObject);
                                 enemyEntity = null;
 
                                 obj.GetComponent<Transform>()?.SetParent(null);
