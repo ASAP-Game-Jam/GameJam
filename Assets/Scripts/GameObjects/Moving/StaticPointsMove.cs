@@ -35,17 +35,20 @@ namespace Assets.Scripts.GameObjects.Moving
 
             transform.position = _points[0];
             _currentIndexPoint = 0;
+            float currentZ = transform.position.z;
             while (CurrentIndex < Points.Count - 1 && IsMove)
             {
+                
                 Vector3 targetPoint = Points[_currentIndexPoint + 1];
-                while (Vector3.Distance(transform.position, targetPoint) > 0.05f && IsMove)
+                while (Vector2.Distance(transform.position, targetPoint) > 0.1f && IsMove)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, targetPoint, CurrentSpeed * Time.deltaTime);
+                    Vector2 newPoint = Vector2.MoveTowards(transform.position, targetPoint, CurrentSpeed * Time.deltaTime);
+                    transform.position = new Vector3(newPoint.x,newPoint.y,currentZ);
                     yield return null;
                 }
 
                 if (IsMove)
-                    transform.position = new Vector3(targetPoint.x, targetPoint.y, transform.position.z);
+                    transform.position = new Vector3(targetPoint.x, targetPoint.y, currentZ);
 
                 _currentIndexPoint++;
 

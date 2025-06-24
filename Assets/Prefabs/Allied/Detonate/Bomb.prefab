@@ -222,13 +222,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424059203088825179}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cb3503bda5fe0a478ba59523f5701fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _distanceAttack: 1
-  AutoStart: 1
+  AutoStart: 0
   damage: 5
 --- !u!114 &1393977953246911116
 MonoBehaviour:
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c8f246f95e17f40b70a476a773a21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minZ: -0.2
+  minZ: -2
   coefficient: 100
 --- !u!114 &8744853214281655201
 MonoBehaviour:
