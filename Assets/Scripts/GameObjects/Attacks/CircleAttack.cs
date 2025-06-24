@@ -38,8 +38,10 @@ namespace Assets.Scripts.GameObjects.Attacks
                 if (attackedAtLeastOne)
                     Shutdown();
                 else
+                {
                     OnViewEnemy?.Invoke(false);
-
+                    OnAttacking?.Invoke(null, null);
+                }
                 yield return null;
             }
         }

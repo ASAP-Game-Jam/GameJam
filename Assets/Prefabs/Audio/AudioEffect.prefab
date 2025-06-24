@@ -89,22 +89,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMappings:
-  - enemyType: 1
-    attackSound: 8
-  - enemyType: 2
+  - activateType: 0
+    enemyType: 1
+    attackSound: 10
+  - activateType: 0
+    enemyType: 2
     attackSound: 1
-  - enemyType: 3
-    attackSound: 3
+  - activateType: 0
+    enemyType: 3
+    attackSound: 5
   allyMappings:
-  - allyType: 2
+  - activateType: 0
+    allyType: 2
+    attackSound: 4
+  - activateType: 0
+    allyType: 4
+    attackSound: 4
+  - activateType: 0
+    allyType: 5
+    attackSound: 9
+  - activateType: 1
+    allyType: 7
     attackSound: 2
-  - allyType: 4
-    attackSound: 2
-  - allyType: 5
-    attackSound: 7
-  - allyType: 7
-    attackSound: 2
-  - allyType: 6
+  - activateType: 0
+    allyType: 7
+    attackSound: 9
+  - activateType: 1
+    allyType: 6
+    attackSound: 10
+  - activateType: 1
+    allyType: 5
     attackSound: 8
   buttons:
   - {fileID: 0}

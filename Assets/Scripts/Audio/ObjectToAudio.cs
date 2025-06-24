@@ -6,9 +6,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ActivateType
+{
+    Attack, Create
+}
 [Serializable]
 public struct EnemyAudioMapping
 {
+    public ActivateType activateType;
     public EnemyType enemyType;
     public SoundType attackSound;
 }
@@ -16,6 +21,7 @@ public struct EnemyAudioMapping
 [Serializable]
 public struct AllyAudioMapping
 {
+    public ActivateType activateType;
     public AllyType allyType;
     public SoundType attackSound;
 }
@@ -56,9 +62,13 @@ public class ObjectToAudio : MonoBehaviour
 
     private void RegisterEnemySound(EnemyType type, GameObject go)
     {
-        var map = enemyMappings.FirstOrDefault(m => m.enemyType == type);
+        var maps = enemyMappings.Where(m => m.enemyType == type);
+        var map = maps.FirstOrDefault(m => m.activateType == ActivateType.Attack);
         if (map.attackSound != default)
             SubscribeAttack(go, map.attackSound);
+        map = maps.FirstOrDefault(m => m.activateType == ActivateType.Create);
+        if (map.attackSound != default)
+            SubscribeCreate(go, map.attackSound);
     }
 
     private void RegisterAllySound(AllyType type, GameObject go)
@@ -66,9 +76,13 @@ public class ObjectToAudio : MonoBehaviour
         // звук строительства прокидываем на всех
         AudioEvents.Play(SoundType.ConstructionSound);
 
-        var map = allyMappings.FirstOrDefault(m => m.allyType == type);
+        var maps = allyMappings.Where(m => m.allyType == type);
+        var map = maps.FirstOrDefault(m => m.activateType == ActivateType.Attack);
         if (map.attackSound != default)
             SubscribeAttack(go, map.attackSound);
+        map = maps.FirstOrDefault(m => m.activateType == ActivateType.Create);
+        if (map.attackSound != default)
+            SubscribeCreate(go, map.attackSound);
     }
 
     private void SubscribeAttack(GameObject go, SoundType sound)
@@ -76,5 +90,10 @@ public class ObjectToAudio : MonoBehaviour
         var atk = go.GetComponent<BasicAttack>();
         if (atk != null)
             atk.OnAttacking += (_, _) => AudioEvents.Play(sound);
+    }
+
+    private void SubscribeCreate(GameObject go, SoundType sound)
+    {
+        AudioEvents.Play(sound);
     }
 }

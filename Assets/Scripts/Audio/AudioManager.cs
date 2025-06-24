@@ -60,15 +60,17 @@ public class AudioManager : MonoBehaviour
         // 1. Заполняем карту типа → клип
         clipMap = new Dictionary<SoundType, AudioClip>
         {
-            { SoundType.MainTheme,        mainTheme },
-            { SoundType.ConstructionSound,constructionSound },
-            { SoundType.ButtonClick,      buttonClick },
-            { SoundType.CannonShot,       cannonShot },
-            { SoundType.RocketLaunch,     rocketLaunch },
-            { SoundType.RocketExplosion,  rocketExplosion },
-            { SoundType.BlasterShot,      blasterShot },
-            { SoundType.TankShot,         tankShot },
-            { SoundType.StickHit,         stickHit }
+            { SoundType.MainTheme,          mainTheme },
+            { SoundType.ConstructionSound,  constructionSound },
+            { SoundType.ButtonClick,        buttonClick },
+            { SoundType.BombLaunch,         bombLaunch },
+            { SoundType.BombExplosion,      bombExplosion },
+            { SoundType.CannonShot,         cannonShot },
+            { SoundType.RocketLaunch,       rocketLaunch },
+            { SoundType.RocketExplosion,    rocketExplosion },
+            { SoundType.BlasterShot,        blasterShot },
+            { SoundType.TankShot,           tankShot },
+            { SoundType.StickHit,           stickHit }
         };
 
         // 2. Инициализируем громкости
