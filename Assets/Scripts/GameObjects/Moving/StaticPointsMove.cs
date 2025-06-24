@@ -41,7 +41,6 @@ namespace Assets.Scripts.GameObjects.Moving
                 while (Vector3.Distance(transform.position, targetPoint) > 0.05f && IsMove)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, targetPoint, CurrentSpeed * Time.deltaTime);
-                    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y / 100);
                     yield return null;
                 }
 

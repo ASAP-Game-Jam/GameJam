@@ -9,7 +9,7 @@ namespace Assets.Scripts.GameObjects.Addons
         void Update()
         {
             Vector3 vector3 = transform.position;
-            vector3.z = (minZ + vector3.y) / coefficient;
+            vector3.z = minZ + vector3.y / coefficient;
             transform.position = vector3;
         }
     }
